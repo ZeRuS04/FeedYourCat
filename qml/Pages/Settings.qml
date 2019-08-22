@@ -1,6 +1,11 @@
 import QtQuick 2.0
+
 import "../controls" as Controls
 
-Controls.BackgroundGradient {
+Controls.BasePage {
+    id: root
 
+    property string title: qsTr("SETTINGS")
+
+    pageName: "settings"
 }

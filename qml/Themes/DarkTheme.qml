@@ -16,8 +16,10 @@ QtObject {
     readonly property color menuButtonPressedBackgroundColor: "#3C3265"
     readonly property color menuButtonBorderColor: "#FFFFFF"
     readonly property color cellBorderColor: "#707070"
+    readonly property color toolbarBackgroundColor: "#10034E"
 
     readonly property color mainTextColor: "#FFFFFF"
+    readonly property color toolbarTextColor: "#ECC0E9"
 
     //====== Opacities:
     readonly property real menuButtonBackgroundOpacity: 0.11

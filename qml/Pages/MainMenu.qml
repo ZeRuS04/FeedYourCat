@@ -3,8 +3,13 @@ import QtQuick.Layouts 1.12
 
 import "../controls" as Controls
 
-Controls.BackgroundGradient {
+Controls.BasePage {
     id: root
+
+    signal start()
+    signal settings()
+
+    pageName: "mainMenu"
 
     ColumnLayout {
         anchors.fill: parent
@@ -57,6 +62,8 @@ Controls.BackgroundGradient {
                     text: qsTr("START!")
 
                     font.bold: true
+
+                    onClicked: root.start()
                 }
 
                 Controls.MenuButton {
@@ -64,6 +71,8 @@ Controls.BackgroundGradient {
                     height: 60
 
                     text: qsTr("SETTINGS")
+
+                    onClicked: root.settings()
                 }
             }
         }

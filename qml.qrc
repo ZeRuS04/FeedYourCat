@@ -11,5 +11,10 @@
         <file>qml/singletons/ThemeManager.qml</file>
         <file>qml/themes/LightTheme.qml</file>
         <file>qml/themes/DarkTheme.qml</file>
+        <file>qml/controls/BasePage.qml</file>
+        <file>qml/PageSelector.qml</file>
+        <file>qml/controls/TitleLabel.qml</file>
+        <file>qml/controls/ToolButton.qml</file>
+        <file>qml/controls/Label.qml</file>
     </qresource>
 </RCC>
