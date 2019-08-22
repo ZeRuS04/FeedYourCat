@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Pages/MainMenu.qml</file>
+        <file>qml/Pages/GameArea.qml</file>
+        <file>qml/Pages/Settings.qml</file>
+        <file>qml/Controls/MenuButton.qml</file>
+        <file>qml/Controls/Toolbar.qml</file>
+        <file>qml/Singletons/Common.qml</file>
+        <file>qml/Singletons/GameLogic.qml</file>
+        <file>qml/Singletons/ThemeManager.qml</file>
+        <file>qml/Themes/LightTheme.qml</file>
+        <file>qml/Themes/DarkTheme.qml</file>
     </qresource>
 </RCC>

@@ -6,9 +6,11 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+    qmlRegisterSingletonType(QUrl("qrc:/qml/Singletos/Common.qml"), "Singletons", 1, 0, "Common");
+    qmlRegisterSingletonType(QUrl("qrc:/qml/Singletos/GameLogic.qml"), "Singletons", 1, 0, "Logic");
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
