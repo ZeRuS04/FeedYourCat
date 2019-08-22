@@ -1,3 +1,5 @@
+pragma Singleton
+
 import QtQuick 2.0
 
 QtObject {
@@ -7,7 +9,7 @@ QtObject {
     readonly property var currentTheme: {
         switch (currentThemeIndex) {
             case 0: return __lightTheme;
-            case 1: return __darkSpaceTheme;
+            case 1: return __darkTheme;
             default: return __lightTheme;
         }
     }
@@ -34,7 +36,7 @@ QtObject {
     function loadLightTheme() {
         var component = Qt.createComponent("../themes/LightTheme.qml");
         if (component.status === Component.Ready) {
-            root.__defaultTheme = component.createObject(root);
+            root.__lightTheme = component.createObject(root);
         } else {
             console.error('Default theme loading error', component.errorString())
         }
@@ -43,10 +45,12 @@ QtObject {
     function loadDarkSpaceTheme() {
         var component = Qt.createComponent("../themes/DarkTheme.qml");
         if (component.status === Component.Ready) {
-            root.__darkSpaceTheme = component.createObject(root);
+            root.__darkTheme = component.createObject(root);
         } else {
             console.error('Dark Space theme loading error', component.errorString())
         }
     }
+
+    Component.onCompleted: init()
 }
 
