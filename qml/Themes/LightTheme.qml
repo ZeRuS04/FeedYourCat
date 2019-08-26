@@ -23,4 +23,7 @@ QtObject {
 
     //====== Opacities:
     readonly property real menuButtonBackgroundOpacity: 0.49
+
+    //====== Images:
+    property url mainMenuImage: "qrc:/resources/images/cats/Start_Cats/SVG/Start_Cat_Light_Theme.svg"
 }

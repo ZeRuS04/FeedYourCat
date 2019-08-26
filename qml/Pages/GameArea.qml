@@ -5,5 +5,6 @@ Controls.BasePage {
     id: root
 
     pageName: "game"
+
 }
 

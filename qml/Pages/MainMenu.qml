@@ -2,6 +2,8 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 
 import "../controls" as Controls
+import Singletons 1.0
+
 
 Controls.BasePage {
     id: root
@@ -33,12 +35,15 @@ Controls.BasePage {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            Rectangle {
+            Image {
                 anchors.centerIn: parent
 
-                color: "gray"
                 width: 280
-                height: 285
+                height: 280
+
+                sourceSize.width: width
+                sourceSize.height: height
+                source: ThemeManager.currentTheme["mainMenuImage"]
             }
         }
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.8" height="10.21" viewBox="0 0 15.8 10.21">
+  <defs>
+    <style type="text/css">
+      .a {
+        fill: #ccc;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <title>Cat_5D_paw_right</title>
+  <path class="a" d="M14.51,9.58c1.3-.71,1-4.44-.94-6.63C10.85-.1,4.42-.38,1.87,2.55c-1.77,2-1.8,5.8-.23,6.58,1.13.57,2.86-.5,3.55-1A4.65,4.65,0,0,0,8.66,9.38a4.3,4.3,0,0,0,2.38-1C12.12,9.15,13.64,10.05,14.51,9.58Z"/>
+</svg>

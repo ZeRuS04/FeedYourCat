@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.121" height="21" viewBox="0 0 30.121 21">
+  <g id="Icon_feather-volume-x" data-name="Icon feather-volume-x" transform="translate(-3 -7.5)">
+    <g id="Path_6" data-name="Path 6" fill="none" stroke-linecap="square" stroke-linejoin="round">
+      <path d="M16.5,7.5,9,13.5H3v9H9l7.5,6Z" stroke="none"/>
+      <path d="M 13.5 13.74188232421875 L 10.87409019470215 15.84260940551758 C 10.34214973449707 16.26815986633301 9.681209564208984 16.5 9 16.5 L 6 16.5 L 6 19.5 L 9 19.5 C 9.681209564208984 19.5 10.34214973449707 19.73184013366699 10.87409019470215 20.15739059448242 L 13.5 22.25811767578125 L 13.5 13.74188232421875 M 16.5 7.5 L 16.5 28.5 L 9 22.5 L 3 22.5 L 3 13.5 L 9 13.5 L 16.5 7.5 Z" stroke="none"/>
+    </g>
+    <path id="Path_7" data-name="Path 7" d="M34.5,13.5l-9,9" transform="translate(-3.5)" fill="none" stroke="#000" stroke-linecap="square" stroke-linejoin="round" stroke-width="3"/>
+    <path id="Path_8" data-name="Path 8" d="M25.5,13.5l9,9" transform="translate(-3.5)" fill="none" stroke="#000" stroke-linecap="square" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>

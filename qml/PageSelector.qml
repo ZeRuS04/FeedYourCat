@@ -8,6 +8,10 @@ StackView {
 
     function updatePage(page) {
         switch (page) {
+        case "game":
+            replace(pauseComponent);
+            push(gameComponent);
+            break;
         case "settings":
             push(settingsComponent);
             break;
@@ -44,6 +48,7 @@ StackView {
 
         Pages.MainMenu {
 
+            onStart: updatePage("game")
             onSettings: updatePage("settings")
         }
     }
@@ -52,6 +57,22 @@ StackView {
         id: settingsComponent
 
         Pages.Settings {
+
+        }
+    }
+
+    Component {
+        id: pauseComponent
+
+        Pages.Pause {
+
+        }
+    }
+
+    Component {
+        id: gameComponent
+
+        Pages.GameArea {
 
         }
     }

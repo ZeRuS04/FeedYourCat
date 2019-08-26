@@ -5,15 +5,15 @@ import QtQuick 2.0
 QtObject {
     id: root
 
-    readonly property var defaultTheme: __lightTheme
+    readonly property var defaultTheme: __darkTheme
     readonly property var currentTheme: {
         switch (currentThemeIndex) {
             case 0: return __lightTheme;
             case 1: return __darkTheme;
-            default: return __lightTheme;
+            default: return __darkTheme;
         }
     }
-    property int currentThemeIndex: 0
+    property int currentThemeIndex: 1
     property var __lightTheme: null
     property var __darkTheme: null
 
