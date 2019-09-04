@@ -30,8 +30,9 @@ QQC2.ToolBar {
         State {
             name: "game"
 
-
             PropertyChanges { target: root; visible: true }
+            PropertyChanges { target: scorePanel; visible: true }
+            PropertyChanges { target: pauseButton; visible: true }
         },
         State {
             name: "score"
@@ -45,37 +46,55 @@ QQC2.ToolBar {
         }
     ]
 
-    background: Rectangle {
-        color: ThemeManager.currentTheme["toolbarBackgroundColor"]
-        opacity: 0.7
-    }
+    background: null
 
     RowLayout {
         anchors {
             fill: parent
-            leftMargin: 30
-            rightMargin: 30
+            leftMargin: 10
+            rightMargin: 10
         }
 
-        ToolButton {
-            width: 70
+        BackToolButton {
+            width: 40
             height: 70
-            text: qsTr("‹")
             onClicked: stack.pop()
         }
 
-        Label {
-            id: titleLabel
+        Item {
+            id: centerItem
 
-            Layout.fillWidth: true
-            horizontalAlignment: Qt.AlignRight
-            verticalAlignment: Qt.AlignVCenter
+            Layout.fillWidth: visible
+            Layout.preferredHeight: 70
 
-            font.pointSize: 20
-            text: stack.currentItem && stack.currentItem.hasOwnProperty("title") ? stack.currentItem.title
-                                                                                 : ""
-            elide: Label.ElideRight
-            color: ThemeManager.currentTheme["toolbarTextColor"]
+            ScorePanel {
+                id: scorePanel
+
+                anchors.centerIn: parent
+
+                visible: false
+            }
+
+            Label {
+                id: titleLabel
+
+                anchors.fill: parent
+                horizontalAlignment: Qt.AlignRight
+                verticalAlignment: Qt.AlignVCenter
+
+                text: stack.currentItem && stack.currentItem.hasOwnProperty("title") ? stack.currentItem.title
+                                                                                     : ""
+                elide: Label.ElideRight
+                color: ThemeManager.currentTheme["toolbarTextColor"]
+            }
+        }
+
+        PauseToolButton {
+            id: pauseButton
+
+            width: 40
+            height: 70
+            visible: false
         }
     }
 }

@@ -5,7 +5,7 @@ import "controls" as Controls
 
 ApplicationWindow {
     visible: true
-    width: 480
+    width: 360
     height: 640
     title: qsTr("Feed your cat")
 
