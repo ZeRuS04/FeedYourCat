@@ -10,9 +10,16 @@ StackView {
     function updatePage(page) {
         switch (page) {
         case "game":
-            replace(pauseComponent);
+            clear();
+            push(pauseComponent);
             push(gameComponent);
             Logic.newGame();
+            break;
+        case "rules":
+            push(rulesComponent);
+            break;
+        case "score":
+            replace(scoreComponent);
             break;
         case "settings":
             push(settingsComponent);
@@ -43,10 +50,10 @@ StackView {
         }
     ]
 
-    state: currentItem.pageName || ""
+    state: !!currentItem && currentItem.pageName ? currentItem.pageName : ""
 
     Keys.onBackPressed: {
-        if (root.empty) {
+        if (root.depth === 1) {
             event.accepted = false;
             return;
         }
@@ -54,12 +61,17 @@ StackView {
         root.pop();
     }
 
+    Connections {
+        target: Logic
+
+        onGameOver: updatePage("score")
+    }
+
     Component {
         id: menuComponent
 
         Pages.MainMenu {
-
-            onStart: updatePage("game")
+            onStart: updatePage("rules")
             onSettings: updatePage("settings")
         }
     }
@@ -76,9 +88,12 @@ StackView {
         id: pauseComponent
 
         Pages.Pause {
-
             onContinueSig: updatePage("game")
+            onRestart: updatePage("game")
             onSettings: updatePage("settings")
+
+            Component.onCompleted: Logic.pause()
+            onVisibleChanged: if (visible) Logic.pause()
         }
     }
 
@@ -87,6 +102,24 @@ StackView {
 
         Pages.GameArea {
 
+        }
+    }
+
+    Component {
+        id: scoreComponent
+
+        Pages.Score {
+            onRestart: updatePage("game")
+            onSettings: updatePage("settings")
+        }
+    }
+
+    Component {
+        id: rulesComponent
+
+        Pages.Rules {
+            onRestart: updatePage("game")
+            onSettings: updatePage("settings")
         }
     }
 }

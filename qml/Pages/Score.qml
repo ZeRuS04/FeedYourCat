@@ -7,44 +7,48 @@ import Singletons 1.0
 Controls.BasePage {
     id: root
 
+    property int score: !!Logic.session ? Logic.session.score : 0
+
     signal continueSig()
     signal restart()
     signal settings()
 
-    pageName: "pause"
+    pageName: "score"
 
     ColumnLayout {
         anchors.fill: parent
 
         Item {
-            id: titleItem
-
-            Layout.fillWidth: true
-            Layout.preferredHeight: root.height / 6
-
-            Controls.Label {
-                anchors.centerIn: parent
-
-                font.pointSize: 30
-                text: qsTr("PAUSE")
-            }
-        }
-
-        Item {
-            id: logoItem
+            id: scoreItem
 
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            Image {
+            Column {
+                id: scoreColumn
+
                 anchors.centerIn: parent
+                width: parent.width
 
-                width: 200
-                height: 200
+                spacing: 50
 
-                sourceSize.width: width
-                sourceSize.height: height
-                source: ThemeManager.currentTheme["mainMenuImage"]
+                Controls.Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pointSize: 30
+                    text: qsTr("YOUR SOCORE:")
+                }
+
+                Controls.ScorePanel {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    score: root.score
+                }
+
+                Controls.Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    font.pointSize: 30
+                    text: qsTr("HIGH SCORE: %1").arg("0")
+                }
             }
         }
 
@@ -65,18 +69,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    text: qsTr("CONTINUE")
-
-                    font.bold: true
-
-                    onClicked: root.continueSig()
-                }
-
-                Controls.MenuButton {
-                    width: 280
-                    height: 60
-
-                    text: qsTr("RESTART")
+                    text: qsTr("FEED MY CATS")
 
                     onClicked: root.restart()
                 }

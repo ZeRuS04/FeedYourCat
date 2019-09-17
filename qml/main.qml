@@ -9,7 +9,7 @@ ApplicationWindow {
     width: 360
     height: 640
     title: qsTr("Feed your cat")
-    visibility: Window.FullScreen
+//    visibility: Window.FullScreen
 
     header: Controls.Toolbar {
         stack: stackView

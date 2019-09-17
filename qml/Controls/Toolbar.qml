@@ -25,7 +25,7 @@ QQC2.ToolBar {
         State {
             name: "rules"
 
-            PropertyChanges { target: root; visible: true }
+            PropertyChanges { target: root; visible: false }
         },
         State {
             name: "game"
@@ -97,8 +97,10 @@ QQC2.ToolBar {
             visible: false
             checked: Logic.sessionPaused
 
-            onClicked: checked ? Logic.pause()
-                               : Logic.resume()
+            onToggled: {
+                checked ? Logic.pause()
+                        : Logic.resume()
+            }
         }
     }
 }

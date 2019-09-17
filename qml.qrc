@@ -111,5 +111,7 @@
         <file>resources/images/cats/Start_Cats/SVG/Cat_pause_Light_Theme.svg</file>
         <file>qml/controls/GameCell.qml</file>
         <file>qml/controls/AdvancedTimer.qml</file>
+        <file>qml/pages/Score.qml</file>
+        <file>qml/pages/Rules.qml</file>
     </qresource>
 </RCC>

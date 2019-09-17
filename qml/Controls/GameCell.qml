@@ -108,10 +108,14 @@ MouseArea {
     Connections {
         target: Logic.session
 
-        enabled: waitTimer.running
-
-        onPause: waitTimer.pause()
-        onResume: waitTimer.resume()
+        onPause: {
+            if (waitTimer.running)
+                waitTimer.pause()
+        }
+        onResume: {
+            if (root.state !== "nothing")
+                waitTimer.resume()
+        }
     }
 
     Rectangle {

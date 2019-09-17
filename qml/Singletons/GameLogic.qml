@@ -10,6 +10,9 @@ Item {
     property bool sessionStarted: false
     property bool sessionPaused: false
 
+    property int lastScore: 0
+    property int lastTime: 0
+
     signal gameOver(int time, int score);
 
     function newGame() {
@@ -34,6 +37,7 @@ Item {
             console.warn("Error resume: session is not open yet");
     }
 
+
     Component {
         id: sessionComponent
 
@@ -47,7 +51,7 @@ Item {
                                 0, 0, 0,
                                 0, 0, 0,
                                 0, 0, 0]
-            property int time: 60 * 1000
+            property int time: 30 * 1000
             property int score: 0
             property int totalSessionTime: 0
             property alias timeLeft: mainGameTimer.timeLeft
@@ -94,11 +98,12 @@ Item {
             }
 
             function hideCat(index, isFed) {
-
 //                console.log("###hideCat")
                 if (area[index] < 0 && isFed) {
                     if (timeLeft <= rewardForTiger) {
                         root.pause();
+                        root.lastScore = sessionObj.score;
+                        root.lastTime = sessionObj.totalSessionTime;
                         root.gameOver(sessionObj.totalSessionTime, sessionObj.score)
                     } else {
                         timeLeft += rewardForTiger;
@@ -149,6 +154,12 @@ Item {
 
                 interval: sessionObj.time
                 onTick: sessionObj.totalSessionTime += time
+                onTriggered: {
+                    root.pause();
+                    root.lastScore = sessionObj.score;
+                    root.lastTime = sessionObj.totalSessionTime;
+                    root.gameOver(sessionObj.totalSessionTime, sessionObj.score)
+                }
             }
 
             Controls.AdvancedTimer {

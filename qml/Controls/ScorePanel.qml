@@ -5,6 +5,8 @@ import Singletons 1.0
 Row {
     id: root
 
+    property int score: !!Logic.session ? Logic.session.score : 0
+
     spacing: 5
 
     Image {
@@ -14,7 +16,7 @@ Row {
 
     Label {
         anchors.verticalCenter: parent.verticalCenter
-        text: !!Logic.session ? Logic.session.score : 0
+        text: root.score
         font.pointSize: 40
         color: ThemeManager.currentTheme["toolbarTextColor"]
     }
