@@ -95,6 +95,10 @@ QQC2.ToolBar {
             width: 40
             height: 70
             visible: false
+            checked: Logic.sessionPaused
+
+            onClicked: checked ? Logic.pause()
+                               : Logic.resume()
         }
     }
 }

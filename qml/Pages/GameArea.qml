@@ -19,7 +19,9 @@ Controls.BasePage {
         Controls.Label {
             anchors.centerIn: parent
 
-            text: "00:00"
+            text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.timeLeft), "mm:ss")
+                                  : "00:00"
+
             font.pointSize: 40
             color: ThemeManager.currentTheme["toolbarTextColor"]
         }
@@ -47,6 +49,7 @@ Controls.BasePage {
                 model: 12
 
                 delegate: Controls.GameCell {
+                    cellIndex: model.index
                     width: (root.width - (root.width / 6)) / 3
                 }
             }

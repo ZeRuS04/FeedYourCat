@@ -1,11 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.12
 
 import Singletons 1.0
 
 Row {
     id: root
-
-    property int score: 0
 
     spacing: 5
 
@@ -16,7 +14,7 @@ Row {
 
     Label {
         anchors.verticalCenter: parent.verticalCenter
-        text: root.score
+        text: !!Logic.session ? Logic.session.score : 0
         font.pointSize: 40
         color: ThemeManager.currentTheme["toolbarTextColor"]
     }

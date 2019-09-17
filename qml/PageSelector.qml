@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
+import Singletons 1.0
 
 import "pages" as Pages
 
@@ -11,6 +12,7 @@ StackView {
         case "game":
             replace(pauseComponent);
             push(gameComponent);
+            Logic.newGame();
             break;
         case "settings":
             push(settingsComponent);
@@ -43,6 +45,15 @@ StackView {
 
     state: currentItem.pageName || ""
 
+    Keys.onBackPressed: {
+        if (root.empty) {
+            event.accepted = false;
+            return;
+        }
+
+        root.pop();
+    }
+
     Component {
         id: menuComponent
 
@@ -66,6 +77,8 @@ StackView {
 
         Pages.Pause {
 
+            onContinueSig: updatePage("game")
+            onSettings: updatePage("settings")
         }
     }
 
