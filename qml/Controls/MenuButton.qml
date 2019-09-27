@@ -6,6 +6,8 @@ import Singletons 1.0
 QQC2.Button {
     id: root
 
+    font.pointSize: 20
+
     background: Item {
         Rectangle {
             anchors.fill: parent
@@ -21,11 +23,27 @@ QQC2.Button {
         }
     }
 
-    contentItem: Label {
+    contentItem: Item {
         anchors.fill: parent
-        text:  root.text
-        font.pointSize: 24
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+        Row {
+            anchors.centerIn: parent
+
+            spacing: 10
+
+            Image {
+                anchors.verticalCenter: parent.verticalCenter
+                source: root.icon.source
+            }
+
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+
+                bold: root.font.bold
+                text:  root.text
+                font.pointSize: root.font.pointSize
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
     }
 }

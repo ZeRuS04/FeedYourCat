@@ -1,5 +1,6 @@
 import QtQuick 2.12
 
+import "../helpers/Constants.js" as Constants
 import Singletons 1.0
 
 MouseArea {
@@ -7,9 +8,9 @@ MouseArea {
 
     property int cellIndex: -1
     property int backgroundIndex: 0
-    property string backgroundColor: Common.catBackgrounds[backgroundIndex] || ThemeManager.currentTheme["cellBackgroundColor"]
+    property string backgroundColor: Constants.catBackgrounds[backgroundIndex] || ThemeManager.currentTheme["cellBackgroundColor"]
     property real backgroundOpacity: 1
-    property string borderColor: Common.catBorders[backgroundIndex] || ThemeManager.currentTheme["cellBorderColor"]
+    property string borderColor: Constants.catBorders[backgroundIndex] || ThemeManager.currentTheme["cellBorderColor"]
 
     height: width
 
@@ -92,10 +93,9 @@ MouseArea {
     CatImage {
         anchors.fill: parent
 
-        visible: !!Logic.session && Logic.session.area[cellIndex] > 0
-        catObject: {
-            console.log("###", cellIndex, Logic.session.area[cellIndex], Common.catsCatalog[Logic.session.area[cellIndex]])
-            return visible ? Common.catsCatalog[Logic.session.area[cellIndex]] : {}
-        }
+        visible: root.state !== "nothing"
+        catObject: root.state === "cat" ? Constants.catsCatalog[Logic.session.area[cellIndex] - 1] :
+                 root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
+                                        : {}
     }
 }

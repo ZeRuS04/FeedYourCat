@@ -56,7 +56,7 @@ Controls.BasePage {
 
                 anchors.centerIn: parent
 
-                bottomPadding: 20
+                bottomPadding: 50
 
                 spacing: 23
 
@@ -75,6 +75,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
+                    icon.source: "qrc:/resources/icons/Settings.svg"
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

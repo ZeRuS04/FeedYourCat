@@ -1,6 +1,7 @@
 pragma Singleton
 
 import QtQuick 2.12
+import "../helpers/Constants.js" as Constants
 import "../controls" as Controls
 
 Item {
@@ -13,14 +14,18 @@ Item {
     property int lastScore: 0
     property int lastTime: 0
 
+    property int columnCount: 3
+    property int rowCount: 4
+
     property int time: 30
     property int startCats: 3
     property int newCatInterval: 1
     property int rewardForFeedCat: 1
     property int rewardForSkipCat: 0
     property int rewardForTiger: -20
-    property var stagesInterval: [10,15,20]
+    property var stagesInterval: [5,10,15]
     property var newStageCatCount: [1,2,3]
+    property var newStageTigerChance: [8,13,18]
     property int minimumCatDelay: 1000
     property int maximumCatDelay: 2000
 
@@ -58,6 +63,7 @@ Item {
             signal pause()
             signal resume()
 
+            readonly property int cellCount: root.rowCount * root.columnCount
             property var area: [0, 0, 0,
                                 0, 0, 0,
                                 0, 0, 0,
@@ -69,8 +75,9 @@ Item {
             property int startCats: root.startCats
             property int newCatInterval: root.newCatInterval * 1000
             property int newCatCount: newStageCatCount[currentStage]
-            property var stagesInterval: root.stagesInterval.push(0)
+            property var stagesInterval: root.stagesInterval
             property var newStageCatCount: root.newStageCatCount
+            property real tigerChance: root.newStageTigerChance[currentStage] / 100
             property int currentStage: 0
             property int rewardForFeedCat: root.rewardForFeedCat * 1000
             property int rewardForSkipCat: root.rewardForSkipCat * 1000
@@ -81,11 +88,11 @@ Item {
                 nextStageTimer.start()
 
                 for (var i = 0; i < startCats; ++i) {
-                    var index = Math.floor(Math.random() * 12);
+                    var index = Math.floor(Math.random() * cellCount);
                     while (area[index] !== 0) {
-                        index = Math.floor(Math.random() * 12);
+                        index = Math.floor(Math.random() * cellCount);
                     }
-                    area[index] = Math.floor(Math.random() * 6);
+                    area[index] = Math.floor(Math.random() * Constants.catsCatalog.length) + 1;
                 }
                 areaChanged();
 
@@ -95,23 +102,26 @@ Item {
                 root.sessionStarted = true;
             }
 
+            function emitTiger() {
+                return Math.random() <= tigerChance;
+            }
 
             function emitCat() {
-                for (var i = 0; i < startCats; ++i) {
-                    var index = Math.floor(Math.random() * 12);
+                for (var i = 0; i < newCatCount; ++i) {
+                    var index = Math.floor(Math.random() * cellCount);
                     while (area[index] !== 0) {
-                        index = Math.floor(Math.random() * 12);
+                        index = Math.floor(Math.random() * cellCount);
                     }
-//                    if (area[index] === 0)
-                        area[index] = Math.floor(Math.random() * 6);
+                    var isTiger  = emitTiger();
+                    area[index] = isTiger ? (Math.floor(Math.random() * Constants.tigersCatalog.length) + 1) * -1
+                                          : Math.floor(Math.random() * Constants.catsCatalog.length) + 1;
                 }
                 areaChanged();
             }
 
             function hideCat(index, isFed) {
-//                console.log("###hideCat")
                 if (area[index] < 0 && isFed) {
-                    if (timeLeft <= rewardForTiger) {
+                    if (timeLeft <= Math.abs(rewardForTiger)) {
                         root.pause();
                         root.lastScore = sessionObj.score;
                         root.lastTime = sessionObj.totalSessionTime;

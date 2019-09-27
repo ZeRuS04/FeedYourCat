@@ -42,11 +42,11 @@ Controls.BasePage {
             id: grid
 
             anchors.centerIn: parent
-            columns: 3
+            columns: Logic.columnCount
             spacing: root.width / 24
 
             Repeater {
-                model: 12
+                model: Logic.columnCount * Logic.rowCount
 
                 delegate: Controls.GameCell {
                     cellIndex: model.index

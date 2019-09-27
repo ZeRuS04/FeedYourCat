@@ -116,5 +116,6 @@
         <file>resources/images/cats/Game_Cats/Dark_Theme/4Cat/Cat_4Cat_body.svg</file>
         <file>resources/images/cats/Game_Cats/Light_Theme/2Cat/Cat_2Cat_paw_left.svg</file>
         <file>resources/images/cats/Game_Cats/Light_Theme/4Cat/Cat_4Cat_body.svg</file>
+        <file>qml/helpers/Constants.js</file>
     </qresource>
 </RCC>

@@ -70,6 +70,7 @@ Controls.BasePage {
                     height: 60
 
                     text: qsTr("FEED MY CATS")
+                    font.bold: true
 
                     onClicked: root.restart()
                 }
@@ -78,6 +79,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
+                    icon.source: "qrc:/resources/icons/Settings.svg"
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

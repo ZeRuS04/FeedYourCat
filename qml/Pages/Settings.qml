@@ -166,6 +166,23 @@ Controls.BasePage {
                 text: Logic.newStageCatCount.join(",")
             }
         }
+        RowLayout {
+            height: 30
+
+            Controls.Label {
+                font.pointSize: 12
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                text: "tiger chance on stage (%,%,...,%)"
+            }
+
+            TextField {
+                id: newTigerChanceField
+                width: 120
+                height: parent.height
+                text: Logic.newStageTigerChance.join(",")
+            }
+        }
 
         RowLayout {
             height: 30
@@ -202,6 +219,7 @@ Controls.BasePage {
                 Logic.rewardForTiger = rewardForFeedTigerField.text;
                 Logic.stagesInterval = stagesIntervalField.text.split(",");
                 Logic.newStageCatCount = newStageCatCountField.text.split(",");
+                Logic.newStageTigerChance = newTigerChanceField.text.split(",");
                 Logic.minimumCatDelay = catDelayField.text.split("-")[0];
                 Logic.maximumCatDelay = catDelayField.text.split("-")[1] || catDelayField.text.split("-")[0];
             }
