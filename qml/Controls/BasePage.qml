@@ -39,7 +39,6 @@ Item {
             GradientStop { position: 1.0; color: ThemeManager.currentTheme["backgroundGradColor2"] }
         }
         z: -100
-
     }
 
     Timer {

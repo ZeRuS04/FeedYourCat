@@ -13,30 +13,9 @@ MouseArea {
 
     height: width
 
-    state: {
-        if (cellIndex < 0 || !Logic.sessionStarted || Logic.session === null)
-            return "nothing";
-        switch (Logic.session.area[cellIndex]) {
-        case -1:
-            return "tiger"
-        case 0:
-            return "nothing"
-        case 1:
-            return "cat1"
-        case 2:
-            return "cat2"
-        case 3:
-            return "cat3"
-        case 4:
-            return "cat4"
-        case 5:
-            return "cat5"
-        case 6:
-            return "cat6"
-        default:
-            return "nothing"
-        }
-    }
+    state: !Logic.session || Logic.session.area[cellIndex] === 0 ? "nothing"
+                             : Logic.session.area[cellIndex] > 0 ? "cat"
+                                                                 : "tiger"
 
     states: [
         State {
@@ -49,32 +28,7 @@ MouseArea {
             }
         },
         State {
-            name: "cat1"
-
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
-        },
-        State {
-            name: "cat2"
-
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
-        },
-        State {
-            name: "cat3"
-
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
-        },
-        State {
-            name: "cat4"
-
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
-        },
-        State {
-            name: "cat5"
-
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
-        },
-        State {
-            name: "cat6"
+            name: "cat"
 
             PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
         },
@@ -87,7 +41,7 @@ MouseArea {
 
     onStateChanged: {
         if (state !== "nothing") {
-            waitTimer.interval = Math.floor(Math.random() * 1500) + 1000;
+            waitTimer.interval = Math.floor(Math.random() * (Logic.maximumCatDelay - Logic.minimumCatDelay)) + Logic.minimumCatDelay;
             waitTimer.start()
         }
     }
@@ -132,5 +86,16 @@ MouseArea {
         radius: height / 10
         color: "transparent"
         border.color: root.borderColor
+        border.width: 2
+    }
+
+    CatImage {
+        anchors.fill: parent
+
+        visible: !!Logic.session && Logic.session.area[cellIndex] > 0
+        catObject: {
+            console.log("###", cellIndex, Logic.session.area[cellIndex], Common.catsCatalog[Logic.session.area[cellIndex]])
+            return visible ? Common.catsCatalog[Logic.session.area[cellIndex]] : {}
+        }
     }
 }

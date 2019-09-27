@@ -51,8 +51,8 @@ QQC2.ToolBar {
     RowLayout {
         anchors {
             fill: parent
-            leftMargin: 10
-            rightMargin: 10
+            leftMargin: 30
+            rightMargin: 30
         }
 
         BackToolButton {

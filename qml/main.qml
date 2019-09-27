@@ -9,7 +9,8 @@ ApplicationWindow {
     width: 360
     height: 640
     title: qsTr("Feed your cat")
-//    visibility: Window.FullScreen
+    visibility: Qt.platform.os === "android" ? Window.FullScreen
+                                             : Window.Windowed
 
     header: Controls.Toolbar {
         stack: stackView

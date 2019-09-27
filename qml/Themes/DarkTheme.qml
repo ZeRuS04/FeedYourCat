@@ -8,6 +8,7 @@ QtObject {
 //            return s.replace('images/dark/', 'images/')
 //        return s;
 //    }
+    readonly property string catalogName: "Dark_Theme"
 
     //====== Background colors:
     readonly property color backgroundGradColor1: "#13055A"
@@ -19,6 +20,7 @@ QtObject {
     readonly property color toolbarBackgroundColor: "#10034E"
     readonly property color cellBackgroundColor: "#1D1243"
     readonly property color cellBorderColor: "#8567A0"
+    readonly property color themeSwitcherCheckedColor: "#FFFFFF"
 
     readonly property color mainTextColor: "#FFFFFF"
     readonly property color toolbarTextColor: "#ECC0E9"
@@ -26,6 +28,7 @@ QtObject {
     //====== Opacities:
     readonly property real menuButtonBackgroundOpacity: 0.11
     readonly property real cellBackgroundOpacity: 0.38
+    readonly property real themeSwitcherOpacity: 0.15
 
     //====== Images:
     property url mainMenuImage: "qrc:/resources/images/cats/Start_Cats/SVG/Start_Cat_Dark_Theme.svg"

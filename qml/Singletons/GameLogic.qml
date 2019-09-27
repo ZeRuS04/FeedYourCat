@@ -13,6 +13,17 @@ Item {
     property int lastScore: 0
     property int lastTime: 0
 
+    property int time: 30
+    property int startCats: 3
+    property int newCatInterval: 1
+    property int rewardForFeedCat: 1
+    property int rewardForSkipCat: 0
+    property int rewardForTiger: -20
+    property var stagesInterval: [10,15,20]
+    property var newStageCatCount: [1,2,3]
+    property int minimumCatDelay: 1000
+    property int maximumCatDelay: 2000
+
     signal gameOver(int time, int score);
 
     function newGame() {
@@ -51,19 +62,19 @@ Item {
                                 0, 0, 0,
                                 0, 0, 0,
                                 0, 0, 0]
-            property int time: 30 * 1000
             property int score: 0
             property int totalSessionTime: 0
             property alias timeLeft: mainGameTimer.timeLeft
-            property int startCats: 3
-            property int newCatInterval: 1 * 1000
+            property int time: root.time * 1000
+            property int startCats: root.startCats
+            property int newCatInterval: root.newCatInterval * 1000
             property int newCatCount: newStageCatCount[currentStage]
-            property var stagesInterval: [10 * 1000, 15 * 1000, 20 * 1000, 0]
-            property var newStageCatCount: [1, 2, 3]
+            property var stagesInterval: root.stagesInterval.push(0)
+            property var newStageCatCount: root.newStageCatCount
             property int currentStage: 0
-            property int rewardForFeedCat: 1 * 1000
-            property int rewardForSkipCat: 0 * 1000
-            property int rewardForTiger: -20 * 1000
+            property int rewardForFeedCat: root.rewardForFeedCat * 1000
+            property int rewardForSkipCat: root.rewardForSkipCat * 1000
+            property int rewardForTiger: root.rewardForTiger * 1000
 
             function init() {
                 mainGameTimer.start()
@@ -74,7 +85,7 @@ Item {
                     while (area[index] !== 0) {
                         index = Math.floor(Math.random() * 12);
                     }
-                    area[index] = Math.floor(Math.random() * 6) + 1;
+                    area[index] = Math.floor(Math.random() * 6);
                 }
                 areaChanged();
 
@@ -92,7 +103,7 @@ Item {
                         index = Math.floor(Math.random() * 12);
                     }
 //                    if (area[index] === 0)
-                        area[index] = Math.floor(Math.random() * 6) + 1;
+                        area[index] = Math.floor(Math.random() * 6);
                 }
                 areaChanged();
             }
@@ -139,10 +150,10 @@ Item {
             Controls.AdvancedTimer {
                 id: nextStageTimer
 
-                interval: sessionObj.stagesInterval[sessionObj.currentStage]
+                interval: sessionObj.stagesInterval[sessionObj.currentStage] * 1000
 
                 onTriggered: {
-                    if (currentStage < 2) {
+                    if (currentStage < sessionObj.newStageCatCount.length - 1) {
                         sessionObj.currentStage++;
                         restart();
                     }

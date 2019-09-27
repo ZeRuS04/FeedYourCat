@@ -20,11 +20,11 @@ QtObject {
     property ListModel themesModel: ListModel {
         ListElement {
             text: qsTr("Light Theme")
-            value: 0
+            value: "Light_Theme"
         }
         ListElement {
             text: qsTr("Dark Theme")
-            value: 1
+            value: "Dark_Theme"
         }
     }
 
