@@ -6,8 +6,9 @@ QtObject {
     property int interval: 0
     property int timeLeft: 0
     property int delta: 100
-    property bool running: timer.running
+    property alias running: timer.running
     property bool repeat: false
+    property bool paused: false
 
     signal tick(int time);
     signal triggered()
@@ -33,10 +34,16 @@ QtObject {
     }
 
     function pause() {
-        timer.stop();
+        if (timer.running) {
+            timer.stop();
+            paused = true;
+        }
     }
     function resume() {
-        timer.start();
+        if (root.paused) {
+            root.paused = false;
+            timer.start();
+        }
     }
 
     property Timer __timer: Timer {

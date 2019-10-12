@@ -17,6 +17,15 @@ Controls.BasePage {
         width: parent.width
 
         Controls.Label {
+            id: gameTimerLabel
+
+            function switchColor() {
+                if (gameTimerLabel.color === ThemeManager.currentTheme["toolbarTextColor"])
+                    gameTimerLabel.color = ThemeManager.currentTheme["alertColor"];
+                else
+                    gameTimerLabel.color = ThemeManager.currentTheme["toolbarTextColor"];
+            }
+
             anchors.centerIn: parent
 
             text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.timeLeft), "mm:ss")
@@ -24,6 +33,32 @@ Controls.BasePage {
 
             font.pointSize: 40
             color: ThemeManager.currentTheme["toolbarTextColor"]
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 500
+                }
+            }
+
+            Controls.AdvancedTimer {
+                property bool running: !!Logic.session && Logic.session.timeLeft < 6000
+
+                interval: 500
+                repeat: true
+
+                onRunningChanged: {
+                    if (running)
+                        restart()
+                    else {
+                        stop();
+                        gameTimerLabel.color = ThemeManager.currentTheme["toolbarTextColor"]
+                    }
+                }
+
+                onTriggered: {
+                    gameTimerLabel.switchColor()
+                }
+            }
         }
     }
 

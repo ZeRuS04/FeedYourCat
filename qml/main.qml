@@ -5,6 +5,8 @@ import QtQuick.Controls 2.12
 import "controls" as Controls
 
 ApplicationWindow {
+    id: root
+
     visible: true
     width: 360
     height: 640
@@ -13,6 +15,7 @@ ApplicationWindow {
                                              : Window.Windowed
 
     header: Controls.Toolbar {
+        height: root.height / 9
         stack: stackView
     }
 

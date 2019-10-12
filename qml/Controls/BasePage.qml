@@ -7,7 +7,7 @@ Item {
 
     property string pageName: "unknown"
 
-    property int foodCount: 16
+    property int foodCount: 24
     property int __screenZoneCount: 8
 
     function intitFoodAnimation () {
@@ -31,8 +31,8 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        anchors.topMargin: -70
-        anchors.bottomMargin: -70
+        anchors.topMargin: -root.height / 5
+        anchors.bottomMargin: -root.height / 5
 
         gradient: Gradient {
             GradientStop { position: 0.0; color: ThemeManager.currentTheme["backgroundGradColor1"] }
@@ -110,7 +110,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        anchors.topMargin: -70
+        anchors.topMargin: -root.height / 5
         opacity: 0.5
         gradient: Gradient {
             GradientStop { position: 0.0; color: ThemeManager.currentTheme["backgroundGradColor1"] }

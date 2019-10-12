@@ -65,7 +65,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    text: qsTr("CONTINUE")
+                    text: qsTr("TEST") //###TODO: REVERT to CONTINUE
 
                     font.bold: true
 
@@ -85,6 +85,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
+                    icon.source: "qrc:/resources/icons/%1/settings.svg".arg(ThemeManager.currentTheme.catalogName)
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

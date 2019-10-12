@@ -1,6 +1,7 @@
 pragma Singleton
 
-import QtQuick 2.0
+import QtQuick 2.12
+import Qt.labs.settings 1.1
 
 QtObject {
     id: root
@@ -16,6 +17,10 @@ QtObject {
     property int currentThemeIndex: 1
     property var __lightTheme: null
     property var __darkTheme: null
+
+    property Settings settings: Settings {
+        property alias currentThemeIndex: root.currentThemeIndex
+    }
 
     property ListModel themesModel: ListModel {
         ListElement {
@@ -52,5 +57,6 @@ QtObject {
     }
 
     Component.onCompleted: init()
+
 }
 

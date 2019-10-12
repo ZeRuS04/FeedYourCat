@@ -13,7 +13,13 @@ StackView {
             clear();
             push(pauseComponent);
             push(gameComponent);
-            Logic.newGame();
+            Logic.newGame(false);
+            break;
+        case "testGame":
+            clear();
+            push(pauseComponent);
+            push(gameComponent);
+            Logic.newGame(true);
             break;
         case "rules":
             push(rulesComponent);
@@ -72,6 +78,7 @@ StackView {
 
         Pages.MainMenu {
             onStart: updatePage("rules")
+            onStartTestMode: updatePage("testGame")
             onSettings: updatePage("settings")
         }
     }
@@ -88,7 +95,7 @@ StackView {
         id: pauseComponent
 
         Pages.Pause {
-            onContinueSig: updatePage("game")
+            onContinueSig: updatePage("testGame") //###TODO: REVERT to continue
             onRestart: updatePage("game")
             onSettings: updatePage("settings")
 

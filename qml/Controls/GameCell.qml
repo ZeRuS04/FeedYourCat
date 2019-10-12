@@ -12,6 +12,8 @@ MouseArea {
     property real backgroundOpacity: 1
     property string borderColor: Constants.catBorders[backgroundIndex] || ThemeManager.currentTheme["cellBorderColor"]
 
+    property bool isFed: false
+
     height: width
 
     state: !Logic.session || Logic.session.area[cellIndex] === 0 ? "nothing"
@@ -41,22 +43,43 @@ MouseArea {
     ]
 
     onStateChanged: {
+        isFed = false;
         if (state !== "nothing") {
-            waitTimer.interval = Math.floor(Math.random() * (Logic.maximumCatDelay - Logic.minimumCatDelay)) + Logic.minimumCatDelay;
-            waitTimer.start()
+            if (!Logic.session.isTestMode) {
+                waitTimer.interval = Math.floor(Math.random() * (Logic.session.maximumCatDelay - Logic.session.minimumCatDelay)) + Logic.session.minimumCatDelay;
+                waitTimer.start()
+            }
         }
     }
 
     onClicked: {
-        waitTimer.stop();
-        Logic.session.hideCat(cellIndex, true);
+        console.log("###Logic.sessionPaused", Logic.sessionPaused)
+        if (Logic.sessionPaused)
+            return;
+
+        if (!Logic.session.isTestMode) {
+            if (waitTimer.running) {
+                waitTimer.stop();
+            }
+            isFed = true;
+            catImage.hide();
+        } else {
+            if (state !== "nothing") {
+                catImage.hide();
+            } else {
+                if (Logic.session.isTestMode) {
+                    Logic.session.area[root.cellIndex] = root.cellIndex - 2;
+                    Logic.session.areaChanged()
+                }
+            }
+        }
     }
 
     AdvancedTimer {
         id: waitTimer
 
         onTriggered: {
-            Logic.session.hideCat(root.cellIndex, false);
+            catImage.hide();
         }
     }
 
@@ -79,6 +102,32 @@ MouseArea {
         radius: height / 10
         color: root.backgroundColor
         opacity: root.backgroundOpacity
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 300
+            }
+        }
+    }
+
+    CatImage {
+        id: catImage
+
+        anchors.fill: parent
+
+        visible: root.state !== "nothing"
+        catObject: root.state === "cat" ? Constants.catsCatalog[Logic.session.area[cellIndex] - 1] :
+                 root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
+                                        : {}
+        onHideAnimationFinished: {
+            Logic.session.hideCat(root.cellIndex, root.isFed);
+        }
+        onShowAnimationFinished: {
+            if (!Logic.session.isTestMode && root.state !== "nothing") {
+                waitTimer.interval = Math.floor(Math.random() * (Logic.session.maximumCatDelay - Logic.session.minimumCatDelay)) + Logic.session.minimumCatDelay;
+                waitTimer.start()
+            }
+        }
     }
 
     Rectangle {
@@ -90,12 +139,4 @@ MouseArea {
         border.width: 2
     }
 
-    CatImage {
-        anchors.fill: parent
-
-        visible: root.state !== "nothing"
-        catObject: root.state === "cat" ? Constants.catsCatalog[Logic.session.area[cellIndex] - 1] :
-                 root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
-                                        : {}
-    }
 }

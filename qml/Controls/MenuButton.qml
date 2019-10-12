@@ -31,11 +31,17 @@ QQC2.Button {
             spacing: 10
 
             Image {
+                height: label.height
                 anchors.verticalCenter: parent.verticalCenter
                 source: root.icon.source
+                sourceSize.width: width
+                sourceSize.height: height
+                fillMode: Image.PreserveAspectFit
             }
 
             Label {
+                id: label
+
                 anchors.verticalCenter: parent.verticalCenter
 
                 bold: root.font.bold

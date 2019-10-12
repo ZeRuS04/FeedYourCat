@@ -77,7 +77,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    icon.source: "qrc:/resources/icons/Settings.svg"
+                    icon.source: "qrc:/resources/icons/%1/settings.svg".arg(ThemeManager.currentTheme.catalogName)
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

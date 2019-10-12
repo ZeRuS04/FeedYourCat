@@ -6,6 +6,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+    app.setOrganizationName("Eugene Sinel");
+    app.setOrganizationDomain("eugene.sinel.com");
+    app.setApplicationName("Feed Your Cat");
+
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/Common.qml"), "Singletons", 1, 0, "Common");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/GameLogic.qml"), "Singletons", 1, 0, "Logic");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/ThemeManager.qml"), "Singletons", 1, 0, "ThemeManager");

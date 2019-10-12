@@ -11,7 +11,7 @@ Controls.BasePage {
     property string title: qsTr("SETTINGS")
 
     pageName: "settings"
-
+/*
     Column {
         padding: 30
 
@@ -225,7 +225,7 @@ Controls.BasePage {
             }
         }
     }
-
+*/
     Column {
         id: themeColumn
         anchors {

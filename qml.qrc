@@ -19,15 +19,6 @@
         <file>resources/fonts/NotoSans-Bold.ttf</file>
         <file>resources/fonts/NotoSans-Regular.ttf</file>
         <file>resources/fonts/snap itc.ttf</file>
-        <file>resources/icons/Arrow.svg</file>
-        <file>resources/icons/Cat_score_black.svg</file>
-        <file>resources/icons/Cat_score_white.svg</file>
-        <file>resources/icons/Continue.svg</file>
-        <file>resources/icons/Pause.svg</file>
-        <file>resources/icons/Settings.svg</file>
-        <file>resources/icons/Volume_max.svg</file>
-        <file>resources/icons/Volume_min.svg</file>
-        <file>resources/icons/While_loading.svg</file>
         <file>resources/images/background/Can.svg</file>
         <file>resources/images/background/Fish.svg</file>
         <file>resources/images/background/Korm1.svg</file>
@@ -117,5 +108,22 @@
         <file>resources/images/cats/Game_Cats/Light_Theme/2Cat/Cat_2Cat_paw_left.svg</file>
         <file>resources/images/cats/Game_Cats/Light_Theme/4Cat/Cat_4Cat_body.svg</file>
         <file>qml/helpers/Constants.js</file>
+        <file>resources/icons/Dark_Theme/back.svg</file>
+        <file>resources/icons/Dark_Theme/cat_score.svg</file>
+        <file>resources/icons/Dark_Theme/pause.svg</file>
+        <file>resources/icons/Dark_Theme/paw.svg</file>
+        <file>resources/icons/Dark_Theme/play.svg</file>
+        <file>resources/icons/Dark_Theme/settings.svg</file>
+        <file>resources/icons/Dark_Theme/volume_max.svg</file>
+        <file>resources/icons/Dark_Theme/volume_min.svg</file>
+        <file>resources/icons/Light_Theme/back.svg</file>
+        <file>resources/icons/Light_Theme/cat_score.svg</file>
+        <file>resources/icons/Light_Theme/pause.svg</file>
+        <file>resources/icons/Light_Theme/paw.svg</file>
+        <file>resources/icons/Light_Theme/play.svg</file>
+        <file>resources/icons/Light_Theme/settings.svg</file>
+        <file>resources/icons/Light_Theme/volume_max.svg</file>
+        <file>resources/icons/Light_Theme/volume_min.svg</file>
+        <file>qml/controls/BaseToolButton.qml</file>
     </qresource>
 </RCC>

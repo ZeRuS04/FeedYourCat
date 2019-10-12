@@ -1,14 +1,16 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
+import Singletons 1.0
 
-ToolButton {
+BaseToolButton {
+    id: root
+
     checkable: true
-    background: null
 
     contentItem: Image {
-        width: 28
-        height: 35
-        source: checked ? "qrc:/resources/icons/Continue.svg"
-                        : "qrc:/resources/icons/Pause.svg"
+        sourceSize.width: width
+        sourceSize.height: height
+        source: (checked ? "qrc:/resources/icons/%1/play.svg"
+                         : "qrc:/resources/icons/%1/pause.svg").arg(ThemeManager.currentTheme.catalogName)
     }
 }

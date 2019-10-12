@@ -9,7 +9,6 @@ QQC2.ToolBar {
 
     property QtObject stack
 
-    height: 70
     state: stack.state
     states: [
         State {
@@ -56,8 +55,8 @@ QQC2.ToolBar {
         }
 
         BackToolButton {
-            width: 40
-            height: 70
+            width: height / 35 * 25
+            height: parent.height / 1.5
             onClicked: stack.pop()
         }
 
@@ -65,7 +64,7 @@ QQC2.ToolBar {
             id: centerItem
 
             Layout.fillWidth: visible
-            Layout.preferredHeight: 70
+            Layout.preferredHeight: root.height
 
             ScorePanel {
                 id: scorePanel
@@ -92,8 +91,8 @@ QQC2.ToolBar {
         PauseToolButton {
             id: pauseButton
 
-            width: 40
-            height: 70
+            width: height
+            height: parent.height / 1.5
             visible: false
             checked: Logic.sessionPaused
 

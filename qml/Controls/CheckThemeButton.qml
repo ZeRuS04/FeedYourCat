@@ -33,7 +33,7 @@ QQC2.Button {
             sourceSize.width: width
             sourceSize.height: height
             visible: root.checked
-            source: "qrc:/resources/icons/While_loading.svg"
+            source: "qrc:/resources/icons/%1/paw.svg".arg(ThemeManager.currentTheme.catalogName)
         }
     }
 }

@@ -35,7 +35,7 @@ Controls.BasePage {
                 Controls.Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pointSize: 30
-                    text: qsTr("YOUR SOCORE:")
+                    text: qsTr("YOUR SCORE:")
                 }
 
                 Controls.ScorePanel {
@@ -47,7 +47,7 @@ Controls.BasePage {
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     font.pointSize: 30
-                    text: qsTr("HIGH SCORE: %1").arg("0")
+                    text: qsTr("HIGH SCORE: %1").arg(Logic.topScore)
                 }
             }
         }
@@ -79,7 +79,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    icon.source: "qrc:/resources/icons/Settings.svg"
+                    icon.source: "qrc:/resources/icons/%1/settings.svg".arg(ThemeManager.currentTheme.catalogName)
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

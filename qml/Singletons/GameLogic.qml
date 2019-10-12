@@ -1,6 +1,8 @@
 pragma Singleton
 
 import QtQuick 2.12
+import Qt.labs.settings 1.1
+
 import "../helpers/Constants.js" as Constants
 import "../controls" as Controls
 
@@ -13,28 +15,30 @@ Item {
 
     property int lastScore: 0
     property int lastTime: 0
+    property alias topScore: setting.topScore
 
     property int columnCount: 3
     property int rowCount: 4
 
     property int time: 30
     property int startCats: 3
-    property int newCatInterval: 1
+    property real newCatInterval: 1.3
     property int rewardForFeedCat: 1
     property int rewardForSkipCat: 0
     property int rewardForTiger: -20
-    property var stagesInterval: [5,10,15]
+    property var stagesInterval: [5,7,10]
     property var newStageCatCount: [1,2,3]
     property var newStageTigerChance: [8,13,18]
-    property int minimumCatDelay: 1000
-    property int maximumCatDelay: 2000
+    property int minimumCatDelay: 1200
+    property int maximumCatDelay: 1800
+    property real speedIncreaseCof: 1.1
 
     signal gameOver(int time, int score);
 
-    function newGame() {
+    function newGame(isTestMode) {
         if (sessionStarted)
             session.destroy();
-        session = sessionComponent.createObject(root);
+        session = sessionComponent.createObject(root, {isTestMode: isTestMode});
     }
 
     function pause() {
@@ -53,6 +57,13 @@ Item {
             console.warn("Error resume: session is not open yet");
     }
 
+    onLastScoreChanged: if (lastScore > topScore) topScore = lastScore
+
+    Settings {
+        id: setting
+
+        property int topScore: 0
+    }
 
     Component {
         id: sessionComponent
@@ -63,27 +74,38 @@ Item {
             signal pause()
             signal resume()
 
+            property bool isTestMode: false
             readonly property int cellCount: root.rowCount * root.columnCount
-            property var area: [0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0]
+            property var area: []
             property int score: 0
             property int totalSessionTime: 0
             property alias timeLeft: mainGameTimer.timeLeft
             property int time: root.time * 1000
             property int startCats: root.startCats
             property int newCatInterval: root.newCatInterval * 1000
-            property int newCatCount: newStageCatCount[currentStage]
+            property int newCatCount: newStageCatCount[Math.min(currentStage, newStageCatCount.length - 1)]
             property var stagesInterval: root.stagesInterval
             property var newStageCatCount: root.newStageCatCount
-            property real tigerChance: root.newStageTigerChance[currentStage] / 100
+            property real tigerChance: root.newStageTigerChance[Math.min(currentStage, root.newStageTigerChance.length - 1)] / 100
             property int currentStage: 0
             property int rewardForFeedCat: root.rewardForFeedCat * 1000
             property int rewardForSkipCat: root.rewardForSkipCat * 1000
             property int rewardForTiger: root.rewardForTiger * 1000
+            property real speedIncreaseCof: root.speedIncreaseCof
+            property int minimumCatDelay: root.minimumCatDelay
+            property int maximumCatDelay: root.maximumCatDelay
 
-            function init() {
+            function initArea() {
+                for (var i = 0, c = Constants.tigersCatalog.length * -1; i < cellCount; i++, c++) {
+                    if (isTestMode && c <= Constants.catsCatalog.length) {
+                        area.push(c);
+                        continue;
+                    }
+                    area.push(0);
+                }
+            }
+
+            function initGame() {
                 mainGameTimer.start()
                 nextStageTimer.start()
 
@@ -96,8 +118,8 @@ Item {
                 }
                 areaChanged();
 
-                mainGameTimer.start()
-                nextStageTimer.start()
+                mainGameTimer.start();
+                nextStageTimer.start();
                 nextCatTimer.start();
                 root.sessionStarted = true;
             }
@@ -109,9 +131,15 @@ Item {
             function emitCat() {
                 for (var i = 0; i < newCatCount; ++i) {
                     var index = Math.floor(Math.random() * cellCount);
+                    var c = 1
                     while (area[index] !== 0) {
+                        if (c > cellCount)
+                            break;
                         index = Math.floor(Math.random() * cellCount);
+                        c++;
                     }
+                    if (area[index] !== 0)
+                        continue;
                     var isTiger  = emitTiger();
                     area[index] = isTiger ? (Math.floor(Math.random() * Constants.tigersCatalog.length) + 1) * -1
                                           : Math.floor(Math.random() * Constants.catsCatalog.length) + 1;
@@ -121,7 +149,7 @@ Item {
 
             function hideCat(index, isFed) {
                 if (area[index] < 0 && isFed) {
-                    if (timeLeft <= Math.abs(rewardForTiger)) {
+                    if (timeLeft <= Math.abs(rewardForTiger) && !isTestMode) {
                         root.pause();
                         root.lastScore = sessionObj.score;
                         root.lastTime = sessionObj.totalSessionTime;
@@ -142,9 +170,16 @@ Item {
                 areaChanged()
             }
 
+            function updateStage() {
+                minimumCatDelay /= speedIncreaseCof
+                maximumCatDelay /= speedIncreaseCof
+                newCatInterval /= speedIncreaseCof
+            }
 
             Component.onCompleted: {
-                init();
+                initArea();
+                if (!isTestMode)
+                    initGame();
             }
             onPause: {
                 mainGameTimer.pause();
@@ -160,13 +195,13 @@ Item {
             Controls.AdvancedTimer {
                 id: nextStageTimer
 
-                interval: sessionObj.stagesInterval[sessionObj.currentStage] * 1000
+                interval: sessionObj.stagesInterval[Math.min(sessionObj.currentStage, sessionObj.stagesInterval.length - 1)] * 1000
+                repeat: true
 
                 onTriggered: {
-                    if (currentStage < sessionObj.newStageCatCount.length - 1) {
-                        sessionObj.currentStage++;
-                        restart();
-                    }
+                    currentStage++
+                    updateStage();
+//                    restart();
                 }
             }
 
@@ -176,10 +211,12 @@ Item {
                 interval: sessionObj.time
                 onTick: sessionObj.totalSessionTime += time
                 onTriggered: {
-                    root.pause();
-                    root.lastScore = sessionObj.score;
-                    root.lastTime = sessionObj.totalSessionTime;
-                    root.gameOver(sessionObj.totalSessionTime, sessionObj.score)
+                    if (!isTestMode) {
+                        root.pause();
+                        root.lastScore = sessionObj.score;
+                        root.lastTime = sessionObj.totalSessionTime;
+                        root.gameOver(sessionObj.totalSessionTime, sessionObj.score)
+                    }
                 }
             }
 

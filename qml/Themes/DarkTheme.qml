@@ -25,6 +25,7 @@ QtObject {
     readonly property color mainTextColor: "#FFFFFF"
     readonly property color toolbarTextColor: "#ECC0E9"
 
+    readonly property color alertColor: "#DC143C"
     //====== Opacities:
     readonly property real menuButtonBackgroundOpacity: 0.11
     readonly property real cellBackgroundOpacity: 0.38
@@ -32,5 +33,5 @@ QtObject {
 
     //====== Images:
     property url mainMenuImage: "qrc:/resources/images/cats/Start_Cats/SVG/Start_Cat_Dark_Theme.svg"
-    property url scoreImage: "qrc:/resources/icons/Cat_score_white.svg"
+    property url scoreImage: "qrc:/resources/icons/Dark_Theme/cat_score.svg"
 }
