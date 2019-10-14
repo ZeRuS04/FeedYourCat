@@ -125,5 +125,8 @@
         <file>resources/icons/Light_Theme/volume_max.svg</file>
         <file>resources/icons/Light_Theme/volume_min.svg</file>
         <file>qml/controls/BaseToolButton.qml</file>
+        <file>resources/icons/flash.svg</file>
+        <file>resources/icons/like.svg</file>
+        <file>resources/icons/While_loading.svg</file>
     </qresource>
 </RCC>

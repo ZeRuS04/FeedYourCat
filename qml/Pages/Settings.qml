@@ -229,8 +229,8 @@ Controls.BasePage {
     Column {
         id: themeColumn
         anchors {
-            bottom: parent.bottom
-            bottomMargin: 50
+            top: parent.top
+            topMargin: 50
         }
 
         width: parent.width
@@ -257,6 +257,55 @@ Controls.BasePage {
             checked: ThemeManager.currentThemeIndex === 1
 
             onClicked: ThemeManager.currentThemeIndex = 1
+        }
+    }
+
+    Row {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        bottomPadding: 5
+        spacing: 3
+        Controls.Label {
+            anchors.verticalCenter: parent.verticalCenter
+            text:  qsTr("designed by ")
+            font.pointSize: 12
+        }
+
+        Controls.Label {
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Lii.Design"
+
+            font.pointSize: 13
+            color: "#FF8C00"
+
+            MouseArea {
+                anchors.fill: parent
+                anchors.margins: -5
+
+                onClicked: Qt.openUrlExternally("https://www.behance.net/liisign")
+            }
+        }
+
+        Controls.Label {
+            anchors.verticalCenter: parent.verticalCenter
+            text:  qsTr("and")
+            font.pointSize: 12
+        }
+
+
+        Controls.Label {
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Eugene.Sinel"
+
+            font.pointSize: 13
+            color: "#47BFD9"
+
+            MouseArea {
+                anchors.fill: parent
+                anchors.margins: -5
+
+                onClicked: Qt.openUrlExternally("mailto:zerus04@gmail.com")
+            }
         }
     }
 }

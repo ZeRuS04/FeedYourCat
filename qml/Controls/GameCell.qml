@@ -53,19 +53,19 @@ MouseArea {
     }
 
     onClicked: {
-        console.log("###Logic.sessionPaused", Logic.sessionPaused)
         if (Logic.sessionPaused)
             return;
 
+        Vibrator.vibrate(120)
         if (!Logic.session.isTestMode) {
             if (waitTimer.running) {
                 waitTimer.stop();
             }
             isFed = true;
-            catImage.hide();
+            catImage.hide(isFed);
         } else {
             if (state !== "nothing") {
-                catImage.hide();
+                catImage.hide(isFed);
             } else {
                 if (Logic.session.isTestMode) {
                     Logic.session.area[root.cellIndex] = root.cellIndex - 2;
@@ -79,7 +79,7 @@ MouseArea {
         id: waitTimer
 
         onTriggered: {
-            catImage.hide();
+            catImage.hide(isFed);
         }
     }
 

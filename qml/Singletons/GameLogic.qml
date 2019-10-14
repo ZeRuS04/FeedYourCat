@@ -26,12 +26,12 @@ Item {
     property int rewardForFeedCat: 1
     property int rewardForSkipCat: 0
     property int rewardForTiger: -20
-    property var stagesInterval: [5,7,10]
+    property var stagesInterval: [7,12,15]
     property var newStageCatCount: [1,2,3]
-    property var newStageTigerChance: [8,13,18]
+    property var newStageTigerChance: [8,13,18.25,33,40]
     property int minimumCatDelay: 1200
     property int maximumCatDelay: 1800
-    property real speedIncreaseCof: 1.1
+    property real speedIncreaseCof: 1.05
 
     signal gameOver(int time, int score);
 
@@ -39,6 +39,7 @@ Item {
         if (sessionStarted)
             session.destroy();
         session = sessionComponent.createObject(root, {isTestMode: isTestMode});
+        sessionPaused = false;
     }
 
     function pause() {
@@ -154,8 +155,11 @@ Item {
                         root.lastScore = sessionObj.score;
                         root.lastTime = sessionObj.totalSessionTime;
                         root.gameOver(sessionObj.totalSessionTime, sessionObj.score)
+                        Vibrator.vibrate(500)
+                        Vibrator.vibrate(500)
                     } else {
                         timeLeft += rewardForTiger;
+                        Vibrator.vibrate(500)
                     }
                     area[index] = 0;
                     return;

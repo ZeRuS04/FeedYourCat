@@ -7,12 +7,15 @@ import "pages" as Pages
 StackView {
     id: root
 
+    property QtObject storedGameArea
+
     function updatePage(page) {
         switch (page) {
         case "game":
             clear();
             push(pauseComponent);
-            push(gameComponent);
+            root.storedGameArea = gameComponent.createObject(root);
+            push(root.storedGameArea);
             Logic.newGame(false);
             break;
         case "testGame":
@@ -20,6 +23,14 @@ StackView {
             push(pauseComponent);
             push(gameComponent);
             Logic.newGame(true);
+            break;
+        case "continue":
+            console.log("###storedGameArea", storedGameArea)
+            if (!!storedGameArea) {
+                push(storedGameArea);
+                storedGameArea = undefined
+                Logic.resume()
+            }
             break;
         case "rules":
             push(rulesComponent);
@@ -59,7 +70,7 @@ StackView {
     state: !!currentItem && currentItem.pageName ? currentItem.pageName : ""
 
     Keys.onBackPressed: {
-        if (root.depth === 1) {
+        if (root.depth === 1 || root.state === "score") {
             event.accepted = false;
             return;
         }
@@ -95,7 +106,7 @@ StackView {
         id: pauseComponent
 
         Pages.Pause {
-            onContinueSig: updatePage("testGame") //###TODO: REVERT to continue
+            onContinueSig: updatePage("continue")
             onRestart: updatePage("game")
             onSettings: updatePage("settings")
 
@@ -108,7 +119,6 @@ StackView {
         id: gameComponent
 
         Pages.GameArea {
-
         }
     }
 

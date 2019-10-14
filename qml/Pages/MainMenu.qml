@@ -72,16 +72,16 @@ Controls.BasePage {
                     onClicked: root.start()
                 }
 
-                Controls.MenuButton {
-                    width: 280
-                    height: 60
+//                Controls.MenuButton {
+//                    width: 280
+//                    height: 60
 
-                    text: qsTr("TEST MODE!")
+//                    text: qsTr("TEST MODE!")
 
-                    font.bold: true
+//                    font.bold: true
 
-                    onClicked: root.startTestMode()
-                }
+//                    onClicked: root.startTestMode()
+//                }
 
                 Controls.MenuButton {
                     width: 280

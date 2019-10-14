@@ -7,7 +7,7 @@ import "controls" as Controls
 ApplicationWindow {
     id: root
 
-    visible: true
+//    visible: false
     width: 360
     height: 640
     title: qsTr("Feed your cat")
@@ -15,13 +15,40 @@ ApplicationWindow {
                                              : Window.Windowed
 
     header: Controls.Toolbar {
-        height: root.height / 9
-        stack: stackView
+        visible: false
+        height: 0 //root.height / 9
+        stack: stackViewLoader.item
     }
 
-    PageSelector {
-        id: stackView
-
+    Loader {
+        id: stackViewLoader
         anchors.fill: parent
+        asynchronous: true
+        opacity: 0
+        focus: true;
+
+        sourceComponent: PageSelector {
+            id: stackView
+
+            anchors.fill: parent
+
+            onCurrentItemChanged: {
+                if (currentItem) {
+                    root.visible = true;
+                    stackViewLoader.opacity = 1;
+                }
+            }
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 500
+                easing.type: Easing.OutQuad;
+                onFinished: {
+                    root.header.height = Qt.binding(function() { return root.height / 9 })
+                    root.header.visible = true
+                }
+            }
+        }
     }
 }

@@ -65,7 +65,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    text: qsTr("TEST") //###TODO: REVERT to CONTINUE
+                    text: qsTr("CONTINUE")
 
                     font.bold: true
 

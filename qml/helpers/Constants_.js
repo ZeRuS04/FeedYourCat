@@ -5,7 +5,7 @@ var catsCatalog = [
         "catImagePrefix": "qrc:/resources/images/cats/Game_Cats/%THEME%/1Cat/Cat_1Cat_",
         "cloudImagePrefix": "qrc:/resources/images/cats/Game_Cats/Cloud/",
         "parts": {
-            "tail": '5,68;40,29;-90,45,97;{"property":"y", "from":156, "to": 68, "duration": 250}|{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 200}',
+            "tail": '5,68;40,29;-90,45,97;{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 300}',
             "body": '11,15;88,84;0;{"property":"x", "from":99, "to": 11, "duration": 250}|{"property":"y", "from":99, "to": 15, "duration": 250}',
             "paw_left": '47,89;17,10;0;{"property":"opacity", "from":0, "to":1, "duration": 100, "delay": 250}',
             "paw_right": '91,66;8,13;0;{"property":"opacity", "from":0, "to":1, "duration": 100, "delay": 500}'
@@ -22,7 +22,7 @@ var catsCatalog = [
         "catImagePrefix": "qrc:/resources/images/cats/Game_Cats/%THEME%/2Cat/Cat_2Cat_",
         "cloudImagePrefix": "qrc:/resources/images/cats/Game_Cats/Cloud/",
         "parts": {
-            "tail": '13,3;35,50;-90,48,53;{"property":"y", "from":65, "to": 3, "duration": 300}|{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 400}',
+            "tail": '13,3;35,50;-90,48,53;{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 400}',
             "body": '5,37;82,62;0;{"property":"y", "from":99, "to": 37, "duration": 300}',
             "paw_left": '13,87;22,12;0;{"property":"opacity", "from":0, "to":1, "duration": 100, "delay": 300}'
         },
@@ -39,8 +39,8 @@ var catsCatalog = [
         "catImagePrefix": "qrc:/resources/images/cats/Game_Cats/%THEME%/3Cat/Cat_3Cat_",
         "cloudImagePrefix": "qrc:/resources/images/cats/Game_Cats/Cloud/",
         "parts": {
-            "tail": '17,3;39,51;-90,56,54;{"property":"y", "from":65, "to": 3, "duration": 300, "delay": 200}|{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 500}',
-            "body": '1,37;89,62;0;{"property":"y", "from":99, "to": 37, "duration": 300, "delay": 200}',
+            "tail": '17,3;39,51;-90,56,54;{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 500}',
+            "body": '1,37;89,62;0;{"property":"y", "from":99, "to": 37, "duration": 300, "delay": 300}',
             "paw_left": '1,80;20,18;0;{"property":"opacity", "from":0, "to":1, "duration": 100}',
             "paw_right": '80,79;20,20;0;{"property":"opacity", "from":0, "to":1, "duration": 100, "delay": 100}'
         },
@@ -86,7 +86,7 @@ var catsCatalog = [
         "catImagePrefix": "qrc:/resources/images/cats/Game_Cats/%THEME%/6Cat/Cat_6Cat_",
         "cloudImagePrefix": "qrc:/resources/images/cats/Game_Cats/Cloud/",
         "parts": {
-            "tail": '71,81;24,14;-90,71,95;{"property":"y", "from":170, "to": 81, "duration": 300, "delay": 200}|{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 500}',
+            "tail": '71,81;24,14;-90,71,95;{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 500}',
             "body": '6,10;89,89;0;{"property":"y", "from":99, "to": 10, "duration": 300, "delay": 200}',
             "paw_left": '6,89;17,10;0;{"property":"opacity", "from":0, "to":1, "duration": 100}',
             "paw_right": '65,90;14,9;0;{"property":"opacity", "from":0, "to":1, "duration": 100}'
@@ -106,7 +106,7 @@ var tigersCatalog = [
         "catImagePrefix": "qrc:/resources/images/cats/Game_Cats/Tigers/Tiger1/T1_",
         "cloudImagePrefix": "qrc:/resources/images/cats/Game_Cats/Cloud/",
         "parts": {
-            "tail": '5,81;24,14;90,29,99;{"property":"y", "from":170, "to": 81, "duration": 300, "delay": 200}|{"property":"rotation","from":90, "to": 0, "duration": 300, "delay": 500}',
+            "tail": '5,81;24,14;90,29,81;{"property":"rotation","from":90, "to": 0, "duration": 300, "delay": 500}',
             "body": '7,10;90,89;0;{"property":"y", "from":99, "to": 10, "duration": 300, "delay": 200}',
             "paw_left": '21,90;14,9;0;{"property":"opacity", "from":0, "to":1, "duration": 100}',
             "paw_right": '77,89;17,10;0;{"property":"opacity", "from":0, "to":1, "duration": 100}'
@@ -123,7 +123,7 @@ var tigersCatalog = [
         "catImagePrefix": "qrc:/resources/images/cats/Game_Cats/Tigers/Tiger2/T2_",
         "cloudImagePrefix": "qrc:/resources/images/cats/Game_Cats/Cloud/",
         "parts": {
-            "tail": '71,81;24,14;-90,71,99;{"property":"y", "from":170, "to": 81, "duration": 300, "delay": 200}|{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 500}',
+            "tail": '71,81;24,14;-90,71,81;{"property":"rotation","from":-90, "to": 0, "duration": 300, "delay": 500}',
             "body": '3,9;92,90;0;{"property":"y", "from":99, "to": 9, "duration": 300, "delay": 200}',
             "paw_left": '5,89;14,9;0;{"property":"opacity", "from":0, "to":1, "duration": 100}',
             "paw_right": '64,90;14,9;0;{"property":"opacity", "from":0, "to":1, "duration": 100}'
