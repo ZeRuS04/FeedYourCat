@@ -2,9 +2,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "vibrator.h"
+#include "statusbar.h"
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     Vibrator vibrator;
     QGuiApplication app(argc, argv);
@@ -12,6 +14,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("eugene.sinel.com");
     app.setApplicationName("Feed Your Cat");
 
+    qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/Common.qml"), "Singletons", 1, 0, "Common");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/GameLogic.qml"), "Singletons", 1, 0, "Logic");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/ThemeManager.qml"), "Singletons", 1, 0, "ThemeManager");

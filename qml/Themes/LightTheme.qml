@@ -30,6 +30,7 @@ QtObject {
     readonly property real menuButtonBackgroundOpacity: 0.49
     readonly property real cellBackgroundOpacity: 1.0
     readonly property real themeSwitcherOpacity: 0.7
+    readonly property real toolbarBackgroundOpacity: 0.7
 
     //====== Images:
     property url mainMenuImage: "qrc:/resources/images/cats/Start_Cats/SVG/Start_Cat_Light_Theme.svg"

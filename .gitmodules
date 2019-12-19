@@ -1,0 +1,3 @@
+[submodule "statusbar"]
+	path = statusbar
+	url = https://github.com/jpnurmi/statusbar.git

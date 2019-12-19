@@ -226,86 +226,201 @@ Controls.BasePage {
         }
     }
 */
+
     Column {
-        id: themeColumn
+        id: mainColumn
+
         anchors {
             top: parent.top
-            topMargin: 50
+            topMargin: 30
         }
-
         width: parent.width
 
-        Controls.CheckThemeButton {
-            id: lightThemeBtn
+        Column {
+            id: languageColumn
 
-            height: 50
             width: parent.width
-            text: qsTr("Light")
-            autoExclusive: true
-            checked: ThemeManager.currentThemeIndex === 0
 
-            onClicked: ThemeManager.currentThemeIndex = 0
+            Controls.Label {
+                anchors {
+                    right: parent.right
+                    rightMargin: 30
+                }
+
+                text: qsTr("Language")
+                color: ThemeManager.currentTheme["toolbarTextColor"]
+            }
+
+            Controls.CheckThemeButton {
+                id: russianBtn
+
+                height: 80
+                width: parent.width
+                text: "Русский"
+                description: "Мяу"
+                autoExclusive: true
+//                checked: ThemeManager.currentThemeIndex === 0
+
+//                onClicked: ThemeManager.currentThemeIndex = 0
+            }
+
+            Controls.CheckThemeButton {
+                id: englishBtn
+
+                height: 80
+                width: parent.width
+                text: "English"
+                description: "Meow"
+                autoExclusive: true
+//                checked: ThemeManager.currentThemeIndex === 1
+
+//                onClicked: ThemeManager.currentThemeIndex = 1
+            }
         }
 
-        Controls.CheckThemeButton {
-            id: darkThemeBtn
+        Column {
+            id: volumeColumn
 
-            height: 50
             width: parent.width
-            text: qsTr("Dark")
-            autoExclusive: true
-            checked: ThemeManager.currentThemeIndex === 1
 
-            onClicked: ThemeManager.currentThemeIndex = 1
+            Controls.Label {
+                anchors {
+                    right: parent.right
+                    rightMargin: 30
+                }
+
+                text: qsTr("Volume")
+                color: ThemeManager.currentTheme["toolbarTextColor"]
+            }
+
+            Controls.VolumeSlider {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: 30
+                }
+            }
+
+            Controls.CheckBox {
+                anchors {
+                    left: parent.left
+                    margins: 30
+                }
+
+                height: 30
+                text: qsTr("Vibration")
+                onCheckedChanged: if (checked) Vibrator.vibrate(120)
+            }
+        }
+
+        Column {
+            id: themeColumn
+
+            width: parent.width
+
+            Controls.Label {
+                anchors {
+                    right: parent.right
+                    rightMargin: 30
+                }
+
+                text: qsTr("Theme")
+                color: ThemeManager.currentTheme["toolbarTextColor"]
+            }
+
+            Controls.CheckThemeButton {
+                id: lightThemeBtn
+
+                height: 50
+                width: parent.width
+                text: qsTr("Light")
+                autoExclusive: true
+                checked: ThemeManager.currentThemeIndex === 0
+
+                onClicked: ThemeManager.currentThemeIndex = 0
+            }
+
+            Controls.CheckThemeButton {
+                id: darkThemeBtn
+
+                height: 50
+                width: parent.width
+                text: qsTr("Dark")
+                autoExclusive: true
+                checked: ThemeManager.currentThemeIndex === 1
+
+                onClicked: ThemeManager.currentThemeIndex = 1
+            }
         }
     }
 
-    Row {
-        anchors.horizontalCenter: parent.horizontalCenter
+    Rectangle {
+        id: footer
+
         anchors.bottom: parent.bottom
-        bottomPadding: 5
-        spacing: 3
-        Controls.Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text:  qsTr("designed by ")
-            font.pointSize: 12
-        }
+        height: 70
+        width: parent.width
 
-        Controls.Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: "Lii.Design"
+        color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+        opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
 
-            font.pointSize: 13
-            color: "#FF8C00"
+    }
 
-            MouseArea {
-                anchors.fill: parent
-                anchors.margins: -5
+    Column {
+        anchors.verticalCenter: footer.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
 
-                onClicked: Qt.openUrlExternally("https://www.behance.net/liisign")
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 3
+
+            Controls.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text:  qsTr("designed by ")
+                font.pointSize: 12
+            }
+
+            Controls.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Lii.Design"
+
+                font.pointSize: 13
+                color: "#FF8C00"
+
+                MouseArea {
+                    anchors.fill: parent
+                    anchors.margins: -5
+
+                    onClicked: Qt.openUrlExternally("https://www.behance.net/liisign")
+                }
+            }
+
+            Controls.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text:  qsTr("and")
+                font.pointSize: 12
+            }
+
+            Controls.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Eugene.Sinel"
+
+                font.pointSize: 13
+                color: "#47BFD9"
+
+                MouseArea {
+                    anchors.fill: parent
+                    anchors.margins: -5
+
+                    onClicked: Qt.openUrlExternally("mailto:zerus04@gmail.com")
+                }
             }
         }
 
         Controls.Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text:  qsTr("and")
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("music freesfx.co.uk")
             font.pointSize: 12
-        }
-
-
-        Controls.Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: "Eugene.Sinel"
-
-            font.pointSize: 13
-            color: "#47BFD9"
-
-            MouseArea {
-                anchors.fill: parent
-                anchors.margins: -5
-
-                onClicked: Qt.openUrlExternally("mailto:zerus04@gmail.com")
-            }
         }
     }
 }

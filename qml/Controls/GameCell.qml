@@ -1,4 +1,5 @@
 import QtQuick 2.12
+import QtGraphicalEffects 1.12
 
 import "../helpers/Constants.js" as Constants
 import Singletons 1.0
@@ -17,8 +18,8 @@ MouseArea {
     height: width
 
     state: !Logic.session || Logic.session.area[cellIndex] === 0 ? "nothing"
-                             : Logic.session.area[cellIndex] > 0 ? "cat"
-                                                                 : "tiger"
+                                                                 : Logic.session.area[cellIndex] > 0 ? "cat"
+                                                                                                     : "tiger"
 
     states: [
         State {
@@ -56,11 +57,12 @@ MouseArea {
         if (Logic.sessionPaused)
             return;
 
-        Vibrator.vibrate(120)
         if (!Logic.session.isTestMode) {
             if (waitTimer.running) {
                 waitTimer.stop();
             }
+            if (state !== "nothing")
+                Vibrator.vibrate(120)
             isFed = true;
             catImage.hide(isFed);
         } else {
@@ -98,8 +100,8 @@ MouseArea {
 
     Rectangle {
         anchors.fill: parent
-
         radius: height / 10
+
         color: root.backgroundColor
         opacity: root.backgroundOpacity
 
@@ -110,15 +112,24 @@ MouseArea {
         }
     }
 
+
+    Image {
+        id: mask
+        anchors.fill: parent
+        visible: false
+
+        source: "../../resources/icons/mask.svg"
+    }
+
     CatImage {
         id: catImage
 
         anchors.fill: parent
+        visible: false
 
-        visible: root.state !== "nothing"
         catObject: root.state === "cat" ? Constants.catsCatalog[Logic.session.area[cellIndex] - 1] :
-                 root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
-                                        : {}
+                                          root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
+                                                                 : {}
         onHideAnimationFinished: {
             Logic.session.hideCat(root.cellIndex, root.isFed);
         }
@@ -128,6 +139,39 @@ MouseArea {
                 waitTimer.start()
             }
         }
+
+        Item {
+            id: clickReactionImage
+
+            anchors {
+                fill: catImage
+            }
+            visible: root.state === "cat" || root.state === "tiger"
+            //        opacity: 0
+
+            Rectangle {
+                anchors.fill: parent
+                color: "#000000"
+                opacity: 0.9
+            }
+
+            Image {
+                anchors.fill: parent
+                anchors.margins: 10
+                sourceSize.width: width
+                sourceSize.height: height
+
+                source: "../../resources/icons/%1.svg".arg(root.state === "cat" ? "paw" : "jaws")
+            }
+        }
+    }
+
+    OpacityMask {
+        anchors.fill: parent
+        source: catImage
+        maskSource: mask
+
+        visible: root.state !== "nothing"
     }
 
     Rectangle {

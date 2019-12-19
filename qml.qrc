@@ -108,19 +108,13 @@
         <file>resources/images/cats/Game_Cats/Light_Theme/2Cat/Cat_2Cat_paw_left.svg</file>
         <file>resources/images/cats/Game_Cats/Light_Theme/4Cat/Cat_4Cat_body.svg</file>
         <file>qml/helpers/Constants.js</file>
-        <file>resources/icons/Dark_Theme/back.svg</file>
         <file>resources/icons/Dark_Theme/cat_score.svg</file>
-        <file>resources/icons/Dark_Theme/pause.svg</file>
         <file>resources/icons/Dark_Theme/paw.svg</file>
-        <file>resources/icons/Dark_Theme/play.svg</file>
         <file>resources/icons/Dark_Theme/settings.svg</file>
         <file>resources/icons/Dark_Theme/volume_max.svg</file>
         <file>resources/icons/Dark_Theme/volume_min.svg</file>
-        <file>resources/icons/Light_Theme/back.svg</file>
         <file>resources/icons/Light_Theme/cat_score.svg</file>
-        <file>resources/icons/Light_Theme/pause.svg</file>
         <file>resources/icons/Light_Theme/paw.svg</file>
-        <file>resources/icons/Light_Theme/play.svg</file>
         <file>resources/icons/Light_Theme/settings.svg</file>
         <file>resources/icons/Light_Theme/volume_max.svg</file>
         <file>resources/icons/Light_Theme/volume_min.svg</file>
@@ -128,5 +122,22 @@
         <file>resources/icons/flash.svg</file>
         <file>resources/icons/like.svg</file>
         <file>resources/icons/While_loading.svg</file>
+        <file>qml/controls/VolumeSlider.qml</file>
+        <file>qml/controls/CheckBox.qml</file>
+        <file>resources/icons/Dark_Theme/arrow.svg</file>
+        <file>resources/icons/Dark_Theme/arrowAction.svg</file>
+        <file>resources/icons/Dark_Theme/pause.svg</file>
+        <file>resources/icons/Dark_Theme/pauseAction.svg</file>
+        <file>resources/icons/Dark_Theme/play.svg</file>
+        <file>resources/icons/Dark_Theme/playAction.svg</file>
+        <file>resources/icons/Light_Theme/arrow.svg</file>
+        <file>resources/icons/Light_Theme/arrowAction.svg</file>
+        <file>resources/icons/Light_Theme/pause.svg</file>
+        <file>resources/icons/Light_Theme/pauseAction.svg</file>
+        <file>resources/icons/Light_Theme/play.svg</file>
+        <file>resources/icons/Light_Theme/playAction.svg</file>
+        <file>resources/icons/jaws.svg</file>
+        <file>resources/icons/paw.svg</file>
+        <file>resources/icons/mask.svg</file>
     </qresource>
 </RCC>

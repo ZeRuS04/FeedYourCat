@@ -1,23 +1,41 @@
 import QtQuick.Window 2.2
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import StatusBar 0.1
+import Singletons 1.0
 
 import "controls" as Controls
 
 ApplicationWindow {
     id: root
 
+    property int dpi: Screen.pixelDensity * 25.4
+
+    function dp(x){
+        if(dpi < 120) {
+            return x;
+        } else {
+            return x*(dpi/160);
+        }
+    }
 //    visible: false
     width: 360
     height: 640
     title: qsTr("Feed your cat")
-    visibility: Qt.platform.os === "android" ? Window.FullScreen
-                                             : Window.Windowed
+
+//    flags: Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
+//    visibility: Qt.platform.os === "android" ? Window.FullScreen
+//                                             : Window.Windowed
 
     header: Controls.Toolbar {
         visible: false
-        height: 0 //root.height / 9
+        height: 70
         stack: stackViewLoader.item
+    }
+
+    StatusBar {
+        theme: ThemeManager.currentThemeIndex
+        color: ThemeManager.currentTheme["backgroundGradColor1"]
     }
 
     Loader {
@@ -45,7 +63,7 @@ ApplicationWindow {
                 duration: 500
                 easing.type: Easing.OutQuad;
                 onFinished: {
-                    root.header.height = Qt.binding(function() { return root.height / 9 })
+                    root.header.height = Qt.binding(function() { return 70 })
                     root.header.visible = true
                 }
             }

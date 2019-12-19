@@ -5,6 +5,8 @@ import Singletons 1.0
 QQC2.Button {
     id: root
 
+    property string description: ''
+
     background: Rectangle {
         anchors.fill: parent
         color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
@@ -13,14 +15,25 @@ QQC2.Button {
     }
 
     contentItem: Item {
-        Label {
+        Column {
             anchors {
                 left: parent.left
                 leftMargin: 30
                 verticalCenter: parent.verticalCenter
             }
-            text: root.text
+            Label {
+                id: mainLabel
+
+                text: root.text
+                font.pointSize: 26
+            }
+            Label {
+                visible: text.length > 0
+                text: root.description
+                opacity: 0.5
+            }
         }
+
         Image {
             anchors {
                 right: parent.right
@@ -28,7 +41,7 @@ QQC2.Button {
                 verticalCenter: parent.verticalCenter
             }
 
-            height: parent.height
+            height: mainLabel.height / 1.5
             width: height
             sourceSize.width: width
             sourceSize.height: height

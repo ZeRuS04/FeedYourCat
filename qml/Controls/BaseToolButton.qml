@@ -11,30 +11,30 @@ ToolButton {
 
     background: null
 
-    onPressed: {
-        round = roundComponent.createObject(root)
-        round.width = root.width * 1.7;
-    }
-    onReleased: round.destroy()
+//    onPressed: {
+//        round = roundComponent.createObject(root)
+//        round.width = root.width * 1.7;
+//    }
+//    onReleased: round.destroy()
 
-    Component {
-        id: roundComponent
+//    Component {
+//        id: roundComponent
 
-        Rectangle {
-            anchors.centerIn: parent
+//        Rectangle {
+//            anchors.centerIn: parent
 
-            width: 1
-            height: width
-            radius: width /2
-            color: ThemeManager.currentTheme["menuButtonBorderColor"]
-            opacity: 0.2
+//            width: 1
+//            height: width
+//            radius: width /2
+//            color: ThemeManager.currentTheme["menuButtonBorderColor"]
+//            opacity: 0.2
 
-            Behavior on width {
-                NumberAnimation {
-                    duration: 200
-                    alwaysRunToEnd: true
-                }
-            }
-        }
-    }
+//            Behavior on width {
+//                NumberAnimation {
+//                    duration: 200
+//                    alwaysRunToEnd: true
+//                }
+//            }
+//        }
+//    }
 }

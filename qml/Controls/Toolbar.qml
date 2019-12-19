@@ -1,10 +1,11 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.12 as QQC2
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 import Singletons 1.0
+import "." as Controls
 
-QQC2.ToolBar {
+ToolBar {
     id: root
 
     property QtObject stack
@@ -47,6 +48,12 @@ QQC2.ToolBar {
 
     background: null
 
+    Rectangle {
+        anchors.fill: parent
+        color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+        opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
+    }
+
     RowLayout {
         anchors {
             fill: parent
@@ -55,8 +62,8 @@ QQC2.ToolBar {
         }
 
         BackToolButton {
-            width: height / 35 * 25
-            height: parent.height / 1.5
+            width: 25
+            height: 35
             onClicked: stack.pop()
         }
 
@@ -74,7 +81,7 @@ QQC2.ToolBar {
                 visible: false
             }
 
-            Label {
+            Controls.Label {
                 id: titleLabel
 
                 anchors.fill: parent
@@ -91,8 +98,8 @@ QQC2.ToolBar {
         PauseToolButton {
             id: pauseButton
 
-            width: height
-            height: parent.height / 1.5
+            width: 17
+            height: 21
             visible: false
             checked: Logic.sessionPaused
 

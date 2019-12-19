@@ -1,9 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="31.497" height="23.131" viewBox="0 0 31.497 23.131">
-  <g id="Icon_feather-volume-2" data-name="Icon feather-volume-2" transform="translate(-3 -6.329)">
-    <g id="Path_9" data-name="Path 9" fill="none" stroke-linejoin="round">
-      <path d="M16.5,7.5,9,13.44H3v8.91H9l7.5,5.94Z" stroke="none"/>
-      <path d="M 13.5 13.70293235778809 L 10.86258983612061 15.79176139831543 C 10.33251953125 16.21157073974609 9.676179885864258 16.44000053405762 9 16.44000053405762 L 6 16.44000053405762 L 6 19.35000038146973 L 9 19.35000038146973 C 9.676179885864258 19.35000038146973 10.33251953125 19.57843017578125 10.86258983612061 19.99824142456055 L 13.5 22.08707046508789 L 13.5 13.70293235778809 M 16.5 7.5 L 16.5 28.29000091552734 L 9 22.35000038146973 L 3 22.35000038146973 L 3 13.44000053405762 L 9 13.44000053405762 L 16.5 7.5 Z" stroke="none"/>
-    </g>
-    <path id="Path_10" data-name="Path 10" d="M28.6,7.395a14.748,14.748,0,0,1,0,21m-5.3-15.757a7.374,7.374,0,0,1,0,10.5" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="32.997" height="24.21" viewBox="0 0 32.997 24.21">
+  <g id="Icon_feather-volume-2" data-name="Icon feather-volume-2" transform="translate(-1.5 -5.895)">
+    <path id="Path_70" data-name="Path 70" d="M16.5,7.5,9,13.5H3v9H9l7.5,6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <path id="Path_71" data-name="Path 71" d="M28.6,7.395a15,15,0,0,1,0,21.21M23.31,12.69a7.5,7.5,0,0,1,0,10.605" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
   </g>
 </svg>

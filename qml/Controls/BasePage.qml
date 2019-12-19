@@ -31,8 +31,8 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        anchors.topMargin: -root.height / 5
-        anchors.bottomMargin: -root.height / 5
+        anchors.topMargin: -root.height / 8
+//        anchors.bottomMargin: -root.height / 5
 
         gradient: Gradient {
             GradientStop { position: 0.0; color: ThemeManager.currentTheme["backgroundGradColor1"] }
@@ -110,7 +110,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        anchors.topMargin: -root.height / 5
+//        anchors.topMargin: -root.height / 5
         opacity: 0.5
         gradient: Gradient {
             GradientStop { position: 0.0; color: ThemeManager.currentTheme["backgroundGradColor1"] }

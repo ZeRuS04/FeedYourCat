@@ -1,4 +1,6 @@
-QT += quick svg androidextras
+QT += quick svg
+
+include(statusbar/src/statusbar.pri)
 
 CONFIG += c++11
 
@@ -42,6 +44,10 @@ DISTFILES += \
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android
+}
+android {
+    QT += androidextras
+    QMAKE_LFLAGS += -nostdlib++
 }
 
 HEADERS += \
