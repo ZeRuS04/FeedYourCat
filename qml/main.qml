@@ -22,6 +22,7 @@ ApplicationWindow {
     width: 360
     height: 640
     title: qsTr("Feed your cat")
+    color: "#D3D3EB"
 
 //    flags: Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
 //    visibility: Qt.platform.os === "android" ? Window.FullScreen
@@ -33,6 +34,8 @@ ApplicationWindow {
         stack: stackViewLoader.item
     }
 
+    Component.onCompleted: Vibrator.setEnabled(Common.vibrationEnabled)
+
     StatusBar {
         theme: ThemeManager.currentThemeIndex
         color: ThemeManager.currentTheme["backgroundGradColor1"]
@@ -43,7 +46,7 @@ ApplicationWindow {
         anchors.fill: parent
         asynchronous: true
         opacity: 0
-        focus: true;
+        focus: true
 
         sourceComponent: PageSelector {
             id: stackView

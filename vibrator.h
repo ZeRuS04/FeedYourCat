@@ -15,7 +15,9 @@ public:
 signals:
 public slots:
     void vibrate(int milliseconds);
+    void setEnabled(bool value);
 private:
+    bool m_enabled;
 #if defined(Q_OS_ANDROID)
     QAndroidJniObject vibratorService;
 #endif

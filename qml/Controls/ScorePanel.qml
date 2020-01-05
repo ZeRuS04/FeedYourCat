@@ -11,6 +11,8 @@ Row {
 
     Image {
         anchors.verticalCenter: parent.verticalCenter
+        width: height * 50 / 43
+        height: parent.height
         sourceSize.width: width
         sourceSize.height: height
         source: ThemeManager.currentTheme["scoreImage"]

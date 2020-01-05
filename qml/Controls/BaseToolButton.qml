@@ -10,7 +10,6 @@ ToolButton {
     checkable: true
 
     background: null
-
 //    onPressed: {
 //        round = roundComponent.createObject(root)
 //        round.width = root.width * 1.7;

@@ -16,4 +16,10 @@ BaseToolButton {
                                  : (checked ? "qrc:/resources/icons/%1/play.svg"
                                             : "qrc:/resources/icons/%1/pause.svg")).arg(ThemeManager.currentTheme.catalogName)
     }
+
+
+
+    onClicked: {
+        SoundManager.buttonClickPlay();
+    }
 }

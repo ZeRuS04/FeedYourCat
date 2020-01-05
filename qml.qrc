@@ -139,5 +139,12 @@
         <file>resources/icons/jaws.svg</file>
         <file>resources/icons/paw.svg</file>
         <file>resources/icons/mask.svg</file>
+        <file>qml/singletons/SoundsManager.qml</file>
+        <file>resources/sounds/buttons.ogg</file>
+        <file>resources/sounds/feedcat.ogg</file>
+        <file>resources/sounds/feedtiger.ogg</file>
+        <file>resources/sounds/gemover3.mp3</file>
+        <file>resources/sounds/main1.mp3</file>
+        <file>resources/sounds/purring.ogg</file>
     </qresource>
 </RCC>

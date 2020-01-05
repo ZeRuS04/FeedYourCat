@@ -57,13 +57,13 @@ ToolBar {
     RowLayout {
         anchors {
             fill: parent
-            leftMargin: 30
-            rightMargin: 30
+            leftMargin: root.state === "game" ? root.width / 30 : 30
+            rightMargin: root.state === "game" ? root.width / 30 : 30
         }
 
         BackToolButton {
-            width: 25
-            height: 35
+            width: height * 14 / 20
+            height: parent.height / 1.3
             onClicked: stack.pop()
         }
 
@@ -98,8 +98,8 @@ ToolBar {
         PauseToolButton {
             id: pauseButton
 
-            width: 17
-            height: 21
+            width: height * 16 / 20
+            height: parent.height / 1.3
             visible: false
             checked: Logic.sessionPaused
 

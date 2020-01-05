@@ -1,7 +1,7 @@
 #include "vibrator.h"
 #include <QDebug>
 
-Vibrator::Vibrator(QObject *parent) : QObject(parent)
+Vibrator::Vibrator(QObject *parent) : QObject(parent), m_enabled(true)
 {
 #if defined(Q_OS_ANDROID)
     QAndroidJniObject vibroString = QAndroidJniObject::fromString("vibrator");
@@ -11,9 +11,15 @@ Vibrator::Vibrator(QObject *parent) : QObject(parent)
 #endif
 }
 
+void Vibrator::setEnabled(bool value)
+{
+    m_enabled = value;
+}
 #if defined(Q_OS_ANDROID)
 
 void Vibrator::vibrate(int milliseconds) {
+    if (!m_enabled)
+        return;
     if (vibratorService.isValid()) {
         jlong ms = milliseconds;
         jboolean hasvibro = vibratorService.callMethod<jboolean>("hasVibrator", "()Z");

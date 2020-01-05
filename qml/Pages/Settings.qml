@@ -259,9 +259,9 @@ Controls.BasePage {
                 text: "Русский"
                 description: "Мяу"
                 autoExclusive: true
-//                checked: ThemeManager.currentThemeIndex === 0
+                checked: Common.lang === "ru"
 
-//                onClicked: ThemeManager.currentThemeIndex = 0
+                onClicked: Common.lang = "ru"
             }
 
             Controls.CheckThemeButton {
@@ -272,9 +272,9 @@ Controls.BasePage {
                 text: "English"
                 description: "Meow"
                 autoExclusive: true
-//                checked: ThemeManager.currentThemeIndex === 1
+                checked: Common.lang === "en"
 
-//                onClicked: ThemeManager.currentThemeIndex = 1
+                onClicked: Common.lang = "en"
             }
         }
 
@@ -299,6 +299,8 @@ Controls.BasePage {
                     right: parent.right
                     margins: 30
                 }
+                value: Common.soundVolume
+                onMoved: Common.soundVolume = position
             }
 
             Controls.CheckBox {
@@ -309,7 +311,14 @@ Controls.BasePage {
 
                 height: 30
                 text: qsTr("Vibration")
-                onCheckedChanged: if (checked) Vibrator.vibrate(120)
+                checked: Common.vibrationEnabled
+                onCheckedChanged: {
+                    Common.vibrationEnabled = checked;
+                    Vibrator.setEnabled(checked);
+                    if (checked) {
+                        Vibrator.vibrate(120);
+                    }
+                }
             }
         }
 

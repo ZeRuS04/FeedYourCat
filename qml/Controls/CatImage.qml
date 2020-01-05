@@ -7,6 +7,7 @@ Item {
 
     property real __cof: width / 100
     property var catObject
+    property bool timeIsOver: false
     property alias longestFinishDuration: finishDelayTimer.interval
     property alias longestStartDuration: startDelayTimer.interval
     property string catColor: {
@@ -28,14 +29,18 @@ Item {
     }
 
     clip: true
-
-    Component.onCompleted: startDelayTimer.start();
+    Component.onCompleted: {
+        startDelayTimer.start();
+    }
 
     AdvancedTimer {
         id: finishDelayTimer
         interval: 0
 
-        onTriggered: root.hideAnimationFinished()
+        onTriggered: {
+            timeIsOver = true;
+            root.hideAnimationFinished();
+        }
     }
 
     AdvancedTimer {

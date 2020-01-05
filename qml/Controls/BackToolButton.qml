@@ -11,4 +11,8 @@ BaseToolButton {
         source: (control.pressed ? "qrc:/resources/icons/%1/arrowAction.svg"
                                  : "qrc:/resources/icons/%1/arrow.svg").arg(ThemeManager.currentTheme.catalogName)
     }
+
+    onClicked: {
+        SoundManager.buttonClickPlay();
+    }
 }

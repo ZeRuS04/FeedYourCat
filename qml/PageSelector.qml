@@ -25,11 +25,10 @@ StackView {
             Logic.newGame(true);
             break;
         case "continue":
-            console.log("###storedGameArea", storedGameArea)
             if (!!storedGameArea) {
                 push(storedGameArea);
-                storedGameArea = undefined
-                Logic.resume()
+                storedGameArea = null;
+                Logic.resume();
             }
             break;
         case "rules":
@@ -76,6 +75,21 @@ StackView {
         }
 
         root.pop();
+    }
+
+    Binding {
+        target: SoundManager
+
+        property: "menuSoundPlaying"
+        value: root.state === "mainMenu" || root.state === "rules" ||
+               root.state === "settings" || root.state === "score"
+    }
+
+    Binding {
+        target: SoundManager
+
+        property: "gameMusicPlaying"
+        value: root.state === "game" || root.state === "pause"
     }
 
     Connections {

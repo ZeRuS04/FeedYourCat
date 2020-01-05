@@ -52,4 +52,8 @@ QQC2.Button {
             }
         }
     }
+
+    onClicked: {
+        SoundManager.buttonClickPlay();
+    }
 }

@@ -15,12 +15,16 @@ Item {
 
     property int lastScore: 0
     property int lastTime: 0
+
     property alias topScore: setting.topScore
+    property alias soundVolume: setting.soundVolume
+    property alias vibrationEnabled: setting.vibrationEnabled
+    property alias lang: setting.lang
 
     property int columnCount: 3
     property int rowCount: 4
 
-    property int time: 30
+    property int time: 300
     property int startCats: 3
     property real newCatInterval: 1.3
     property int rewardForFeedCat: 1
@@ -64,6 +68,9 @@ Item {
         id: setting
 
         property int topScore: 0
+        property real soundVolume: 1
+        property bool vibrationEnabled: true
+        property string lang: "en"
     }
 
     Component {
@@ -175,9 +182,9 @@ Item {
             }
 
             function updateStage() {
-                minimumCatDelay /= speedIncreaseCof
-                maximumCatDelay /= speedIncreaseCof
-                newCatInterval /= speedIncreaseCof
+                minimumCatDelay /= speedIncreaseCof;
+                maximumCatDelay /= speedIncreaseCof;
+                newCatInterval /= speedIncreaseCof;
             }
 
             Component.onCompleted: {

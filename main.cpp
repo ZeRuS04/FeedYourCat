@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/Common.qml"), "Singletons", 1, 0, "Common");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/GameLogic.qml"), "Singletons", 1, 0, "Logic");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/ThemeManager.qml"), "Singletons", 1, 0, "ThemeManager");
+    qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/SoundsManager.qml"), "Singletons", 1, 0, "SoundManager");
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("Vibrator", &vibrator);
