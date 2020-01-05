@@ -1,12 +1,21 @@
 pragma Singleton
 import QtQuick 2.12
 import QtMultimedia 5.12
+import Singletons 1.0
 
 Item {
     id: root
 
     property bool menuSoundPlaying: false
     property bool gameMusicPlaying: false
+
+    function updateVolume(volume) {
+        buttonSound.volume = volume;
+        feedCatSound.volume = volume;
+        feedTigerSound.volume = volume;
+        menuSound.volume = volume;
+        gameMusicSound.volume = volume;
+    }
 
     function buttonClickPlay() {
         buttonSound.stop()
@@ -76,7 +85,7 @@ Item {
         audioRole: Audio.GameRole
         loops: -1
         source: "qrc:/resources/sounds/main1.mp3"
-        playbackRate: Logic.session.currentStage * 1.05
+//        playbackRate: Logic.session.currentStage * 1.05
 
     }
 //    Timer {

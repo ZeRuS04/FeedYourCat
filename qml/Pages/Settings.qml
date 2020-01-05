@@ -259,9 +259,9 @@ Controls.BasePage {
                 text: "Русский"
                 description: "Мяу"
                 autoExclusive: true
-                checked: Common.lang === "ru"
+                checked: Logic.lang === "ru"
 
-                onClicked: Common.lang = "ru"
+                onClicked: Logic.lang = "ru"
             }
 
             Controls.CheckThemeButton {
@@ -272,9 +272,9 @@ Controls.BasePage {
                 text: "English"
                 description: "Meow"
                 autoExclusive: true
-                checked: Common.lang === "en"
+                checked: Logic.lang === "en"
 
-                onClicked: Common.lang = "en"
+                onClicked: Logic.lang = "en"
             }
         }
 
@@ -299,8 +299,12 @@ Controls.BasePage {
                     right: parent.right
                     margins: 30
                 }
-                value: Common.soundVolume
-                onMoved: Common.soundVolume = position
+                value: Logic.soundVolume
+                onMoved: {
+                    SoundManager.updateVolume(position);
+                    SoundManager.feedCatPlay();
+                    Logic.soundVolume = position;
+                }
             }
 
             Controls.CheckBox {
@@ -311,9 +315,9 @@ Controls.BasePage {
 
                 height: 30
                 text: qsTr("Vibration")
-                checked: Common.vibrationEnabled
+                checked: Logic.vibrationEnabled
                 onCheckedChanged: {
-                    Common.vibrationEnabled = checked;
+                    Logic.vibrationEnabled = checked;
                     Vibrator.setEnabled(checked);
                     if (checked) {
                         Vibrator.vibrate(120);

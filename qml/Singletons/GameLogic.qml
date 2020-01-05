@@ -24,7 +24,7 @@ Item {
     property int columnCount: 3
     property int rowCount: 4
 
-    property int time: 300
+    property int time: 30
     property int startCats: 3
     property real newCatInterval: 1.3
     property int rewardForFeedCat: 1
@@ -71,6 +71,8 @@ Item {
         property real soundVolume: 1
         property bool vibrationEnabled: true
         property string lang: "en"
+
+        onLangChanged: Translator.setTranslation(lang)
     }
 
     Component {

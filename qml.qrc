@@ -146,5 +146,6 @@
         <file>resources/sounds/gemover3.mp3</file>
         <file>resources/sounds/main1.mp3</file>
         <file>resources/sounds/purring.ogg</file>
+        <file>QmlLanguage_ru.qm</file>
     </qresource>
 </RCC>

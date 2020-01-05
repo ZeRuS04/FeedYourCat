@@ -17,7 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
+        qmltranslator.cpp \
         vibrator.cpp
+
+lupdate_only {
+    SOURCES += qml/main.qml \
+                qml/pages/GameArea.qml \
+                qml/pages/MainMenu.qml \
+                qml/pages/Pause.qml \
+                qml/pages/Rules.qml \
+                qml/pages/Score.qml \
+                qml/pages/Swttinga.qml \
+                qml/singletones/ThemeManager.qml
+
+}
 
 RESOURCES += qml.qrc
 
@@ -33,6 +46,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    QmlLanguage_ru.qm \
     android/AndroidManifest.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.jar \
@@ -50,5 +64,7 @@ android {
     QMAKE_LFLAGS += -nostdlib++
 }
 
+TRANSLATIONS += QmlLanguage_ru.ts
 HEADERS += \
+    qmltranslator.h \
     vibrator.h

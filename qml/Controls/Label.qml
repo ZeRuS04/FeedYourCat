@@ -11,4 +11,13 @@ Label {
     font.family: Common.getDefaultFont(bold)
     font.pointSize: 20
     color: ThemeManager.currentTheme["mainTextColor"]
+
+//    Connections {
+//        target: Translator
+//        onLanguageChanged: {
+//            console.log("###onLanguageChanged", text)
+
+//            textChanged(text);
+//        }
+//    }
 }

@@ -67,7 +67,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    text: qsTr("FEED MY CATS")
+                    text: qsTr("FEED MY CATS!")
                     font.bold: true
 
                     onClicked: root.restart()

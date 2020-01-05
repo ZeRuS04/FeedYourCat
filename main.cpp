@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "vibrator.h"
+#include "qmltranslator.h"
 #include "statusbar.h"
 
 int main(int argc, char *argv[])
@@ -21,6 +22,8 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/SoundsManager.qml"), "Singletons", 1, 0, "SoundManager");
 
     QQmlApplicationEngine engine;
+    QmlTranslator qmlTranslator(&engine);
+    engine.rootContext()->setContextProperty("Translator", &qmlTranslator);
     engine.rootContext()->setContextProperty("Vibrator", &vibrator);
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtGraphicalEffects 1.0
 
 import "../controls" as Controls
 import Singletons 1.0
@@ -26,8 +27,34 @@ Controls.BasePage {
             Controls.TitleLabel {
                 anchors.centerIn: parent
 
+                visible: Logic.lang !== "ru"
                 text: qsTr("FEED\nYOUR CAT")
             }
+
+            Image {
+                id: titleImage
+                anchors.centerIn: parent
+
+                width: 240
+                height: 83
+
+                visible: Logic.lang === "ru"
+                sourceSize.width: width
+                sourceSize.height: height
+                source: "qrc:/resources/icons/HOKOPMN_KOTNKOB.svg"
+            }
+
+            ColorOverlay {
+                anchors.centerIn: parent
+
+                width: 240
+                height: 83
+
+                source: titleImage
+                visible: Logic.lang === "ru"
+                color: ThemeManager.currentThemeIndex === 0 ? "#000000" : "#ffffff"
+            }
+
         }
 
         Item {

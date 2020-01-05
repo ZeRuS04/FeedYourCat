@@ -14,7 +14,7 @@ QtObject {
             default: return __darkTheme;
         }
     }
-    property int currentThemeIndex: 1
+    property int currentThemeIndex: 0
     property var __lightTheme: null
     property var __darkTheme: null
 
