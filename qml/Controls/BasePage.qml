@@ -91,7 +91,7 @@ Item {
                 reversingMode: SmoothedAnimation.Immediate
                 easing.type: Easing.Linear
                 onFinished: {
-                    root.createAnotherOneFood(screenZone)
+                    root.createAnotherOneFood(foodImage.screenZone)
                     foodImage.destroy()
                 }
             }

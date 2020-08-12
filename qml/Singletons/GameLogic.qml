@@ -25,14 +25,14 @@ Item {
     property int rowCount: 4
 
     property int time: 30
-    property int startCats: 3
-    property real newCatInterval: 1.3
+    property int startCats: 2
+    property real baseNewCatInterval: 1.0
     property int rewardForFeedCat: 1
     property int rewardForSkipCat: 0
-    property int rewardForTiger: -20
-    property var stagesInterval: [7,12,15]
+    property int rewardForTiger: -10
+    property int stagesInterval: 5
     property var newStageCatCount: [1,2,3]
-    property var newStageTigerChance: [8,13,18.25,33,40]
+    property var newStageTigerChance: [8,13,18.23,27,30,35,40]
     property int minimumCatDelay: 1200
     property int maximumCatDelay: 1800
     property real speedIncreaseCof: 1.05
@@ -92,9 +92,9 @@ Item {
             property alias timeLeft: mainGameTimer.timeLeft
             property int time: root.time * 1000
             property int startCats: root.startCats
-            property int newCatInterval: root.newCatInterval * 1000
-            property int newCatCount: newStageCatCount[Math.min(currentStage, newStageCatCount.length - 1)]
-            property var stagesInterval: root.stagesInterval
+            property int newCatInterval: root.baseNewCatInterval * Math.pow(0.9, currentStage) * 1000
+//            property int newCatCount: newStageCatCount[Math.min(currentStage, newStageCatCount.length - 1)]
+            property int stagesInterval: root.stagesInterval
             property var newStageCatCount: root.newStageCatCount
             property real tigerChance: root.newStageTigerChance[Math.min(currentStage, root.newStageTigerChance.length - 1)] / 100
             property int currentStage: 0
@@ -139,21 +139,29 @@ Item {
             }
 
             function emitCat() {
-                for (var i = 0; i < newCatCount; ++i) {
-                    var index = Math.floor(Math.random() * cellCount);
-                    var c = 1
-                    while (area[index] !== 0) {
-                        if (c > cellCount)
-                            break;
-                        index = Math.floor(Math.random() * cellCount);
-                        c++;
+                var index = Math.floor(Math.random() * cellCount);
+                var c = 1
+                let ccw = Math.random() > 0.5;
+                while (area[index] !== 0) {
+                    if (c > cellCount)
+                        break;
+                    if (ccw) {
+                        index++;
+                        if (index >= cellCount)
+                            index = 0;
+                    } else {
+                        index--;
+                        if (index < 0)
+                            index = cellCount - 1;
                     }
-                    if (area[index] !== 0)
-                        continue;
-                    var isTiger  = emitTiger();
-                    area[index] = isTiger ? (Math.floor(Math.random() * Constants.tigersCatalog.length) + 1) * -1
-                                          : Math.floor(Math.random() * Constants.catsCatalog.length) + 1;
+                    c++;
                 }
+                if (area[index] !== 0) {
+                    return;
+                }
+                var isTiger  = emitTiger();
+                area[index] = isTiger ? (Math.floor(Math.random() * Constants.tigersCatalog.length) + 1) * -1
+                                      : Math.floor(Math.random() * Constants.catsCatalog.length) + 1;
                 areaChanged();
             }
 
@@ -186,7 +194,7 @@ Item {
             function updateStage() {
                 minimumCatDelay /= speedIncreaseCof;
                 maximumCatDelay /= speedIncreaseCof;
-                newCatInterval /= speedIncreaseCof;
+//                newCatInterval /= speedIncreaseCof;
             }
 
             Component.onCompleted: {
@@ -208,11 +216,11 @@ Item {
             Controls.AdvancedTimer {
                 id: nextStageTimer
 
-                interval: sessionObj.stagesInterval[Math.min(sessionObj.currentStage, sessionObj.stagesInterval.length - 1)] * 1000
+                interval: sessionObj.stagesInterval * 1000
                 repeat: true
 
                 onTriggered: {
-                    currentStage++
+                    currentStage++;
                     updateStage();
 //                    restart();
                 }
@@ -238,6 +246,7 @@ Item {
 
                 interval: sessionObj.newCatInterval
                 repeat: true
+                delta: 100
 
                 onTriggered: sessionObj.emitCat()
             }
