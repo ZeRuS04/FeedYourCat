@@ -40,14 +40,14 @@ Item {
     signal gameOver(int time, int score);
 
     function newGame(isTestMode) {
-        if (sessionStarted)
+        if (!!session)
             session.destroy();
         session = sessionComponent.createObject(root, {isTestMode: isTestMode});
         sessionPaused = false;
     }
 
     function pause() {
-        if(sessionStarted) {
+        if(!!session) {
             session.pause();
             sessionPaused = true;
         } else
@@ -55,7 +55,7 @@ Item {
     }
 
     function resume() {
-        if(sessionStarted) {
+        if(!!session) {
             session.resume();
             sessionPaused = false;
         } else
@@ -131,7 +131,6 @@ Item {
                 mainGameTimer.start();
                 nextStageTimer.start();
                 nextCatTimer.start();
-                root.sessionStarted = true;
             }
 
             function emitTiger() {
