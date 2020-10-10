@@ -217,6 +217,9 @@ Controls.BasePage {
         width: parent.width
         height: grid.height
 
+        enabled: !Logic.sessionPaused
+        opacity: enabled ? 1.0 : 0.5
+
         Grid {
             id: grid
 
