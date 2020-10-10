@@ -61,7 +61,8 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
 }
 android {
     QT += androidextras
-    QMAKE_LFLAGS += -nostdlib++
+    ANDROID_VERSION_CODE = "1"
+    ANDROID_VERSION_NAME = "0.7.2"
 }
 
 TRANSLATIONS += QmlLanguage_ru.ts

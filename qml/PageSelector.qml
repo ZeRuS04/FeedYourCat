@@ -124,7 +124,6 @@ StackView {
             onRestart: updatePage("game")
             onSettings: updatePage("settings")
 
-            Component.onCompleted: Logic.pause()
             onVisibleChanged: if (visible) Logic.pause()
         }
     }

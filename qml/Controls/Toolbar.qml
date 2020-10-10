@@ -104,8 +104,8 @@ ToolBar {
             checked: Logic.sessionPaused
 
             onToggled: {
-                Logic.sessionPaused ? Logic.pause()
-                                    : Logic.resume()
+                !Logic.sessionPaused ? Logic.pause()
+                                     : Logic.resume()
             }
         }
     }
