@@ -45,11 +45,11 @@ Controls.BasePage {
             Connections {
                 target: Logic.session
 
-                onPause: {
+                function onPause() {
                     if (plusAnimation.running)
                         plusAnimation.pause();
                 }
-                onResume: {
+                function onResume() {
                     plusAnimation.resume()
                 }
             }

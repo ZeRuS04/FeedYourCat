@@ -58,13 +58,13 @@ Item {
     Connections {
         target: Logic.session
 
-        onPause: {
+         function onPause() {
             if (startDelayTimer.running)
                 startDelayTimer.pause();
             if (finishDelayTimer.running)
                 finishDelayTimer.pause();
         }
-        onResume: {
+        function onResume() {
             startDelayTimer.resume()
             finishDelayTimer.resume()
         }
@@ -129,7 +129,7 @@ Item {
                     property Connections connection: Connections {
                         target: root
 
-                        onReverseAnimation: {
+                        function onReverseAnimation() {
                             var from = propAnimation.from;
                             propAnimation.from = propAnimation.to;
                             propAnimation.to = from;
@@ -140,13 +140,13 @@ Item {
                     property Connections connection2: Connections {
                         target: Logic.session
 
-                        onPause: {
+                        function onPause() {
                             if (delayTimer.running)
                                 delayTimer.pause();
                             if (propAnimation.running)
                                 propAnimation.pause();
                         }
-                        onResume: {
+                        function onResume() {
                             delayTimer.resume();
                             propAnimation.resume();
                         }
@@ -244,7 +244,7 @@ Item {
                     property Connections connection: Connections {
                         target: root
 
-                        onReverseAnimation: {
+                        function onReverseAnimation() {
                             if (cloudDelegateImage.containsFood)
                                 return;
                             var from = propAnimation.from;
@@ -257,13 +257,13 @@ Item {
                     property Connections connection2: Connections {
                         target: Logic.session
 
-                        onPause: {
+                        function onPause() {
                             if (delayTimer.running)
                                 delayTimer.pause();
                             if (propAnimation.running)
                                 propAnimation.pause();
                         }
-                        onResume: {
+                        function onResume() {
                             delayTimer.resume();
                             propAnimation.resume()
                         }
@@ -347,7 +347,7 @@ Item {
                     Connections {
                         target: root
 
-                        onChangeEmotion: {
+                        function onChangeEmotion(isGood) {
                             if (isGood) {
                                 foodImage.type = -1;
                                 foodImage.source = "qrc:/resources/icons/like.svg"

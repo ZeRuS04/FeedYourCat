@@ -100,11 +100,11 @@ MouseArea {
     Connections {
         target: Logic.session
 
-        onPause: {
+        function onPause() {
             if (waitTimer.running)
                 waitTimer.pause()
         }
-        onResume: {
+        function onResume() {
             if (root.state !== "nothing")
                 waitTimer.resume()
         }
@@ -175,7 +175,10 @@ MouseArea {
             Connections {
                 target: root
 
-                onStateChanged: if (root.state !== "nothing" && clickReactionImage.opacity > 0) clickReactionImage.reset()
+                function onStateChanged() {
+                    if (clickReactionImage.opacity > 0)
+                        clickReactionImage.reset()
+                }
             }
 
             SequentialAnimation {
@@ -252,10 +255,14 @@ MouseArea {
 
         radius: height / 10
         color: "transparent"
-        border.color: root.state !== "nothing" && clickReactionImage.opacity > 0 ? (root.state == "tiger" ? "#ff0000"
-                                                                                                          : root.backgroundColor)
-                                                               : root.borderColor
-        border.width: root.state !== "nothing" && clickReactionImage.opacity > 0 ? 5 : 2
+        border.color: root.state !== "nothing" &&
+                      clickReactionImage.opacity > 0 &&
+                      !resetOpacityAnimation.running ? (root.state == "tiger" ? "#ff0000"
+                                                                              : root.backgroundColor)
+                                                     : root.borderColor
+        border.width: root.state !== "nothing" &&
+                      clickReactionImage.opacity > 0 &&
+                      !resetOpacityAnimation.running  ? 5 : 2
     }
 
 }

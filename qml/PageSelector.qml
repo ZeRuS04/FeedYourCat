@@ -95,7 +95,9 @@ StackView {
     Connections {
         target: Logic
 
-        onGameOver: updatePage("score")
+        function onGameOver(time, score) {
+            updatePage("score")
+        }
     }
 
     Component {
