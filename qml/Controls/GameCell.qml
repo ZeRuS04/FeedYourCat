@@ -49,12 +49,12 @@ MouseArea {
         State {
             name: "cat"
 
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
+            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 6) }
         },
         State {
             name: "tiger"
 
-            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 7) }
+            PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 6) }
         }
     ]
 
