@@ -102,11 +102,11 @@ MouseArea {
 
         function onPause() {
             if (waitTimer.running)
-                waitTimer.pause()
+                waitTimer.pause();
         }
         function onResume() {
             if (root.state !== "nothing")
-                waitTimer.resume()
+                waitTimer.resume();
         }
     }
 

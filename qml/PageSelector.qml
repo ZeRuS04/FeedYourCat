@@ -27,7 +27,6 @@ StackView {
         case "continue":
             if (!!storedGameArea) {
                 push(storedGameArea);
-                storedGameArea = null;
                 Logic.resume();
             }
             break;
