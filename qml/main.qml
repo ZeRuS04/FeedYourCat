@@ -44,6 +44,12 @@ ApplicationWindow {
         color: ThemeManager.currentTheme["backgroundGradColor1"]
     }
 
+    Binding {
+        target: SoundManager
+        property: "pauseMusic"
+        value: Logic.sessionPaused
+    }
+
     Loader {
         id: stackViewLoader
         anchors.fill: parent

@@ -21,6 +21,7 @@ Controls.BasePage {
         var minusObj = minusComponent.createObject(timerItem,
                                                   /*{x: timerItem.width / 2 - gameTimerLabel.width / 2 - 10 - 40 * minusObjectsCount}*/)
     }
+
     Component {
         id: plusComponent
 

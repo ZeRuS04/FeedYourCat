@@ -8,13 +8,14 @@ Item {
 
     property bool menuSoundPlaying: false
     property bool gameMusicPlaying: false
+    property bool pauseMusic: false
 
     function updateVolume(volume) {
         buttonSound.volume = volume;
         feedCatSound.volume = volume;
         feedTigerSound.volume = volume;
         menuSound.volume = volume;
-        gameMusicSound.volume = volume;
+        gameMusicSound.realVolume = gameMusicSound.volume = volume;
     }
 
     function buttonClickPlay() {
@@ -30,19 +31,27 @@ Item {
         feedTigerSound.play()
     }
 
-    Audio {
+    onPauseMusicChanged: {
+        if (pauseMusic) {
+            gameMusicSound.volume = gameMusicSound.realVolume / 4;
+        } else {
+            gameMusicSound.volume = gameMusicSound.realVolume;
+        }
+    }
+
+    Audio  {
         id: buttonSound
 
         audioRole: Audio.GameRole
         source: "qrc:/resources/sounds/buttons.ogg"
     }
-    Audio {
+    Audio  {
         id: feedCatSound
 
         audioRole: Audio.GameRole
         source: "qrc:/resources/sounds/feedcat.ogg"
     }
-    Audio {
+    Audio  {
         id: feedTigerSound
 
         audioRole: Audio.GameRole
@@ -71,6 +80,7 @@ Item {
         id: gameMusicSound
 
 
+        property real realVolume: volume
         property bool needPlay: Qt.application.state === Qt.ApplicationActive && root.gameMusicPlaying
 
         onNeedPlayChanged: {
