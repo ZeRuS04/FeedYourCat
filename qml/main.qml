@@ -34,7 +34,10 @@ ApplicationWindow {
         stack: stackViewLoader.item
     }
 
-    Component.onCompleted: Vibrator.setEnabled(Common.vibrationEnabled)
+    Component.onCompleted: {
+        SoundManager.updateVolume(Logic.soundVolume);
+        Vibrator.setEnabled(Logic.vibrationEnabled);
+    }
 
     StatusBar {
         theme: ThemeManager.currentThemeIndex

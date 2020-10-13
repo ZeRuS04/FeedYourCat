@@ -88,6 +88,7 @@ Item {
 //        playbackRate: Logic.session.currentStage * 1.05
 
     }
+
 //    Timer {
 //        interval: 2000
 //        running: true
