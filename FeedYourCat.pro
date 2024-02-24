@@ -61,8 +61,8 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
 }
 android {
     QT += androidextras
-    ANDROID_VERSION_CODE = "1"
-    ANDROID_VERSION_NAME = "0.7.2"
+    ANDROID_VERSION_CODE = "79"
+    ANDROID_VERSION_NAME = "0.7.9"
 }
 
 TRANSLATIONS += QmlLanguage_ru.ts
