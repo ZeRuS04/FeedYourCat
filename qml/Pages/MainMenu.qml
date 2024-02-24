@@ -29,6 +29,7 @@ Controls.BasePage {
 
                 visible: Logic.lang !== "ru"
                 text: qsTr("FEED\nYOUR CAT")
+                color: ThemeManager.currentTheme["secondaryTextColor"]
             }
 
             Image {
@@ -42,19 +43,13 @@ Controls.BasePage {
                 sourceSize.width: width
                 sourceSize.height: height
                 source: "qrc:/resources/icons/HOKOPMN_KOTNKOB.svg"
+                layer {
+                    enabled: true
+                    effect: ColorOverlay {
+                        color: ThemeManager.currentTheme["secondaryTextColor"]
+                    }
+                }
             }
-
-            ColorOverlay {
-                anchors.centerIn: parent
-
-                width: 240
-                height: 83
-
-                source: titleImage
-                visible: Logic.lang === "ru"
-                color: ThemeManager.currentThemeIndex === 0 ? "#000000" : "#ffffff"
-            }
-
         }
 
         Item {
@@ -84,14 +79,15 @@ Controls.BasePage {
 
                 anchors.centerIn: parent
 
-                bottomPadding: 50
+                bottomPadding: 60
 
-                spacing: 23
+                spacing: 20
 
                 Controls.MenuButton {
                     width: 280
                     height: 60
 
+                    primaryStyle: true
                     text: qsTr("START!")
 
                     font.bold: true
@@ -99,22 +95,11 @@ Controls.BasePage {
                     onClicked: root.start()
                 }
 
-//                Controls.MenuButton {
-//                    width: 280
-//                    height: 60
-
-//                    text: qsTr("TEST MODE!")
-
-//                    font.bold: true
-
-//                    onClicked: root.startTestMode()
-//                }
-
                 Controls.MenuButton {
                     width: 280
                     height: 60
 
-                    icon.source: "qrc:/resources/icons/%1/settings.svg".arg(ThemeManager.currentTheme.catalogName)
+                    icon.source: "qrc:/resources/icons/settings.svg"
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

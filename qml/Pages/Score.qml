@@ -36,19 +36,34 @@ Controls.BasePage {
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pointSize: 30
                     text: qsTr("YOUR SCORE:")
+                    color: ThemeManager.currentTheme["secondaryTextColor"]
                 }
 
                 Controls.ScorePanel {
                     anchors.horizontalCenter: parent.horizontalCenter
                     score: root.score
+                    color: ThemeManager.currentTheme["secondaryTextColor"]
                 }
 
-                Controls.Label {
+                Row {
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    font.pointSize: 30
-                    text: qsTr("HIGH SCORE: %1").arg(Logic.topScore)
+                    Controls.Label {
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        font.pointSize: 30
+                        text: qsTr("HIGH SCORE: ")
+                        color: ThemeManager.currentTheme["secondaryTextColor"]
+                    }
+                    Controls.Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        bold: true
+                        font.pointSize: 30
+                        text: qsTr("%1").arg(Logic.topScore)
+                        color: ThemeManager.currentTheme["secondaryTextColor"]
+                    }
                 }
+
             }
         }
 
@@ -60,28 +75,23 @@ Controls.BasePage {
                 id: buttonsColumn
 
                 anchors.centerIn: parent
-
-                bottomPadding: 50
-
-                spacing: 30
+                bottomPadding: 60
+                spacing: 20
 
                 Controls.MenuButton {
                     width: 280
                     height: 60
 
+                    primaryStyle: true
                     text: qsTr("FEED MY CATS!")
                     font.bold: true
-
                     onClicked: root.restart()
                 }
-
                 Controls.MenuButton {
                     width: 280
                     height: 60
-
-                    icon.source: "qrc:/resources/icons/%1/settings.svg".arg(ThemeManager.currentTheme.catalogName)
+                    icon.source: "qrc:/resources/icons/settings.svg"
                     text: qsTr("SETTINGS")
-
                     onClicked: root.settings()
                 }
             }

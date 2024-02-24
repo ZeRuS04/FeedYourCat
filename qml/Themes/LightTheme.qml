@@ -1,33 +1,29 @@
 import QtQuick 2.0
 
 QtObject {
-//    function themeSource(source) {
-//        var s = '';
-//        s = source;
-//        if (s.indexOf('images/dark/') != -1)
-//            return s.replace('images/dark/', 'images/')
-//        return s;
-//    }
     readonly property string catalogName: "Light_Theme"
 
     //====== Background colors:
-    readonly property color backgroundGradColor1: "#F5E1E7"
-    readonly property color backgroundGradColor2: "#F1D0E0"
-    readonly property color menuButtonBackgroundColor: "#F4E0E6"
-    readonly property color menuButtonPressedBackgroundColor: "#AE6A80"
-    readonly property color menuButtonBorderColor: "#000000"
+    readonly property color backgroundGradColor1: "#FFF8F9"
+    readonly property color backgroundGradColor2: "#FFEDEF"
+    readonly property color menuButtonBackgroundColor: "#FFD8DA"
+    readonly property color menuButtonIconColor: "#0E1950"
+    readonly property color menuButtonPressedBackgroundColor: "#FFD8DA"
+    readonly property color menuButtonBorderColor: "#F7A1A1"
 //    readonly property color cellBorderColor: "#707070"
     readonly property color toolbarBackgroundColor: "#E2B8C5"
+    readonly property color toolbuttonIconColor: "#0E1950"
     readonly property color cellBackgroundColor: "#F6C9DF"
     readonly property color cellBorderColor: "#937187"
-    readonly property color themeSwitcherCheckedColor: "#E8C0CC"
+    readonly property color themeSwitcherCheckedColor: "#F7A1A1"
+    readonly property color themeSwitcherHandleColor: "#FFD9DA"
 
-    readonly property color mainTextColor: "#000000"
-    readonly property color toolbarTextColor: "#28204A"
+    readonly property color mainTextColor: "#0E1950"
+    readonly property color secondaryTextColor: "#0E1950"
 
     readonly property color alertColor: "#DC143C"
     //====== Opacities:
-    readonly property real menuButtonBackgroundOpacity: 0.49
+    readonly property real menuButtonBackgroundOpacity: 0.8
     readonly property real cellBackgroundOpacity: 1.0
     readonly property real themeSwitcherOpacity: 0.7
     readonly property real toolbarBackgroundOpacity: 0.7

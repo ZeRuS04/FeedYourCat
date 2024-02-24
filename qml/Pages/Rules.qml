@@ -45,6 +45,7 @@ Controls.BasePage {
                     font.pointSize: 24
                     wrapMode: Text.WordWrap
                     horizontalAlignment: Text.AlignHCenter
+                    color: ThemeManager.currentTheme["secondaryTextColor"]
                     text: qsTr("EASY!\n\nFeed all your cats and don't feed tigers.\n\nTo feed a cat touch it on the screen.\n\nAnd do not touch tigers!")
                 }
             }
@@ -59,9 +60,9 @@ Controls.BasePage {
 
                 anchors.centerIn: parent
 
-                bottomPadding: 50
+                bottomPadding: 60
 
-                spacing: 30
+                spacing: 20
 
                 Controls.MenuButton {
                     width: 280
@@ -69,6 +70,7 @@ Controls.BasePage {
 
                     text: qsTr("FEED MY CATS!")
                     font.bold: true
+                    primaryStyle: true
 
                     onClicked: root.restart()
                 }
@@ -77,7 +79,7 @@ Controls.BasePage {
                     width: 280
                     height: 60
 
-                    icon.source: "qrc:/resources/icons/%1/settings.svg".arg(ThemeManager.currentTheme.catalogName)
+                    icon.source: "qrc:/resources/icons/settings.svg"
                     text: qsTr("SETTINGS")
 
                     onClicked: root.settings()

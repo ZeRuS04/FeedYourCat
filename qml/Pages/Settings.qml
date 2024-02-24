@@ -240,82 +240,51 @@ Controls.BasePage {
             id: languageColumn
 
             width: parent.width
+            spacing: 12
 
-            Controls.Label {
-                anchors {
-                    right: parent.right
-                    rightMargin: 30
-                }
+            Controls.Switch {
+                id: langSwitch
 
+                height: 80
+                width: parent.width
                 text: qsTr("Language")
-                color: ThemeManager.currentTheme["toolbarTextColor"]
-            }
-
-            Controls.CheckThemeButton {
-                id: russianBtn
-
-                height: 80
-                width: parent.width
-                text: "Русский"
-                description: "Мяу"
-                autoExclusive: true
                 checked: Logic.lang === "ru"
-
-                onClicked: Logic.lang = "ru"
+                checkedIcon: "qrc:/resources/icons/ru.svg"
+                uncheckedIcon: "qrc:/resources/icons/eng.svg"
+                onClicked: {
+                    if (checked) {
+                        Logic.lang = "ru";
+                    } else {
+                        Logic.lang = "en";
+                    }
+                }
             }
-
-            Controls.CheckThemeButton {
-                id: englishBtn
+            Controls.Switch {
+                id: themeSwitch
 
                 height: 80
                 width: parent.width
-                text: "English"
-                description: "Meow"
-                autoExclusive: true
-                checked: Logic.lang === "en"
-
-                onClicked: Logic.lang = "en"
-            }
-        }
-
-        Column {
-            id: volumeColumn
-
-            width: parent.width
-
-            Controls.Label {
-                anchors {
-                    right: parent.right
-                    rightMargin: 30
-                }
-
-                text: qsTr("Volume")
-                color: ThemeManager.currentTheme["toolbarTextColor"]
-            }
-
-            Controls.VolumeSlider {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: 30
-                }
-                value: Logic.soundVolume
-                onMoved: {
-                    SoundManager.updateVolume(position);
-                    SoundManager.feedCatPlay();
-                    Logic.soundVolume = position;
+                text: qsTr("Theme")
+                checked:  ThemeManager.currentThemeIndex === 0
+                checkedIcon: "qrc:/resources/icons/sun.svg"
+                uncheckedIcon: "qrc:/resources/icons/moon.svg"
+                onClicked: {
+                    if (checked) {
+                        ThemeManager.currentThemeIndex = 0;
+                    } else {
+                        ThemeManager.currentThemeIndex = 1;
+                    }
                 }
             }
+            Controls.Switch {
+                id: vibrationSwitch
 
-            Controls.CheckBox {
-                anchors {
-                    left: parent.left
-                    margins: 30
-                }
-
-                height: 30
+                height: 80
+                width: parent.width
                 text: qsTr("Vibration")
                 checked: Logic.vibrationEnabled
+                checkedIcon: "qrc:/resources/icons/on.svg"
+                uncheckedIcon: "qrc:/resources/icons/off.svg"
                 onCheckedChanged: {
                     Logic.vibrationEnabled = checked;
                     Vibrator.setEnabled(checked);
@@ -324,45 +293,43 @@ Controls.BasePage {
                     }
                 }
             }
-        }
+            Item {
+                height: 152
+                width: parent.width
 
-        Column {
-            id: themeColumn
-
-            width: parent.width
-
-            Controls.Label {
-                anchors {
-                    right: parent.right
-                    rightMargin: 30
+                Rectangle {
+                    anchors.fill: parent
+                    color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+                    opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
                 }
+                Column {
+                    id: volumeColumn
 
-                text: qsTr("Theme")
-                color: ThemeManager.currentTheme["toolbarTextColor"]
-            }
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width
+                    spacing: 10
 
-            Controls.CheckThemeButton {
-                id: lightThemeBtn
-
-                height: 50
-                width: parent.width
-                text: qsTr("Light")
-                autoExclusive: true
-                checked: ThemeManager.currentThemeIndex === 0
-
-                onClicked: ThemeManager.currentThemeIndex = 0
-            }
-
-            Controls.CheckThemeButton {
-                id: darkThemeBtn
-
-                height: 50
-                width: parent.width
-                text: qsTr("Dark")
-                autoExclusive: true
-                checked: ThemeManager.currentThemeIndex === 1
-
-                onClicked: ThemeManager.currentThemeIndex = 1
+                    Controls.Label {
+                        anchors {
+                            left: parent.left
+                            leftMargin: 40
+                        }
+                        text: qsTr("Volume")
+                    }
+                    Controls.VolumeSlider {
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: 32
+                        }
+                        value: Logic.soundVolume
+                        onMoved: {
+                            SoundManager.updateVolume(position);
+                            SoundManager.feedCatPlay();
+                            Logic.soundVolume = position;
+                        }
+                    }
+                }
             }
         }
     }
@@ -376,7 +343,6 @@ Controls.BasePage {
 
         color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
         opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
-
     }
 
     Column {

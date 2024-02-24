@@ -155,10 +155,10 @@ Controls.BasePage {
             id: gameTimerLabel
 
             function switchColor() {
-                if (gameTimerLabel.color === ThemeManager.currentTheme["toolbarTextColor"])
+                if (gameTimerLabel.color === ThemeManager.currentTheme["mainTextColor"])
                     gameTimerLabel.color = ThemeManager.currentTheme["alertColor"];
                 else
-                    gameTimerLabel.color = ThemeManager.currentTheme["toolbarTextColor"];
+                    gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"];
             }
 
             anchors.centerIn: parent
@@ -166,9 +166,9 @@ Controls.BasePage {
             visible: !Logic.sessionPaused
             text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.timeLeft), "mm:ss")
                                   : "00:00"
-
+            bold: true
             font.pointSize: 40
-            color: ThemeManager.currentTheme["toolbarTextColor"]
+            color: ThemeManager.currentTheme["secondaryTextColor"]
 
             Behavior on color {
                 ColorAnimation {
@@ -187,7 +187,7 @@ Controls.BasePage {
                         restart()
                     else {
                         stop();
-                        gameTimerLabel.color = ThemeManager.currentTheme["toolbarTextColor"]
+                        gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"]
                     }
                 }
 
@@ -202,7 +202,7 @@ Controls.BasePage {
             anchors.centerIn: parent
             font.pointSize: 60
             bold: true
-            color: ThemeManager.currentTheme["toolbarTextColor"]
+            color: ThemeManager.currentTheme["secondaryTextColor"]
             text: qsTr("PAUSE")
         }
     }
