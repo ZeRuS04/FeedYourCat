@@ -15,10 +15,9 @@
         <file>qml/PageSelector.qml</file>
         <file>qml/controls/TitleLabel.qml</file>
         <file>qml/controls/Label.qml</file>
-        <file>resources/fonts/foo.otf</file>
-        <file>resources/fonts/NotoSans-Bold.ttf</file>
-        <file>resources/fonts/NotoSans-Regular.ttf</file>
         <file>resources/fonts/snap itc.ttf</file>
+        <file>resources/fonts/Mulish-Black.ttf</file>
+        <file>resources/fonts/Mulish-Regular.ttf</file>
         <file>resources/images/background/Can.svg</file>
         <file>resources/images/background/Fish.svg</file>
         <file>resources/images/background/Korm1.svg</file>

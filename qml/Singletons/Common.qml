@@ -7,24 +7,20 @@ Item {
     property string titleFont: snapFont.name
 
     function getDefaultFont(isBold) {
-        return isBold ? notoSansBoldFont.name
-                      : notoSansRegFont.name
+        return isBold ? mulishBlackFont.name
+                      : mulishRegularFont.name
     }
 
-    FontLoader {
-        id: fooFont
-        source: "qrc:/resources/fonts/foo.otf"
-    }
     FontLoader {
         id: snapFont
         source: "qrc:/resources/fonts/snap itc.ttf"
     }
     FontLoader {
-        id: notoSansRegFont
-        source: "qrc:/resources/fonts/NotoSans-Regular.ttf"
+        id: mulishBlackFont
+        source: "qrc:/resources/fonts/Mulish-Black.ttf"
     }
     FontLoader {
-        id: notoSansBoldFont
-        source: "qrc:/resources/fonts/NotoSans-Bold.ttf"
+        id: mulishRegularFont
+        source: "qrc:/resources/fonts/Mulish-Regular.ttf"
     }
 }
