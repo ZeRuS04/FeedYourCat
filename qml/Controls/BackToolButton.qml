@@ -5,13 +5,7 @@ import Singletons 1.0
 BaseToolButton {
     id: control
 
-    contentItem: Image {
-        sourceSize.width: width
-        sourceSize.height: height
-        source: (control.pressed ? "qrc:/resources/icons/%1/arrowAction.svg"
-                                 : "qrc:/resources/icons/%1/arrow.svg").arg(ThemeManager.currentTheme.catalogName)
-    }
-
+    iconSource: "qrc:/resources/icons/arrow.svg"
     onClicked: {
         SoundManager.buttonClickPlay();
     }

@@ -6,19 +6,8 @@ BaseToolButton {
     id: control
 
     checkable: true
-
-    contentItem: Image {
-        sourceSize.width: width
-        sourceSize.height: height
-
-        source: (control.pressed ? (checked ? "qrc:/resources/icons/%1/playAction.svg"
-                                            : "qrc:/resources/icons/%1/pauseAction.svg")
-                                 : (checked ? "qrc:/resources/icons/%1/play.svg"
-                                            : "qrc:/resources/icons/%1/pause.svg")).arg(ThemeManager.currentTheme.catalogName)
-    }
-
-
-
+    iconSource: checked ? "qrc:/resources/icons/play.svg"
+                        : "qrc:/resources/icons/pause.svg"
     onClicked: {
         SoundManager.buttonClickPlay();
     }

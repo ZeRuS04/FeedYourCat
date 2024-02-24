@@ -91,7 +91,7 @@ ToolBar {
                 text: stack.currentItem && stack.currentItem.hasOwnProperty("title") ? stack.currentItem.title
                                                                                      : ""
                 elide: Label.ElideRight
-                color: ThemeManager.currentTheme["toolbarTextColor"]
+                color: ThemeManager.currentTheme["mainTextColor"]
             }
         }
 

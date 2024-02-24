@@ -8,8 +8,10 @@ Label {
 
     property bool bold: false
 
-    font.family: Common.getDefaultFont(bold)
-    font.pointSize: 20
+    font {
+        family: Common.getDefaultFont(bold)
+        pointSize: 20
+    }
     color: ThemeManager.currentTheme["mainTextColor"]
 
 //    Connections {

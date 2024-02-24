@@ -6,22 +6,24 @@ Row {
     id: root
 
     property int score: !!Logic.session ? Logic.session.score : 0
+    property alias color: scoreLabel.color
 
     spacing: 5
 
     Image {
         anchors.verticalCenter: parent.verticalCenter
-        width: height * 50 / 43
-        height: parent.height
-        sourceSize.width: width
-        sourceSize.height: height
+        sourceSize.width: 50
+        sourceSize.height: 40
         source: ThemeManager.currentTheme["scoreImage"]
     }
 
     Label {
+        id: scoreLabel
+
         anchors.verticalCenter: parent.verticalCenter
         text: root.score
-        font.pointSize: 40
-        color: ThemeManager.currentTheme["toolbarTextColor"]
+        font.pointSize: 34
+        bold: true
+        color: ThemeManager.currentTheme["mainTextColor"]
     }
 }
