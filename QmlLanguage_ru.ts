@@ -99,7 +99,7 @@ And do not touch tigers!</source>
         <location filename="qml/pages/Score.qml" line="72"/>
         <source>FEED MY CATS!</source>
         <oldsource>FEED MY CATS</oldsource>
-        <translation>КОРМИТЬ КОТИКОВ!</translation>
+        <translation>КОРМИТЬ КОТОВ!</translation>
     </message>
     <message>
         <location filename="qml/pages/Score.qml" line="83"/>
