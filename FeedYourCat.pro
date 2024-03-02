@@ -55,14 +55,12 @@ DISTFILES += \
     android/gradlew.bat \
     android/res/values/libs.xml
 
-contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
-    ANDROID_PACKAGE_SOURCE_DIR = \
-        $$PWD/android
-}
 android {
+ANDROID_PACKAGE_SOURCE_DIR = \
+    $$PWD/android
     QT += androidextras
-    ANDROID_VERSION_CODE = "79"
-    ANDROID_VERSION_NAME = "0.7.9"
+    ANDROID_VERSION_CODE = "800"
+    ANDROID_VERSION_NAME = "0.8.0"
 }
 
 TRANSLATIONS += QmlLanguage_ru.ts

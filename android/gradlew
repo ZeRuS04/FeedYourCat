@@ -36,9 +36,7 @@ MAX_FD="maximum"
 warn () {
     echo "$*"
 }
-dexOptions {
-        javaMaxHeapSize "4g"
-    }
+
 die () {
     echo
     echo "$*"
