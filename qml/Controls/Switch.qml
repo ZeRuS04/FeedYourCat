@@ -66,6 +66,9 @@ SwitchDelegate {
 
             Image {
                 anchors.centerIn: parent
+                sourceSize.width: 26
+                sourceSize.height: 26
+                fillMode: Image.PreserveAspectFit
                 source: control.checked ? control.checkedIcon : control.uncheckedIcon
                 layer {
                     enabled: true
