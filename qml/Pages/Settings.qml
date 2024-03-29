@@ -249,8 +249,8 @@ Controls.BasePage {
                 width: parent.width
                 text: qsTr("Language")
                 checked: Logic.lang === "ru"
-                checkedIcon: "qrc:/resources/icons/ru.svg"
-                uncheckedIcon: "qrc:/resources/icons/eng.svg"
+                uncheckedIcon: "qrc:/resources/icons/ru.svg"
+                checkedIcon: "qrc:/resources/icons/eng.svg"
                 onClicked: {
                     if (checked) {
                         Logic.lang = "ru";
@@ -266,8 +266,8 @@ Controls.BasePage {
                 width: parent.width
                 text: qsTr("Theme")
                 checked:  ThemeManager.currentThemeIndex === 0
-                checkedIcon: "qrc:/resources/icons/sun.svg"
-                uncheckedIcon: "qrc:/resources/icons/moon.svg"
+                uncheckedIcon: "qrc:/resources/icons/sun.svg"
+                checkedIcon: "qrc:/resources/icons/moon.svg"
                 onClicked: {
                     if (checked) {
                         ThemeManager.currentThemeIndex = 0;
@@ -283,8 +283,8 @@ Controls.BasePage {
                 width: parent.width
                 text: qsTr("Vibration")
                 checked: Logic.vibrationEnabled
-                checkedIcon: "qrc:/resources/icons/on.svg"
-                uncheckedIcon: "qrc:/resources/icons/off.svg"
+                uncheckedIcon: "qrc:/resources/icons/on.svg"
+                checkedIcon: "qrc:/resources/icons/off.svg"
                 onCheckedChanged: {
                     Logic.vibrationEnabled = checked;
                     Vibrator.setEnabled(checked);
