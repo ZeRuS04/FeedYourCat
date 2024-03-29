@@ -62,9 +62,11 @@ ToolBar {
         }
 
         BackToolButton {
-            width: height * 14 / 20
-            height: parent.height / 1.3
+            Layout.fillHeight: true
+            Layout.preferredWidth: height
             onClicked: stack.pop()
+
+            onHeightChanged: console.log("###", height) || console.trace()
         }
 
         Item {
@@ -80,7 +82,6 @@ ToolBar {
 
                 visible: false
             }
-
             Controls.Label {
                 id: titleLabel
 
@@ -98,11 +99,10 @@ ToolBar {
         PauseToolButton {
             id: pauseButton
 
-            width: height * 16 / 20
-            height: parent.height / 1.3
+            Layout.fillHeight: true
+            Layout.preferredWidth: height
             visible: false
             checked: Logic.sessionPaused
-
             onToggled: {
                 !Logic.sessionPaused ? Logic.pause()
                                      : Logic.resume()

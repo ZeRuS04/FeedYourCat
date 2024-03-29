@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.12
 import Singletons 1.0
@@ -13,9 +13,10 @@ ToolButton {
 
     contentItem: Image {
         width: height
-        sourceSize.width: 54
-        sourceSize.height: 54
+        sourceSize.width: 108
+        sourceSize.height: 108
         source: root.iconSource
+        mipmap: true
         layer {
             enabled: true
             effect: ColorOverlay {
@@ -26,30 +27,4 @@ ToolButton {
         }
     }
     background: null
-//    onPressed: {
-//        round = roundComponent.createObject(root)
-//        round.width = root.width * 1.7;
-//    }
-//    onReleased: round.destroy()
-
-//    Component {
-//        id: roundComponent
-
-//        Rectangle {
-//            anchors.centerIn: parent
-
-//            width: 1
-//            height: width
-//            radius: width /2
-//            color: ThemeManager.currentTheme["menuButtonBorderColor"]
-//            opacity: 0.2
-
-//            Behavior on width {
-//                NumberAnimation {
-//                    duration: 200
-//                    alwaysRunToEnd: true
-//                }
-//            }
-//        }
-//    }
 }
