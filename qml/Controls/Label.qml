@@ -9,17 +9,9 @@ Label {
     property bool bold: false
 
     font {
-        family: Common.getDefaultFont(bold)
+        family: Common.getDefaultFont()
+        weight: bold ? Font.Black : Font.Normal
         pointSize: 20
     }
     color: ThemeManager.currentTheme["mainTextColor"]
-
-//    Connections {
-//        target: Translator
-//        onLanguageChanged: {
-//            console.log("###onLanguageChanged", text)
-
-//            textChanged(text);
-//        }
-//    }
 }

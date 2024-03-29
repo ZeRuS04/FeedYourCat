@@ -6,9 +6,8 @@ import Singletons 1.0
 Item {
     property string titleFont: snapFont.name
 
-    function getDefaultFont(isBold) {
-        return isBold ? mulishBlackFont.name
-                      : mulishRegularFont.name
+    function getDefaultFont() {
+        return mulishRegularFont.name
     }
 
     FontLoader {

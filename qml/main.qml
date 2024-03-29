@@ -35,6 +35,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        console.log(Common.getDefaultFont(),Common.getDefaultFont())
         SoundManager.updateVolume(Logic.soundVolume);
         Vibrator.setEnabled(Logic.vibrationEnabled);
     }

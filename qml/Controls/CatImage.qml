@@ -253,7 +253,6 @@ Item {
                             propAnimation.start();
                         }
                     }
-
                     property Connections connection2: Connections {
                         target: Logic.session
 
@@ -268,12 +267,10 @@ Item {
                             propAnimation.resume()
                         }
                     }
-
                     property int delay: 0
 
                     target: cloudDelegateImage
                     duration: 300
-
                     Component.onCompleted: {
                         if (Logic.session.currentStage > 0) {
                             propAnimation.duration /= Math.pow(Logic.session.speedIncreaseCof, Logic.session.currentStage - 1)

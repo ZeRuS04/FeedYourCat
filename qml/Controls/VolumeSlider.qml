@@ -7,9 +7,7 @@ import Singletons 1.0
 Slider {
     id: control
 
-    property bool bold: false
-
-    font.family: Common.getDefaultFont(bold)
+    font.family: Common.getDefaultFont()
     font.pointSize: 20
     leftPadding: 48
     rightPadding: 48

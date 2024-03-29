@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/fonts/snap itc.ttf</file>
+        <file>resources/fonts/Mulish-Black.ttf</file>
+        <file>resources/fonts/Mulish-Regular.ttf</file>
+    </qresource>
+</RCC>

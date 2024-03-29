@@ -32,7 +32,8 @@ lupdate_only {
 
 }
 
-RESOURCES += qml.qrc
+RESOURCES += fonts.qrc \
+              qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
