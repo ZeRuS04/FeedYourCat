@@ -59,7 +59,7 @@ android {
 ANDROID_PACKAGE_SOURCE_DIR = \
     $$PWD/android
     QT += androidextras
-    ANDROID_VERSION_CODE = "800"
+    ANDROID_VERSION_CODE = "802"
     ANDROID_VERSION_NAME = "0.8.0"
 }
 
