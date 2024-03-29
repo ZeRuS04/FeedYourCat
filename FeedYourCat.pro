@@ -60,8 +60,8 @@ android {
 ANDROID_PACKAGE_SOURCE_DIR = \
     $$PWD/android
     QT += androidextras
-    ANDROID_VERSION_CODE = "802"
-    ANDROID_VERSION_NAME = "0.8.0"
+    ANDROID_VERSION_CODE = "810"
+    ANDROID_VERSION_NAME = "0.8.1"
 }
 
 TRANSLATIONS += QmlLanguage_ru.ts

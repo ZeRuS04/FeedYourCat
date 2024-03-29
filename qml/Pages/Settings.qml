@@ -407,7 +407,7 @@ Controls.BasePage {
             bottom: parent.bottom
             margins: 5
         }
-        text: qsTr("v0.8.0")
+        text: qsTr("v0.8.1")
         font.pointSize: 12
         opacity: 0.6
     }
