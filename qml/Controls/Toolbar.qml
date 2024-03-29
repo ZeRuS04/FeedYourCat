@@ -52,58 +52,58 @@ ToolBar {
         anchors.fill: parent
         color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
         opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
-    }
 
-    RowLayout {
-        anchors {
-            fill: parent
-            leftMargin: root.state === "game" ? root.width / 30 : 30
-            rightMargin: root.state === "game" ? root.width / 30 : 30
-        }
+        RowLayout {
+            anchors {
+                fill: parent
+                leftMargin: root.state === "game" ? root.width / 30 : 30
+                rightMargin: root.state === "game" ? root.width / 30 : 30
+            }
 
-        BackToolButton {
-            Layout.fillHeight: true
-            Layout.preferredWidth: height
-            onClicked: stack.pop()
-        }
+            BackToolButton {
+                Layout.fillHeight: true
+                Layout.preferredWidth: height
+                onClicked: stack.pop()
+            }
 
-        Item {
-            id: centerItem
+            Item {
+                id: centerItem
 
-            Layout.fillWidth: visible
-            Layout.preferredHeight: root.height
+                Layout.fillWidth: visible
+                Layout.preferredHeight: root.height
 
-            ScorePanel {
-                id: scorePanel
+                ScorePanel {
+                    id: scorePanel
 
-                anchors.centerIn: parent
+                    anchors.centerIn: parent
 
+                    visible: false
+                }
+                Controls.Label {
+                    id: titleLabel
+
+                    anchors.fill: parent
+                    horizontalAlignment: Qt.AlignRight
+                    verticalAlignment: Qt.AlignVCenter
+
+                    text: stack.currentItem && stack.currentItem.hasOwnProperty("title") ? stack.currentItem.title
+                                                                                         : ""
+                    elide: Label.ElideRight
+                    color: ThemeManager.currentTheme["mainTextColor"]
+                }
+            }
+
+            PauseToolButton {
+                id: pauseButton
+
+                Layout.fillHeight: true
+                Layout.preferredWidth: height
                 visible: false
-            }
-            Controls.Label {
-                id: titleLabel
-
-                anchors.fill: parent
-                horizontalAlignment: Qt.AlignRight
-                verticalAlignment: Qt.AlignVCenter
-
-                text: stack.currentItem && stack.currentItem.hasOwnProperty("title") ? stack.currentItem.title
-                                                                                     : ""
-                elide: Label.ElideRight
-                color: ThemeManager.currentTheme["mainTextColor"]
-            }
-        }
-
-        PauseToolButton {
-            id: pauseButton
-
-            Layout.fillHeight: true
-            Layout.preferredWidth: height
-            visible: false
-            checked: Logic.sessionPaused
-            onToggled: {
-                !Logic.sessionPaused ? Logic.pause()
-                                     : Logic.resume()
+                checked: Logic.sessionPaused
+                onToggled: {
+                    !Logic.sessionPaused ? Logic.pause()
+                                         : Logic.resume()
+                }
             }
         }
     }
