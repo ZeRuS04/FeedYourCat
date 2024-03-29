@@ -14,7 +14,7 @@ QtObject {
     readonly property color menuButtonActiveShadowColor: "#A5A0BD"
     readonly property color menuButtonBorderColor: "#A5A0BD"
 //    readonly property color cellBorderColor: "#707070"
-    readonly property color toolbarBackgroundColor: "#10034E"
+    readonly property color toolbarBackgroundColor: "#1B124C"
     readonly property color toolbuttonIconColor: "#A5A0BD"
     readonly property color cellBackgroundColor: "#1D1243"
     readonly property color cellBorderColor: "#8567A0"
@@ -29,7 +29,7 @@ QtObject {
     readonly property real menuButtonBackgroundOpacity: 0.8
     readonly property real cellBackgroundOpacity: 0.38
     readonly property real themeSwitcherOpacity: 0.8
-    readonly property real toolbarBackgroundOpacity: 1
+    readonly property real toolbarBackgroundOpacity: 0.7
 
     //====== Images:
     property url mainMenuImage: "qrc:/resources/images/cats/Start_Cats/SVG/Start_Cat_Dark_Theme.svg"

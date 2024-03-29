@@ -14,7 +14,7 @@ QtObject {
     readonly property color menuButtonActiveShadowColor: "#FFEDEF"
     readonly property color menuButtonBorderColor: "#F7A1A1"
 //    readonly property color cellBorderColor: "#707070"
-    readonly property color toolbarBackgroundColor: "#E2B8C5"
+    readonly property color toolbarBackgroundColor: "#F2B6B6"
     readonly property color toolbuttonIconColor: "#0E1950"
     readonly property color cellBackgroundColor: "#F6C9DF"
     readonly property color cellBorderColor: "#937187"

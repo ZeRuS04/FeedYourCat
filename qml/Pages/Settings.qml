@@ -341,10 +341,9 @@ Controls.BasePage {
         height: 70
         width: parent.width
 
-        color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
-        opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
+        color: ThemeManager.currentTheme["toolbarBackgroundColor"]
+        opacity: ThemeManager.currentTheme["toolbarBackgroundOpacity"]
     }
-
     Column {
         anchors.verticalCenter: footer.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -401,5 +400,15 @@ Controls.BasePage {
             text: qsTr("music freesfx.co.uk")
             font.pointSize: 12
         }
+    }
+    Controls.Label {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: 5
+        }
+        text: qsTr("v0.8.0")
+        font.pointSize: 12
+        opacity: 0.6
     }
 }

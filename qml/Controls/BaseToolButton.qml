@@ -13,8 +13,8 @@ ToolButton {
 
     contentItem: Image {
         width: height
-        sourceSize.width: 108
-        sourceSize.height: 108
+        sourceSize.width: 64
+        sourceSize.height: 64
         source: root.iconSource
         mipmap: true
         layer {

@@ -50,14 +50,14 @@ ToolBar {
 
     Rectangle {
         anchors.fill: parent
-        color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
-        opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
+        color: ThemeManager.currentTheme["toolbarBackgroundColor"]
+        opacity: ThemeManager.currentTheme["toolbarBackgroundOpacity"]
 
         RowLayout {
             anchors {
                 fill: parent
-                leftMargin: root.state === "game" ? root.width / 30 : 30
-                rightMargin: root.state === "game" ? root.width / 30 : 30
+                leftMargin: 20
+                rightMargin: 20
             }
 
             BackToolButton {
