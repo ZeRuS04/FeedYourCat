@@ -88,6 +88,7 @@ Controls.BasePage {
                     height: 60
 
                     primaryStyle: true
+                    icon.source: "qrc:/resources/icons/play.svg"
                     text: qsTr("START!")
 
                     font.bold: true

@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 QtObject {
     id: root
+
     readonly property string catalogName: "Dark_Theme"
 
     //====== Background colors:
@@ -9,7 +10,8 @@ QtObject {
     readonly property color backgroundGradColor2: "#0B0141"
     readonly property color menuButtonBackgroundColor: "#372C6A"
     readonly property color menuButtonIconColor: "#A5A0BD"
-    readonly property color menuButtonPressedBackgroundColor: "#372C6A"
+    readonly property color menuButtonPressedBackgroundColor: "#1B124C"
+    readonly property color menuButtonActiveShadowColor: "#A5A0BD"
     readonly property color menuButtonBorderColor: "#A5A0BD"
 //    readonly property color cellBorderColor: "#707070"
     readonly property color toolbarBackgroundColor: "#10034E"
