@@ -67,7 +67,8 @@ Slider {
                     anchors.centerIn: parent
                     sourceSize.width: 28
                     sourceSize.height: 21
-                    source: "qrc:/resources/icons/volume_min.svg"
+                    source: control.value === control.from ? "qrc:/resources/icons/volume_min_fill.svg"
+                                                           : "qrc:/resources/icons/volume_min.svg"
                     layer {
                         enabled: true
                         effect: ColorOverlay {
@@ -103,7 +104,8 @@ Slider {
                     anchors.centerIn: parent
                     sourceSize.width: 30
                     sourceSize.height: 21
-                    source: "qrc:/resources/icons/volume_max.svg"
+                    source: control.value === control.to ? "qrc:/resources/icons/volume_max_fill.svg"
+                                                         : "qrc:/resources/icons/volume_max.svg"
                     layer {
                         enabled: true
                         effect: ColorOverlay {
@@ -118,7 +120,7 @@ Slider {
     handle: Item {
         x: control.leftPadding + control.visualPosition * (control.availableWidth - width )  //+ width / 2
         y: control.topPadding + control.availableHeight / 2 - height / 2
-      width: 64
+        width: 64
         height: 64
 
         Rectangle {

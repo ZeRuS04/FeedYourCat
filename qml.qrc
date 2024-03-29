@@ -112,7 +112,9 @@
         <file>resources/icons/Light_Theme/cat_score.svg</file>
         <file>resources/icons/Light_Theme/paw.svg</file>
         <file>resources/icons/volume_max.svg</file>
+        <file>resources/icons/volume_max_fill.svg</file>
         <file>resources/icons/volume_min.svg</file>
+        <file>resources/icons/volume_min_fill.svg</file>
         <file>qml/controls/BaseToolButton.qml</file>
         <file>resources/icons/flash.svg</file>
         <file>resources/icons/like.svg</file>
