@@ -28,7 +28,7 @@ SwitchDelegate {
         Rectangle {
             anchors.fill: parent
             radius: Number.MAX_VALUE
-            color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+            color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
             layer {
                 enabled: true
                 effect: InnerShadow {
@@ -45,7 +45,7 @@ SwitchDelegate {
                 fill: parent
                 margins: 3
             }
-            color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
+            color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
             radius: Number.MAX_VALUE
             layer {
                 enabled: true
@@ -86,7 +86,7 @@ SwitchDelegate {
             width: 48
             height: width
             radius: Number.MAX_VALUE
-            color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+            color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
             layer {
                 enabled: true
                 effect: DropShadow {
@@ -121,7 +121,7 @@ SwitchDelegate {
     background: Rectangle {
         implicitWidth: 100
         implicitHeight: 88
-        color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+        color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
         opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
     }
 }

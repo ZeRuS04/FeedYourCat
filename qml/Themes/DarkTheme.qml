@@ -16,8 +16,8 @@ QtObject {
     readonly property color toolbuttonIconColor: "#A5A0BD"
     readonly property color cellBackgroundColor: "#1D1243"
     readonly property color cellBorderColor: "#8567A0"
-    readonly property color themeSwitcherCheckedColor: "#2F2369"
-    readonly property color themeSwitcherHandleColor: "#8780AB"
+    readonly property color themeSwitcherCheckedColor: "#8780AB"
+    readonly property color themeSwitcherHandleColor: "#2F2369"
 
     readonly property color mainTextColor: "#CFCCE0"
     readonly property color secondaryTextColor: "#FFFFFF"

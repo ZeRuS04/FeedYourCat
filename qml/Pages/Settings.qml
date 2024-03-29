@@ -299,7 +299,7 @@ Controls.BasePage {
 
                 Rectangle {
                     anchors.fill: parent
-                    color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+                    color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
                     opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
                 }
                 Column {
@@ -341,7 +341,7 @@ Controls.BasePage {
         height: 70
         width: parent.width
 
-        color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+        color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
         opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
     }
 

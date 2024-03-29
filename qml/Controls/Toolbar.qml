@@ -50,7 +50,7 @@ ToolBar {
 
     Rectangle {
         anchors.fill: parent
-        color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+        color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
         opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
     }
 

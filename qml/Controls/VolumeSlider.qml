@@ -24,7 +24,7 @@ Slider {
         Rectangle {
             anchors.fill: parent
             radius: Number.MAX_VALUE
-            color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+            color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
             // color: control.checked ? "#17a81a" : "transparent"
             layer {
                 enabled: true
@@ -42,7 +42,7 @@ Slider {
                 fill: parent
                 margins: 3
             }
-            color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
+            color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
             radius: Number.MAX_VALUE
             layer {
                 enabled: true
@@ -128,7 +128,7 @@ Slider {
             width: 48
             height: width
             radius: Number.MAX_VALUE
-            color: ThemeManager.currentTheme["themeSwitcherCheckedColor"]
+            color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
             layer {
                 enabled: true
                 effect: DropShadow {
