@@ -65,8 +65,6 @@ ToolBar {
             Layout.fillHeight: true
             Layout.preferredWidth: height
             onClicked: stack.pop()
-
-            onHeightChanged: console.log("###", height) || console.trace()
         }
 
         Item {

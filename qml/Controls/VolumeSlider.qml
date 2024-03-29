@@ -33,7 +33,7 @@ Slider {
                     radius: 3.0
                     samples: 12
                     spread: 0
-                    color: "#88000000"
+                    color: "#44000000"
                 }
             }
         }
@@ -51,7 +51,7 @@ Slider {
                     radius: 3.0
                     samples: 12
                     spread: 0
-                    color: "#66000000"
+                    color: "#33000000"
                 }
             }
         }
