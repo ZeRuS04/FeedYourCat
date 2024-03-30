@@ -12,33 +12,35 @@ MouseArea {
     property string backgroundColor: Constants.catBackgrounds[backgroundIndex] || ThemeManager.currentTheme["cellBackgroundColor"]
     property real backgroundOpacity: 1
     property string borderColor: Constants.catBorders[backgroundIndex] || ThemeManager.currentTheme["cellBorderColor"]
-
     property bool isFed: false
 
-    signal feed(bool isCat);
+    signal feed(string type);
 
     onFeed: {
         if (waitTimer.running) {
             waitTimer.stop();
         }
-        if (isCat)
+        if (type === "cat") {
             SoundManager.feedCatPlay();
-        else
+        } else if (type === "tiger"){
             SoundManager.feedTigerPlay();
-        Vibrator.vibrate(120)
+        } else {
+            return;
+        }
+
+        Vibrator.vibrate(120);
         isFed = true;
         catImage.hide(isFed);
     }
-
     height: width
 
     state: !Logic.session || Logic.session.area[cellIndex] === 0 ? "nothing"
                                                                  : Logic.session.area[cellIndex] > 0 ? "cat"
                                                                                                      : "tiger"
-
     states: [
         State {
             name: "nothing"
+
             PropertyChanges {
                 target: root
                 backgroundColor: ThemeManager.currentTheme["cellBackgroundColor"]
@@ -57,34 +59,32 @@ MouseArea {
             PropertyChanges { target: root; backgroundIndex: Math.floor(Math.random() * 6) }
         }
     ]
-
     onStateChanged: {
         isFed = false;
         if (state !== "nothing") {
-            catImage.timeIsOver = false
+            catImage.timeIsOver = false;
             if (!Logic.session.isTestMode) {
                 waitTimer.interval = Math.floor(Math.random() * (Logic.session.maximumCatDelay - Logic.session.minimumCatDelay)) + Logic.session.minimumCatDelay;
-                waitTimer.start()
+                waitTimer.start();
             }
         }
     }
-
     onClicked: {
-        if (Logic.sessionPaused)
+        if (Logic.sessionPaused || isFed) {
             return;
+        }
 
         if (!Logic.session.isTestMode) {
-            if (state == "nothing" || catImage.timeIsOver)
+            if (state == "nothing" || catImage.timeIsOver) {
                 return;
-            root.feed(state === "cat");
+            }
+            root.feed(state);
         } else {
             if (state !== "nothing") {
                 catImage.hide(isFed);
-            } else {
-                if (Logic.session.isTestMode) {
-                    Logic.session.area[root.cellIndex] = root.cellIndex - 2;
-                    Logic.session.areaChanged()
-                }
+            } else if (Logic.session.isTestMode) {
+                Logic.session.area[root.cellIndex] = root.cellIndex - 2;
+                Logic.session.areaChanged();
             }
         }
     }
@@ -96,24 +96,23 @@ MouseArea {
             catImage.hide(isFed);
         }
     }
-
     Connections {
         target: Logic.session
 
         function onPause() {
-            if (waitTimer.running)
+            if (waitTimer.running) {
                 waitTimer.pause();
+            }
         }
         function onResume() {
-            if (root.state !== "nothing")
+            if (root.state !== "nothing") {
                 waitTimer.resume();
+            }
         }
     }
-
     Rectangle {
         anchors.fill: parent
         radius: height / 10
-
         color: root.backgroundColor
         opacity: root.backgroundOpacity
 
@@ -123,7 +122,6 @@ MouseArea {
             }
         }
     }
-
     Image {
         id: mask
         anchors.fill: parent
@@ -131,7 +129,6 @@ MouseArea {
 
         source: "../../resources/icons/mask.svg"
     }
-
     Item {
         id: catContainer
 
@@ -142,9 +139,8 @@ MouseArea {
             id: catImage
 
             anchors.fill: parent
-
-            catObject: root.state === "cat" ? Constants.catsCatalog[Logic.session.area[cellIndex] - 1] :
-                                              root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
+            catObject: root.state === "cat" ? Constants.catsCatalog[Logic.session.area[cellIndex] - 1]
+                                            : root.state === "tiger" ? Constants.tigersCatalog[Math.abs(Logic.session.area[cellIndex]) - 1]
                                                                      : null
             onHideAnimationFinished: {
                 Logic.session.hideCat(root.cellIndex, root.isFed);
@@ -152,11 +148,10 @@ MouseArea {
             onShowAnimationFinished: {
                 if (!Logic.session.isTestMode && root.state !== "nothing") {
                     waitTimer.interval = Math.floor(Math.random() * (Logic.session.maximumCatDelay - Logic.session.minimumCatDelay)) + Logic.session.minimumCatDelay;
-                    waitTimer.start()
+                    waitTimer.start();
                 }
             }
         }
-
         Item {
             id: clickReactionImage
 
@@ -169,25 +164,23 @@ MouseArea {
 
             anchors.fill: parent
             opacity: 0
-
             onNeedShowChanged: if (needShow && opacity === 0 && !catImage.timeIsOver) opacityAnimation.start()
 
             Connections {
                 target: root
 
                 function onStateChanged() {
-                    if (clickReactionImage.opacity > 0)
-                        clickReactionImage.reset()
+                    if (clickReactionImage.opacity > 0) {
+                        clickReactionImage.reset();
+                    }
                 }
             }
-
             SequentialAnimation {
                 id: opacityAnimation
 
                 ScriptAction {
                     script: clickReactionImage.state = root.state;
                 }
-
                 PropertyAnimation {
                     target: clickReactionImage
                     property: "opacity"
@@ -197,7 +190,6 @@ MouseArea {
                     duration: 100
                 }
             }
-
             SequentialAnimation {
                 id: resetOpacityAnimation
 
@@ -209,12 +201,10 @@ MouseArea {
                     alwaysRunToEnd: true
                     duration: 100
                 }
-
                 ScriptAction {
                     script: clickReactionImage.state = "nothing";
                 }
             }
-
             RadialGradient {
                 anchors.fill: parent
                 gradient: Gradient {
@@ -223,24 +213,20 @@ MouseArea {
                     GradientStop { position: 0.5; color: "#dd000000" }
                 }
             }
-
             Image {
                 anchors.fill: parent
                 anchors.margins: 10
                 sourceSize.width: width
                 sourceSize.height: height
-
                 source: "../../resources/icons/%1.svg".arg(clickReactionImage.state === "cat" ? "paw"
                                                                                               : "jaws")
             }
         }
     }
-
     OpacityMask {
         anchors.fill: parent
         source: catContainer
         maskSource: mask
-
         opacity:  root.state !== "nothing" ? 1 : 0
 
         Behavior on opacity {
@@ -249,7 +235,6 @@ MouseArea {
             }
         }
     }
-
     Rectangle {
         anchors.fill: parent
 
@@ -262,7 +247,7 @@ MouseArea {
                                                      : root.borderColor
         border.width: root.state !== "nothing" &&
                       clickReactionImage.opacity > 0 &&
-                      !resetOpacityAnimation.running  ? 5 : 2
+                      !resetOpacityAnimation.running ? 5 : 2
     }
 
 }

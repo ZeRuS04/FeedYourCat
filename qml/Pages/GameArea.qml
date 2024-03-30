@@ -228,7 +228,7 @@ Controls.BasePage {
                     cellIndex: model.index
                     width: (root.width - (root.width / 6)) / 3
 
-                    onFeed: isCat ? root.addPlus() : root.addMinus()
+                    onFeed: type === "cat" ? root.addPlus() : root.addMinus()
                 }
             }
         }

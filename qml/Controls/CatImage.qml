@@ -42,7 +42,6 @@ Item {
             root.hideAnimationFinished();
         }
     }
-
     AdvancedTimer {
         id: startDelayTimer
         interval: 0
@@ -54,7 +53,6 @@ Item {
             root.showAnimationFinished()
         }
     }
-
     Connections {
         target: Logic.session
 
@@ -69,7 +67,6 @@ Item {
             finishDelayTimer.resume()
         }
     }
-
     Repeater {
         model: !!root.catObject ? Object.keys(root.catObject.parts || {}) : 0
 
@@ -174,7 +171,6 @@ Item {
             }
         }
     }
-
     Repeater {
         id: cloudRepeater
 

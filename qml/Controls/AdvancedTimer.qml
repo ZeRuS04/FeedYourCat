@@ -20,19 +20,15 @@ QtObject {
         timeLeft = interval;
         timer.start();
     }
-
-
     function restart() {
         timer.stop();
         timeLeft = interval;
         timer.start();
     }
-
     function stop() {
         timeLeft = 0;
         timer.stop();
     }
-
     function pause() {
         if (timer.running) {
             timer.stop();
@@ -57,8 +53,9 @@ QtObject {
             root.timeLeft -=interval;
             if (timeLeft === 0) {
                 root.triggered();
-                if (root.repeat)
+                if (root.repeat) {
                     root.restart();
+                }
             }
         }
     }
