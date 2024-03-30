@@ -13,13 +13,11 @@ Controls.BasePage {
     property int minusObjectsCount: 0
 
     function addPlus() {
-        var plusObj = plusComponent.createObject(timerItem,
-                                                  /*{x: timerItem.width / 2 + gameTimerLabel.width / 2 + 10 + 40 * plusObjectsCount}*/)
+        var plusObj = plusComponent.createObject(timerItem);
     }
 
     function addMinus() {
-        var minusObj = minusComponent.createObject(timerItem,
-                                                  /*{x: timerItem.width / 2 - gameTimerLabel.width / 2 - 10 - 40 * minusObjectsCount}*/)
+        var minusObj = minusComponent.createObject(timerItem);
     }
 
     Component {
@@ -28,18 +26,15 @@ Controls.BasePage {
         Controls.Label {
             id: plus
 
-            anchors {
-                left: gameTimerLabel.right
-            }
-
+            anchors.left: gameTimerLabel.right
             y: parent.height / 3 * 2 - height / 2
             text: "+" + Logic.rewardForFeedCat
             color: "#F600FF"
             visible: !Logic.sessionPaused
             font.pointSize: 30
-
             Component.onCompleted: {
-                anchors.leftMargin = 5 + implicitWidth * root.plusObjectsCount;
+                var nAvailableCount = Math.floor((timerItem.width - gameTimerLabel.width) / 2 / implicitWidth);
+                anchors.leftMargin = 5 + implicitWidth * (root.plusObjectsCount % nAvailableCount);
                 root.plusObjectsCount++;
             }
 
@@ -54,7 +49,6 @@ Controls.BasePage {
                     plusAnimation.resume()
                 }
             }
-
             ParallelAnimation {
                 id: plusAnimation
 
@@ -90,29 +84,28 @@ Controls.BasePage {
         Controls.Label {
             id: minus
 
-            anchors {
-                right: gameTimerLabel.left
-            }
+            anchors.right: gameTimerLabel.left
             y: parent.height / 3 - height / 2
             text: Logic.rewardForTiger
             color: "#ff0000"
             visible: !Logic.sessionPaused
             font.pointSize: 30
-
             Component.onCompleted: {
-                anchors.rightMargin = 10 + implicitWidth * root.plusObjectsCount;
+                var nAvailableCount = Math.floor((timerItem.width - gameTimerLabel.width) / 2 / implicitWidth);
+                anchors.rightMargin = 5 + implicitWidth * (root.minusObjectsCount % nAvailableCount);
                 root.minusObjectsCount++;
             }
 
             Connections {
                 target: Logic.session
 
-                onPause: {
-                    if (minusAnimation.running)
+                function onPause() {
+                    if (minusAnimation.running) {
                         minusAnimation.pause();
+                    }
                 }
-                onResume: {
-                    minusAnimation.resume()
+                function onResume() {
+                    minusAnimation.resume();
                 }
             }
 
