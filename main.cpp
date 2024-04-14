@@ -1,7 +1,9 @@
+#include <QCoreApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQmlContext>
+#include <QTimer>
 #include "vibrator.h"
 #include "qmltranslator.h"
 
@@ -32,5 +34,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
+    QNativeInterface::QAndroidApplication::hideSplashScreen(1000);
     return app.exec();
 }

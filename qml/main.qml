@@ -21,6 +21,8 @@ ApplicationWindow {
     height: 640
     title: qsTr("Feed your cat")
     color: "#D3D3EB"
+    visibility: Qt.platform.os === "android" ? Window.FullScreen
+                                             : Window.Windowed
     header: Controls.Toolbar {
         visible: false
         height: 70
