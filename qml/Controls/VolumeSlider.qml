@@ -1,6 +1,7 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.12
-import QtGraphicalEffects 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 
 import Singletons 1.0
 
@@ -61,18 +62,13 @@ Slider {
                 width: 32
                 height: width
 
-                Image {
+                IconImage {
                     anchors.centerIn: parent
                     sourceSize.width: 28
                     sourceSize.height: 21
                     source: control.value === control.from ? "qrc:/resources/icons/volume_min_fill.svg"
                                                            : "qrc:/resources/icons/volume_min.svg"
-                    layer {
-                        enabled: true
-                        effect: ColorOverlay {
-                            color: ThemeManager.currentTheme["mainTextColor"]
-                        }
-                    }
+                    color: ThemeManager.currentTheme["mainTextColor"]
                 }
             }
             Item {
@@ -81,35 +77,25 @@ Slider {
                 implicitHeight: 2
                 width: control.availableWidth - parent.spacing * 2
                 height: implicitHeight
-                Image {
+                IconImage {
                     anchors.centerIn: parent
                     sourceSize.width: parent.width
                     sourceSize.height: 10
                     source: "qrc:/resources/icons/line.svg"
-                    layer {
-                        enabled: true
-                        effect: ColorOverlay {
-                            color: ThemeManager.currentTheme["mainTextColor"]
-                        }
-                    }
+                    color: ThemeManager.currentTheme["mainTextColor"]
                 }
             }
             Item {
                 width: 32
                 height: width
 
-                Image {
+                IconImage {
                     anchors.centerIn: parent
                     sourceSize.width: 30
                     sourceSize.height: 21
                     source: control.value === control.to ? "qrc:/resources/icons/volume_max_fill.svg"
                                                          : "qrc:/resources/icons/volume_max.svg"
-                    layer {
-                        enabled: true
-                        effect: ColorOverlay {
-                            color: ThemeManager.currentTheme["mainTextColor"]
-                        }
-                    }
+                    color: ThemeManager.currentTheme["mainTextColor"]
                 }
             }
         }
@@ -129,25 +115,19 @@ Slider {
             color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
             layer {
                 enabled: true
-                effect: DropShadow {
-                    verticalOffset: 2
-                    radius: 5.0
-                    samples: 12
-                    spread: 0
+                effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowScale: 1
+                    shadowColor: "#88000000"
                 }
             }
-            Image {
+            IconImage {
                 anchors.centerIn: parent
                 source: "qrc:/resources/icons/paw.svg"
                 sourceSize.width: 32
                 sourceSize.height: 32
                 fillMode: Image.PreserveAspectFit
-                layer {
-                    enabled: true
-                    effect: ColorOverlay {
-                        color: ThemeManager.currentTheme["mainTextColor"]
-                    }
-                }
+                color: ThemeManager.currentTheme["mainTextColor"]
             }
         }
     }

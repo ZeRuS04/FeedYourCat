@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick
 import "../controls" as Controls
 
 import Singletons 1.0
@@ -228,7 +228,7 @@ Controls.BasePage {
                     cellIndex: model.index
                     width: (root.width - (root.width / 6)) / 3
 
-                    onFeed: type === "cat" ? root.addPlus() : root.addMinus()
+                    onFeed: function (type) { return type === "cat" ? root.addPlus() : root.addMinus(); }
                 }
             }
         }

@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick
 
 QtObject {
     id: root
@@ -10,7 +10,7 @@ QtObject {
     property bool repeat: false
     property bool paused: false
 
-    signal tick(int time);
+    signal tick(time: int);
     signal triggered()
 
     function start() {

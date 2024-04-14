@@ -1,6 +1,7 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.12 as QQC2
-import QtGraphicalEffects 1.12
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Controls.Basic
+import Qt5Compat.GraphicalEffects
 
 import Singletons 1.0
 
@@ -92,25 +93,19 @@ QQC2.Button {
             anchors.centerIn: parent
             spacing: 3
 
-            Image {
+            QQC2.IconImage {
                 height: label.height
                 anchors.verticalCenter: parent.verticalCenter
                 source: root.icon.source
                 sourceSize.width: width
                 sourceSize.height: height
                 fillMode: Image.PreserveAspectFit
-                layer {
-                    enabled: true
-                    effect: ColorOverlay {
-                        color: ThemeManager.currentTheme["secondaryTextColor"]
-                    }
-                }
+                color: ThemeManager.currentTheme["secondaryTextColor"]
             }
             Label {
                 id: label
 
                 anchors.verticalCenter: parent.verticalCenter
-                bold: root.font.bold
                 text:  root.text
                 color: ThemeManager.currentTheme["secondaryTextColor"]
                 font.pointSize: root.font.pointSize

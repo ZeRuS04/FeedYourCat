@@ -1,5 +1,5 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.5 as QQC2
+import QtQuick
+import QtQuick.Controls as QQC2
 import Singletons 1.0
 
 QQC2.Button {

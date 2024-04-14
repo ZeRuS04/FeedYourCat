@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick 2.12
+import QtQuick
 import Singletons 1.0
 
 Item {

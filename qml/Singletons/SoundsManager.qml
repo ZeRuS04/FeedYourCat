@@ -20,16 +20,16 @@ Item {
         __globalVolume = volume;
     }
     function buttonClickPlay() {
-        buttonSound.stop()
-        buttonSound.play()
+        buttonSound.stop();
+        buttonSound.play();
     }
     function feedCatPlay() {
-        feedCatSound.stop()
-        feedCatSound.play()
+        feedCatSound.stop();
+        feedCatSound.play();
     }
     function feedTigerPlay() {
-        feedTigerSound.stop()
-        feedTigerSound.play()
+        feedTigerSound.stop();
+        feedTigerSound.play();
     }
 
     MediaPlayer {
@@ -82,8 +82,6 @@ Item {
                 gameMusicSound.stop();
         }
     }
-
-
 }
 
 

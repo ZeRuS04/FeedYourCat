@@ -8,7 +8,6 @@
 int main(int argc, char *argv[])
 {
     qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     Vibrator vibrator;
     QGuiApplication app(argc, argv);
     app.setOrganizationName("Eugene Sinel");

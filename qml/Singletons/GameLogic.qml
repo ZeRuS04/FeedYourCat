@@ -1,7 +1,7 @@
 pragma Singleton
 
-import QtQuick 2.12
-import Qt.labs.settings 1.1
+import QtQuick
+import QtCore
 
 import "../helpers/Constants.js" as Constants
 import "../controls" as Controls
@@ -229,7 +229,7 @@ Item {
                 id: mainGameTimer
 
                 interval: sessionObj.time
-                onTick: sessionObj.totalSessionTime += time
+                onTick: function (time) { sessionObj.totalSessionTime += time; }
                 onTriggered: {
                     if (!isTestMode) {
                         root.pause();

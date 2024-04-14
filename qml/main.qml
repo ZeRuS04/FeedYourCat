@@ -1,6 +1,6 @@
-import QtQuick.Window 2.2
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick.Window
+import QtQuick
+import QtQuick.Controls
 import Singletons 1.0
 
 import "controls" as Controls
@@ -17,22 +17,15 @@ ApplicationWindow {
             return x*(dpi/160);
         }
     }
-//    visible: false
     width: 360
     height: 640
     title: qsTr("Feed your cat")
     color: "#D3D3EB"
-
-//    flags: Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
-//    visibility: Qt.platform.os === "android" ? Window.FullScreen
-//                                             : Window.Windowed
-
     header: Controls.Toolbar {
         visible: false
         height: 70
         stack: stackViewLoader.item
     }
-
     Component.onCompleted: {
         console.log(Common.getDefaultFont(),Common.getDefaultFont())
         SoundManager.updateVolume(Logic.soundVolume);

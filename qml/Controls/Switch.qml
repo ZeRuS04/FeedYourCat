@@ -1,6 +1,7 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtGraphicalEffects 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 
 import Singletons 1.0
 import "." as Controls
@@ -64,18 +65,11 @@ SwitchDelegate {
             width: 48
             height: width
 
-            Image {
+            IconImage {
                 anchors.centerIn: parent
-                sourceSize.width: 26
-                sourceSize.height: 26
                 fillMode: Image.PreserveAspectFit
                 source: control.checked ? control.checkedIcon : control.uncheckedIcon
-                layer {
-                    enabled: true
-                    effect: ColorOverlay {
-                        color: ThemeManager.currentTheme["mainTextColor"]
-                    }
-                }
+                color: ThemeManager.currentTheme["mainTextColor"]
             }
             Behavior on x {
                 NumberAnimation {
@@ -92,11 +86,10 @@ SwitchDelegate {
             color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
             layer {
                 enabled: true
-                effect: DropShadow {
-                    verticalOffset: 2
-                    radius: 5.0
-                    samples: 12
-                    spread: 0
+                effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowScale: 1
+                    shadowColor: "#88000000"
                 }
             }
 
@@ -105,18 +98,13 @@ SwitchDelegate {
                     duration: 150
                 }
             }
-            Image {
+            IconImage {
                 anchors.centerIn: parent
                 source: "qrc:/resources/icons/paw.svg"
                 sourceSize.width: 32
                 sourceSize.height: 32
                 fillMode: Image.PreserveAspectFit
-                layer {
-                    enabled: true
-                    effect: ColorOverlay {
-                        color: ThemeManager.currentTheme["mainTextColor"]
-                    }
-                }
+                color: ThemeManager.currentTheme["mainTextColor"]
             }
         }
     }

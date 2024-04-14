@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick
 
 import Singletons 1.0
 
@@ -81,30 +81,18 @@ Item {
 
             Component.onCompleted: downAnimatiom.start()
 
-            SmoothedAnimation {
+            YAnimator {
                 id: downAnimatiom
 
                 target: foodImage
-                property: "y"
-                velocity: Math.random() * 20 + 30
+                duration: Math.random() * 3000 + 5000
                 to: root.height + height
-                reversingMode: SmoothedAnimation.Immediate
                 easing.type: Easing.Linear
                 onFinished: {
                     root.createAnotherOneFood(foodImage.screenZone)
                     foodImage.destroy()
                 }
             }
-
-//            NumberAnimation {
-//                easing.type: Easing.Linear
-//                duration: Math.random() * 1000 + 10000
-
-//                onRunningChanged: {
-//                    if (!running)
-//                        foodImage.destroy()
-//                }
-//            }
         }
     }
 
