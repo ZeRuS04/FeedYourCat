@@ -3,7 +3,6 @@
 #include <QQmlContext>
 #include "vibrator.h"
 #include "qmltranslator.h"
-#include "statusbar.h"
 
 int main(int argc, char *argv[])
 {

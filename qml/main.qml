@@ -1,7 +1,6 @@
 import QtQuick.Window 2.2
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-import StatusBar 0.1
 import Singletons 1.0
 
 import "controls" as Controls
@@ -38,11 +37,6 @@ ApplicationWindow {
         console.log(Common.getDefaultFont(),Common.getDefaultFont())
         SoundManager.updateVolume(Logic.soundVolume);
         Vibrator.setEnabled(Logic.vibrationEnabled);
-    }
-
-    StatusBar {
-        theme: ThemeManager.currentThemeIndex
-        color: ThemeManager.currentTheme["backgroundGradColor1"]
     }
 
     Binding {
