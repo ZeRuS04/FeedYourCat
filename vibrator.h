@@ -4,8 +4,8 @@
 #include <QObject>
 
 #if defined(Q_OS_ANDROID)
-#include <QAndroidJniEnvironment>
-#include <QAndroidJniObject>
+#include <QJniEnvironment>
+#include <QJniObject>
 #endif
 class Vibrator : public QObject
 {
@@ -19,7 +19,7 @@ public slots:
 private:
     bool m_enabled;
 #if defined(Q_OS_ANDROID)
-    QAndroidJniObject vibratorService;
+    QJniObject vibratorService;
 #endif
 };
 

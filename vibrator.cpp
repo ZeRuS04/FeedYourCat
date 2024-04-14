@@ -4,9 +4,9 @@
 Vibrator::Vibrator(QObject *parent) : QObject(parent), m_enabled(true)
 {
 #if defined(Q_OS_ANDROID)
-    QAndroidJniObject vibroString = QAndroidJniObject::fromString("vibrator");
-    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");
-    QAndroidJniObject appctx = activity.callObjectMethod("getApplicationContext","()Landroid/content/Context;");
+    QJniObject vibroString = QJniObject::fromString("vibrator");
+    QJniObject activity = QJniObject::callStaticObjectMethod("org/qtproject/qt/android/QtNative", "activity", "()Landroid/app/Activity;");
+    QJniObject appctx = activity.callObjectMethod("getApplicationContext","()Landroid/content/Context;");
     vibratorService = appctx.callObjectMethod("getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;", vibroString.object<jstring>());
 #endif
 }
