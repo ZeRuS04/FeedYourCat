@@ -13,16 +13,16 @@ Item {
     function intitFoodAnimation () {
         for (var i = 0; i < __screenZoneCount; ++i) {
             for (var j = 0; j < foodCount / __screenZoneCount; ++j) {
-                var randY = Math.random() * height - 170,
+                var randYCof = Math.random();
+                var randY = randYCof * height,
                     randX = Math.random() * width / __screenZoneCount + width / __screenZoneCount * i;
-                sausageComponent.createObject(root, {"x": randX, "y": randY, "screenZone": i})
+                sausageComponent.createObject(root, {"x": randX, "y": randY, "screenZone": i, "position": 1 - randYCof })
             }
         }
     }
-
     function createAnotherOneFood(zone) {
         var randX = Math.random() * width / __screenZoneCount + width / __screenZoneCount * zone;
-        sausageComponent.createObject(root, {"x": randX, "y": -170, "screenZone": zone})
+        sausageComponent.createObject(root, {"x": randX, "y": -170, "screenZone": zone, "position": 1})
     }
 
     Component.onCompleted: {
@@ -30,24 +30,23 @@ Item {
     }
 
     Rectangle {
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            bottomMargin: -140
+        }
         anchors.topMargin: -root.height / 8
-//        anchors.bottomMargin: -root.height / 5
-
         gradient: Gradient {
             GradientStop { position: 0.0; color: ThemeManager.currentTheme["backgroundGradColor1"] }
-            GradientStop { position: 1.0; color: ThemeManager.currentTheme["backgroundGradColor2"] }
+            GradientStop { position: root.height / height; color: ThemeManager.currentTheme["backgroundGradColor2"] }
         }
         z: -100
     }
-
     Timer {
         id: initTimer
 
         interval: 100
         onTriggered: intitFoodAnimation();
     }
-
     Component {
         id: sausageComponent
 
@@ -56,6 +55,7 @@ Item {
 
             readonly property int type: Math.random() * 6
             property int screenZone: -1
+            property real position: 1
 
             z: Math.random() * -6 - 1
 
@@ -85,24 +85,25 @@ Item {
                 id: downAnimatiom
 
                 target: foodImage
-                duration: Math.random() * 3000 + 5000
+                duration: (Math.random() * 5000 + 8000) * foodImage.position
                 to: root.height + height
                 easing.type: Easing.Linear
                 onFinished: {
-                    root.createAnotherOneFood(foodImage.screenZone)
-                    foodImage.destroy()
+                    root.createAnotherOneFood(foodImage.screenZone);
+                    foodImage.destroy();
                 }
             }
         }
     }
-
     Rectangle {
-        anchors.fill: parent
-//        anchors.topMargin: -root.height / 5
+        anchors {
+            fill: parent
+            bottomMargin: -140
+        }
         opacity: 0.5
         gradient: Gradient {
             GradientStop { position: 0.0; color: ThemeManager.currentTheme["backgroundGradColor1"] }
-            GradientStop { position: 1.0; color: ThemeManager.currentTheme["backgroundGradColor2"] }
+            GradientStop { position: root.height / height; color: ThemeManager.currentTheme["backgroundGradColor2"] }
         }
     }
 }

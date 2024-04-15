@@ -64,7 +64,6 @@ ToolBar {
                 Layout.preferredWidth: height
                 onClicked: stack.pop()
             }
-
             Item {
                 id: centerItem
 
@@ -91,7 +90,6 @@ ToolBar {
                     color: ThemeManager.currentTheme["mainTextColor"]
                 }
             }
-
             PauseToolButton {
                 id: pauseButton
 
