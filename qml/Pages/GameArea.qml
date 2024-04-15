@@ -138,100 +138,111 @@ Controls.BasePage {
     }
 
     Item {
-        id: timerItem
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            bottomMargin: !header.visible ? -header.height : 0
+        }
+        height: root.height
 
-        anchors.top: parent.top
-        anchors.bottom: gridItem.top
-        width: parent.width
+        Item {
+            id: timerItem
 
-        Controls.Label {
-            id: gameTimerLabel
+            anchors.top: parent.top
+            anchors.bottom: gridItem.top
+            width: parent.width
 
-            function switchColor() {
-                if (gameTimerLabel.color === ThemeManager.currentTheme["mainTextColor"])
-                    gameTimerLabel.color = ThemeManager.currentTheme["alertColor"];
-                else
-                    gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"];
-            }
+            Controls.Label {
+                id: gameTimerLabel
 
-            anchors.centerIn: parent
-
-            visible: !Logic.sessionPaused
-            text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.timeLeft), "mm:ss")
-                                  : "00:00"
-            bold: true
-            font.pointSize: 40
-            color: ThemeManager.currentTheme["secondaryTextColor"]
-
-            Behavior on color {
-                ColorAnimation {
-                    duration: 500
+                function switchColor() {
+                    if (gameTimerLabel.color === ThemeManager.currentTheme["mainTextColor"])
+                        gameTimerLabel.color = ThemeManager.currentTheme["alertColor"];
+                    else
+                        gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"];
                 }
-            }
 
-            Controls.AdvancedTimer {
-                property bool running: !!Logic.session && Logic.session.timeLeft < 6000
+                anchors.centerIn: parent
 
-                interval: 500
-                repeat: true
+                visible: !Logic.sessionPaused
+                text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.timeLeft), "mm:ss")
+                                      : "00:00"
+                bold: true
+                font.pointSize: 40
+                color: ThemeManager.currentTheme["secondaryTextColor"]
 
-                onRunningChanged: {
-                    if (running)
-                        restart()
-                    else {
-                        stop();
-                        gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"]
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 500
                     }
                 }
 
-                onTriggered: {
-                    gameTimerLabel.switchColor()
+                Controls.AdvancedTimer {
+                    property bool running: !!Logic.session && Logic.session.timeLeft < 6000
+
+                    interval: 500
+                    repeat: true
+
+                    onRunningChanged: {
+                        if (running)
+                            restart()
+                        else {
+                            stop();
+                            gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"]
+                        }
+                    }
+
+                    onTriggered: {
+                        gameTimerLabel.switchColor()
+                    }
                 }
+            }
+
+            Controls.Label {
+                visible: Logic.sessionPaused
+                anchors.centerIn: parent
+                font.pointSize: 60
+                bold: true
+                color: ThemeManager.currentTheme["secondaryTextColor"]
+                text: qsTr("PAUSE")
             }
         }
 
-        Controls.Label {
-            visible: Logic.sessionPaused
-            anchors.centerIn: parent
-            font.pointSize: 60
-            bold: true
-            color: ThemeManager.currentTheme["secondaryTextColor"]
-            text: qsTr("PAUSE")
-        }
-    }
+        Item {
+            id: gridItem
 
-    Item {
-        id: gridItem
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: root.height / 15
+            }
 
-        anchors {
-            bottom: parent.bottom
-            bottomMargin: root.height / 15
-        }
+            width: parent.width
+            height: grid.height
 
-        width: parent.width
-        height: grid.height
+            enabled: !Logic.sessionPaused
+            opacity: enabled ? 1.0 : 0.5
 
-        enabled: !Logic.sessionPaused
-        opacity: enabled ? 1.0 : 0.5
+            Grid {
+                id: grid
 
-        Grid {
-            id: grid
+                anchors.centerIn: parent
+                columns: Logic.columnCount
+                spacing: root.width / 24
 
-            anchors.centerIn: parent
-            columns: Logic.columnCount
-            spacing: root.width / 24
+                Repeater {
+                    model: Logic.columnCount * Logic.rowCount
 
-            Repeater {
-                model: Logic.columnCount * Logic.rowCount
+                    delegate: Controls.GameCell {
+                        cellIndex: model.index
+                        width: (root.width - (root.width / 6)) / 3
 
-                delegate: Controls.GameCell {
-                    cellIndex: model.index
-                    width: (root.width - (root.width / 6)) / 3
-
-                    onFeed: function (type) { return type === "cat" ? root.addPlus() : root.addMinus(); }
+                        onFeed: function (type) { return type === "cat" ? root.addPlus() : root.addMinus(); }
+                    }
                 }
             }
         }
     }
 }
+
 

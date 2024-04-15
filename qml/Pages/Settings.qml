@@ -227,188 +227,204 @@ Controls.BasePage {
     }
 */
 
-    Column {
-        id: mainColumn
-
+    Item {
         anchors {
-            top: parent.top
-            topMargin: 30
-        }
-        width: parent.width
-
-        Column {
-            id: languageColumn
-
-            width: parent.width
-            spacing: 12
-
-            Controls.Switch {
-                id: langSwitch
-
-                height: 80
-                width: parent.width
-                text: qsTr("Language")
-                checked: Logic.lang === "ru"
-                uncheckedIcon: "qrc:/resources/icons/ru.svg"
-                checkedIcon: "qrc:/resources/icons/eng.svg"
-                onClicked: {
-                    if (checked) {
-                        Logic.lang = "ru";
-                    } else {
-                        Logic.lang = "en";
-                    }
-                }
-            }
-            Controls.Switch {
-                id: themeSwitch
-
-                height: 80
-                width: parent.width
-                text: qsTr("Theme")
-                checked:  ThemeManager.currentThemeIndex === 0
-                uncheckedIcon: "qrc:/resources/icons/sun.svg"
-                checkedIcon: "qrc:/resources/icons/moon.svg"
-                onClicked: {
-                    if (checked) {
-                        ThemeManager.currentThemeIndex = 0;
-                    } else {
-                        ThemeManager.currentThemeIndex = 1;
-                    }
-                }
-            }
-            Controls.Switch {
-                id: vibrationSwitch
-
-                height: 80
-                width: parent.width
-                text: qsTr("Vibration")
-                checked: Logic.vibrationEnabled
-                uncheckedIcon: "qrc:/resources/icons/on.svg"
-                checkedIcon: "qrc:/resources/icons/off.svg"
-                onCheckedChanged: {
-                    Logic.vibrationEnabled = checked;
-                    Vibrator.setEnabled(checked);
-                    if (checked) {
-                        Vibrator.vibrate(120);
-                    }
-                }
-            }
-            Item {
-                height: 152
-                width: parent.width
-
-                Rectangle {
-                    anchors.fill: parent
-                    color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
-                    opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
-                }
-                Column {
-                    id: volumeColumn
-
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width
-                    spacing: 10
-
-                    Controls.Label {
-                        anchors {
-                            left: parent.left
-                            leftMargin: 40
-                        }
-                        text: qsTr("Volume")
-                    }
-                    Controls.VolumeSlider {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            margins: 32
-                        }
-                        value: Logic.soundVolume
-                        onMoved: {
-                            SoundManager.updateVolume(position);
-                            SoundManager.feedCatPlay();
-                            Logic.soundVolume = position;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id: footer
-
-        anchors.bottom: parent.bottom
-        height: 70
-        width: parent.width
-
-        color: ThemeManager.currentTheme["toolbarBackgroundColor"]
-        opacity: ThemeManager.currentTheme["toolbarBackgroundOpacity"]
-    }
-    Column {
-        anchors.verticalCenter: footer.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 3
-
-            Controls.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text:  qsTr("designed by ")
-                font.pointSize: 12
-            }
-
-            Controls.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Lii.Design"
-
-                font.pointSize: 13
-                color: "#FF8C00"
-
-                MouseArea {
-                    anchors.fill: parent
-                    anchors.margins: -5
-
-                    onClicked: Qt.openUrlExternally("https://www.behance.net/liisign")
-                }
-            }
-
-            Controls.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text:  qsTr("and")
-                font.pointSize: 12
-            }
-
-            Controls.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Eugene.Sinel"
-
-                font.pointSize: 13
-                color: "#47BFD9"
-
-                MouseArea {
-                    anchors.fill: parent
-                    anchors.margins: -5
-
-                    onClicked: Qt.openUrlExternally("mailto:zerus04@gmail.com")
-                }
-            }
-        }
-
-        Controls.Label {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("music freesfx.co.uk")
-            font.pointSize: 12
-        }
-    }
-    Controls.Label {
-        anchors {
+            left: parent.left
             right: parent.right
             bottom: parent.bottom
-            margins: 5
+            bottomMargin: !header.visible ? -header.height : 0
         }
-        text: qsTr("v0.8.1")
-        font.pointSize: 12
-        opacity: 0.6
+        height: root.height
+
+        Column {
+            id: mainColumn
+
+            anchors {
+                top: parent.top
+                topMargin: 30
+            }
+            width: parent.width
+
+            Column {
+                id: languageColumn
+
+                width: parent.width
+                spacing: 12
+
+                Controls.Switch {
+                    id: langSwitch
+
+                    height: 80
+                    width: parent.width
+                    text: qsTr("Language")
+                    checked: Logic.lang === "ru"
+                    uncheckedIcon: "qrc:/resources/icons/ru.svg"
+                    checkedIcon: "qrc:/resources/icons/eng.svg"
+                    onClicked: {
+                        if (checked) {
+                            Logic.lang = "ru";
+                        } else {
+                            Logic.lang = "en";
+                        }
+                    }
+                }
+                Controls.Switch {
+                    id: themeSwitch
+
+                    height: 80
+                    width: parent.width
+                    text: qsTr("Theme")
+                    checked:  ThemeManager.currentThemeIndex === 0
+                    uncheckedIcon: "qrc:/resources/icons/sun.svg"
+                    checkedIcon: "qrc:/resources/icons/moon.svg"
+                    onClicked: {
+                        if (checked) {
+                            ThemeManager.currentThemeIndex = 0;
+                        } else {
+                            ThemeManager.currentThemeIndex = 1;
+                        }
+                    }
+                }
+                Controls.Switch {
+                    id: vibrationSwitch
+
+                    height: 80
+                    width: parent.width
+                    text: qsTr("Vibration")
+                    checked: Logic.vibrationEnabled
+                    uncheckedIcon: "qrc:/resources/icons/on.svg"
+                    checkedIcon: "qrc:/resources/icons/off.svg"
+                    onCheckedChanged: {
+                        Logic.vibrationEnabled = checked;
+                        Vibrator.setEnabled(checked);
+                        if (checked) {
+                            Vibrator.vibrate(120);
+                        }
+                    }
+                }
+                Item {
+                    height: 152
+                    width: parent.width
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: ThemeManager.currentTheme["themeSwitcherHandleColor"]
+                        opacity: ThemeManager.currentTheme["themeSwitcherOpacity"]
+                    }
+                    Column {
+                        id: volumeColumn
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width
+                        spacing: 10
+
+                        Controls.Label {
+                            anchors {
+                                left: parent.left
+                                leftMargin: 40
+                            }
+                            text: qsTr("Volume")
+                        }
+                        Controls.VolumeSlider {
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                margins: 32
+                            }
+                            value: Logic.soundVolume
+                            onMoved: {
+                                SoundManager.updateVolume(position);
+                                SoundManager.feedCatPlay();
+                                Logic.soundVolume = position;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Item {
+            id: footer
+
+            anchors.bottom: parent.bottom
+            height: 70
+            width: parent.width
+
+            Rectangle {
+                anchors.top: parent.top
+                height: parent.height + 140
+                width: parent.width
+
+                color: ThemeManager.currentTheme["toolbarBackgroundColor"]
+                opacity: ThemeManager.currentTheme["toolbarBackgroundOpacity"]
+            }
+        }
+        Column {
+            anchors.verticalCenter: footer.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 3
+
+                Controls.Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text:  qsTr("designed by ")
+                    font.pointSize: 12
+                }
+
+                Controls.Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Lii.Design"
+
+                    font.pointSize: 13
+                    color: "#FF8C00"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        anchors.margins: -5
+
+                        onClicked: Qt.openUrlExternally("https://www.behance.net/liisign")
+                    }
+                }
+
+                Controls.Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text:  qsTr("and")
+                    font.pointSize: 12
+                }
+
+                Controls.Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Eugene.Sinel"
+
+                    font.pointSize: 13
+                    color: "#47BFD9"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        anchors.margins: -5
+
+                        onClicked: Qt.openUrlExternally("mailto:zerus04@gmail.com")
+                    }
+                }
+            }
+
+            Controls.Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("music freesfx.co.uk")
+                font.pointSize: 12
+            }
+        }
+        Controls.Label {
+            anchors {
+                right: parent.right
+                bottom: parent.bottom
+                margins: 5
+            }
+            text: qsTr("v0.8.1")
+            font.pointSize: 12
+            opacity: 0.6
+        }
     }
 }

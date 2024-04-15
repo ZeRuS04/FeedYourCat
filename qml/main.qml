@@ -42,6 +42,9 @@ ApplicationWindow {
 
     Loader {
         id: stackViewLoader
+
+        property Item header: root.header
+
         anchors.fill: parent
         asynchronous: true
         opacity: 0
