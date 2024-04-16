@@ -114,7 +114,7 @@ MouseArea {
     }
     Rectangle {
         anchors.fill: parent
-        radius: height / 10
+        radius: height / 8
         color: root.backgroundColor
         opacity: root.backgroundOpacity
 
@@ -255,8 +255,7 @@ MouseArea {
             fill: parent
             margins: -1
         }
-
-        radius: height / 10
+        radius: height / 8
         color: "transparent"
         border.color: root.state !== "nothing" &&
                       clickReactionImage.opacity > 0 &&
