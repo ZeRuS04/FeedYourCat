@@ -251,7 +251,10 @@ MouseArea {
         }
     }
     Rectangle {
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            margins: -1
+        }
 
         radius: height / 10
         color: "transparent"
