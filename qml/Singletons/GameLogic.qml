@@ -36,6 +36,7 @@ Item {
     property int minimumCatDelay: 1200
     property int maximumCatDelay: 1800
     property real speedIncreaseCof: 1.05
+    property int foodCount: 0
 
     signal gameOver(int time, int score);
 

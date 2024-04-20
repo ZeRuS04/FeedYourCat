@@ -10,6 +10,8 @@ Item {
     property int foodCount: 24
     property int __screenZoneCount: 8
 
+    signal destroyFood()
+
     function intitFoodAnimation () {
         for (var i = 0; i < __screenZoneCount; ++i) {
             for (var j = 0; j < foodCount / __screenZoneCount; ++j) {
@@ -25,6 +27,13 @@ Item {
         sausageComponent.createObject(root, {"x": randX, "y": -170, "screenZone": zone, "position": 1})
     }
 
+    onVisibleChanged: {
+        if (visible) {
+            intitFoodAnimation();
+        } else {
+            destroyFood();
+        }
+    }
     Component.onCompleted: {
         initTimer.restart()
     }
@@ -79,8 +88,18 @@ Item {
             }
             rotation: Math.random() * 360
 
-            Component.onCompleted: downAnimatiom.start()
+            Component.onCompleted:  {
+                downAnimatiom.start()
+                Logic.foodCount++
+            }
+            Component.onDestruction: {
+                Logic.foodCount--;
+            }
 
+            Connections {
+                target: root
+                function onDestroyFood() { foodImage.destroy(); }
+            }
             YAnimator {
                 id: downAnimatiom
 
