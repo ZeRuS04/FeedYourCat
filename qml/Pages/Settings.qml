@@ -347,12 +347,12 @@ Controls.BasePage {
             id: footer
 
             anchors.bottom: parent.bottom
-            height: 70
+            height: footerColumn.implicitHeight + versionLabel.implicitHeight + 40
             width: parent.width
 
             Rectangle {
                 anchors.top: parent.top
-                height: parent.height + 140
+                height: parent.height
                 width: parent.width
 
                 color: ThemeManager.currentTheme["toolbarBackgroundColor"]
@@ -360,12 +360,17 @@ Controls.BasePage {
             }
         }
         Column {
-            anchors.verticalCenter: footer.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+            id: footerColumn
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: footer.verticalCenter
+                verticalCenterOffset: -10
+            }
 
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 3
+                spacing: 7
 
                 Controls.Label {
                     anchors.verticalCenter: parent.verticalCenter
@@ -409,7 +414,6 @@ Controls.BasePage {
                     }
                 }
             }
-
             Controls.Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("music freesfx.co.uk")
@@ -417,10 +421,12 @@ Controls.BasePage {
             }
         }
         Controls.Label {
+            id: versionLabel
+
             anchors {
-                right: parent.right
                 bottom: parent.bottom
-                margins: 5
+                bottomMargin: 10
+                horizontalCenter: parent.horizontalCenter
             }
             text: qsTr("v0.8.1")
             font.pointSize: 12

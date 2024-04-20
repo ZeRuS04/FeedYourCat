@@ -17,12 +17,13 @@ ApplicationWindow {
             return x*(dpi/160);
         }
     }
-    width: 360
-    height: 640
-    title: qsTr("Feed your cat")
-    color: "#D3D3EB"
+
+    width: Screen.desktopAvailableWidth
+    height: Screen.desktopAvailableHeight
     visibility: Qt.platform.os === "android" ? Window.FullScreen
                                              : Window.Windowed
+    title: qsTr("Feed your cat")
+    color: "#D3D3EB"
     header: Controls.Toolbar {
         visible: false
         height: 70
@@ -32,6 +33,7 @@ ApplicationWindow {
         console.log(Common.getDefaultFont(),Common.getDefaultFont())
         SoundManager.updateVolume(Logic.soundVolume);
         Vibrator.setEnabled(Logic.vibrationEnabled);
+        root.showFullScreen();
     }
 
     Binding {
@@ -39,7 +41,6 @@ ApplicationWindow {
         property: "pauseMusic"
         value: Logic.sessionPaused
     }
-
     Loader {
         id: stackViewLoader
 
@@ -49,7 +50,6 @@ ApplicationWindow {
         asynchronous: true
         opacity: 0
         focus: true
-
         sourceComponent: PageSelector {
             id: stackView
 
