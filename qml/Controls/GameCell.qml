@@ -71,7 +71,7 @@ MouseArea {
             }
         }
     }
-    onClicked: {
+    onPressed: {
         if (Logic.sessionPaused || isFed) {
             return;
         }
