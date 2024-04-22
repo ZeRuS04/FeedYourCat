@@ -1,5 +1,5 @@
 #include "qmltranslator.h"
-#include <QApplication>
+#include <QGuiApplication>
 #include <QDebug>
 
 QmlTranslator::QmlTranslator(QQmlApplicationEngine *engine, QObject *parent) :

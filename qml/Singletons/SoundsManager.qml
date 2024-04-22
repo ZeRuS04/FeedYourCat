@@ -1,6 +1,7 @@
 pragma Singleton
-import QtQuick 2.12
-import QtMultimedia 5.12
+
+import QtQuick
+import QtMultimedia
 import Singletons 1.0
 
 Item {
@@ -10,58 +11,50 @@ Item {
     property bool gameMusicPlaying: false
     property bool pauseMusic: false
 
-    function updateVolume(volume) {
-        buttonSound.volume = volume;
-        feedCatSound.volume = volume;
-        feedTigerSound.volume = volume;
-        menuSound.volume = volume;
-        gameMusicSound.realVolume = gameMusicSound.volume = volume;
-    }
+    property real __globalVolume: 1
 
+    function updateVolume(volume) {
+        Qt.callLater(__updateVolume, volume)
+    }
+    function __updateVolume(volume) {
+        __globalVolume = volume;
+    }
     function buttonClickPlay() {
-        buttonSound.stop()
-        buttonSound.play()
+        buttonSound.stop();
+        buttonSound.play();
     }
     function feedCatPlay() {
-        feedCatSound.stop()
-        feedCatSound.play()
+        feedCatSound.stop();
+        feedCatSound.play();
     }
     function feedTigerPlay() {
-        feedTigerSound.stop()
-        feedTigerSound.play()
+        feedTigerSound.stop();
+        feedTigerSound.play();
     }
 
-    onPauseMusicChanged: {
-        if (pauseMusic) {
-            gameMusicSound.volume = gameMusicSound.realVolume / 4;
-        } else {
-            gameMusicSound.volume = gameMusicSound.realVolume;
-        }
-    }
-
-    Audio  {
+    MediaPlayer {
         id: buttonSound
-
-        audioRole: Audio.GameRole
         source: "qrc:/resources/sounds/buttons.ogg"
+        audioOutput: AudioOutput { volume: root.__globalVolume }
     }
-    Audio  {
+    MediaPlayer {
         id: feedCatSound
-
-        audioRole: Audio.GameRole
         source: "qrc:/resources/sounds/feedcat.ogg"
+        audioOutput: AudioOutput { volume: root.__globalVolume }
     }
-    Audio  {
+    MediaPlayer {
         id: feedTigerSound
-
-        audioRole: Audio.GameRole
         source: "qrc:/resources/sounds/feedtiger.ogg"
+        audioOutput: AudioOutput { volume: root.__globalVolume }
     }
-    Audio {
+    MediaPlayer {
         id: menuSound
 
         property bool needPlay: Qt.application.state === Qt.ApplicationActive && root.menuSoundPlaying
 
+        loops: -1
+        source: "qrc:/resources/sounds/purring.ogg"
+        audioOutput: AudioOutput { volume: root.__globalVolume }
         onNeedPlayChanged: {
             if (needPlay)
                 menuSound.play();
@@ -70,19 +63,16 @@ Item {
             else
                 menuSound.stop();
         }
-
-//        volume: Common.soundVolume
-        audioRole: Audio.GameRole
-        loops: -1
-        source: "qrc:/resources/sounds/purring.ogg"
     }
-    Audio {
+    MediaPlayer {
         id: gameMusicSound
 
-
-        property real realVolume: volume
+        property real realVolume: root.__globalVolume
         property bool needPlay: Qt.application.state === Qt.ApplicationActive && root.gameMusicPlaying
 
+        loops: -1
+        source: "qrc:/resources/sounds/main1.mp3"
+        audioOutput: AudioOutput { volume: pauseMusic ? gameMusicSound.realVolume / 4 : gameMusicSound.realVolume }
         onNeedPlayChanged: {
             if (needPlay)
                 gameMusicSound.play();
@@ -91,19 +81,7 @@ Item {
             else
                 gameMusicSound.stop();
         }
-
-        audioRole: Audio.GameRole
-        loops: -1
-        source: "qrc:/resources/sounds/main1.mp3"
-//        playbackRate: Logic.session.currentStage * 1.05
-
     }
-
-//    Timer {
-//        interval: 2000
-//        running: true
-//        onTriggered: gameMusicSound.playbackRate += 0.2
-//    }
 }
 
 

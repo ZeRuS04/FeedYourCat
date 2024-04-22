@@ -1,5 +1,7 @@
-import QtQuick 2.12
-import QtGraphicalEffects 1.12
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Shapes
+import Qt5Compat.GraphicalEffects
 
 import "../helpers/Constants.js" as Constants
 import Singletons 1.0
@@ -14,9 +16,9 @@ MouseArea {
     property string borderColor: Constants.catBorders[backgroundIndex] || ThemeManager.currentTheme["cellBorderColor"]
     property bool isFed: false
 
-    signal feed(string type);
+    signal feed(type: string);
 
-    onFeed: {
+    onFeed: function (type) {
         if (waitTimer.running) {
             waitTimer.stop();
         }
@@ -69,7 +71,7 @@ MouseArea {
             }
         }
     }
-    onClicked: {
+    onPressed: {
         if (Logic.sessionPaused || isFed) {
             return;
         }
@@ -112,7 +114,7 @@ MouseArea {
     }
     Rectangle {
         anchors.fill: parent
-        radius: height / 10
+        radius: height / 8
         color: root.backgroundColor
         opacity: root.backgroundOpacity
 
@@ -133,7 +135,20 @@ MouseArea {
         id: catContainer
 
         anchors.fill: parent
-        visible: false
+        layer {
+            enabled: true
+            effect: MultiEffect {
+                maskEnabled: true
+                maskSource: mask
+            }
+        }
+        opacity:  root.state !== "nothing" ? 1 : 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 150
+            }
+        }
 
         CatImage {
             id: catImage
@@ -205,6 +220,18 @@ MouseArea {
                     script: clickReactionImage.state = "nothing";
                 }
             }
+            Rectangle {
+                anchors.fill: parent
+                color: "#ccffffff"
+                layer {
+                    enabled: true
+                    effect: MultiEffect {
+                        shadowEnabled: true
+                        shadowScale: 1
+                        shadowColor: "black"
+                    }
+                }
+            }
             RadialGradient {
                 anchors.fill: parent
                 gradient: Gradient {
@@ -223,22 +250,12 @@ MouseArea {
             }
         }
     }
-    OpacityMask {
-        anchors.fill: parent
-        source: catContainer
-        maskSource: mask
-        opacity:  root.state !== "nothing" ? 1 : 0
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 300
-            }
-        }
-    }
     Rectangle {
-        anchors.fill: parent
-
-        radius: height / 10
+        anchors {
+            fill: parent
+            margins: -1
+        }
+        radius: height / 8
         color: "transparent"
         border.color: root.state !== "nothing" &&
                       clickReactionImage.opacity > 0 &&

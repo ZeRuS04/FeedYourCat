@@ -1,6 +1,6 @@
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../controls" as Controls
 import Singletons 1.0
@@ -32,7 +32,7 @@ Controls.BasePage {
                 color: ThemeManager.currentTheme["secondaryTextColor"]
             }
 
-            Image {
+            IconImage {
                 id: titleImage
                 anchors.centerIn: parent
 
@@ -43,12 +43,7 @@ Controls.BasePage {
                 sourceSize.width: width
                 sourceSize.height: height
                 source: "qrc:/resources/icons/HOKOPMN_KOTNKOB.svg"
-                layer {
-                    enabled: true
-                    effect: ColorOverlay {
-                        color: ThemeManager.currentTheme["secondaryTextColor"]
-                    }
-                }
+                color: ThemeManager.currentTheme["secondaryTextColor"]
             }
         }
 

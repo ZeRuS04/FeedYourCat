@@ -1,7 +1,6 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import Singletons 1.0
 import "." as Controls
 
@@ -65,7 +64,6 @@ ToolBar {
                 Layout.preferredWidth: height
                 onClicked: stack.pop()
             }
-
             Item {
                 id: centerItem
 
@@ -92,7 +90,6 @@ ToolBar {
                     color: ThemeManager.currentTheme["mainTextColor"]
                 }
             }
-
             PauseToolButton {
                 id: pauseButton
 

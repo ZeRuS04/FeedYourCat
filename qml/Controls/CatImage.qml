@@ -1,5 +1,4 @@
-import QtQuick 2.12
-
+import QtQuick
 import Singletons 1.0
 
 Item {
@@ -155,6 +154,10 @@ Item {
                     duration: 300
 
                     Component.onCompleted: {
+                        if (propAnimation.property  === "x" || propAnimation.property  === "y") {
+                            from = from * root.__cof;
+                            to = to * root.__cof;
+                        }
                         if (Logic.session.currentStage > 0) {
                             propAnimation.duration /= Math.pow(Logic.session.speedIncreaseCof, Logic.session.currentStage - 1)
                             propAnimation.delay /= Math.pow(Logic.session.speedIncreaseCof, Logic.session.currentStage - 1)

@@ -1,21 +1,22 @@
+#include <QCoreApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QQmlContext>
+#include <QTimer>
 #include "vibrator.h"
 #include "qmltranslator.h"
-#include "statusbar.h"
 
 int main(int argc, char *argv[])
 {
     qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     Vibrator vibrator;
     QGuiApplication app(argc, argv);
     app.setOrganizationName("Eugene Sinel");
     app.setOrganizationDomain("eugene.sinel.com");
     app.setApplicationName("Feed Your Cat");
 
-    qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
+    QQuickStyle::setStyle("Basic");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/Common.qml"), "Singletons", 1, 0, "Common");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/GameLogic.qml"), "Singletons", 1, 0, "Logic");
     qmlRegisterSingletonType(QUrl("qrc:/qml/singletons/ThemeManager.qml"), "Singletons", 1, 0, "ThemeManager");
@@ -32,6 +33,8 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
+#ifdef Q_OS_ANDROID
+    QNativeInterface::QAndroidApplication::hideSplashScreen(1000);
+#endif
     return app.exec();
 }

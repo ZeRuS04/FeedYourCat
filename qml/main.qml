@@ -1,7 +1,6 @@
-import QtQuick.Window 2.2
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import StatusBar 0.1
+import QtQuick.Window
+import QtQuick
+import QtQuick.Controls
 import Singletons 1.0
 
 import "controls" as Controls
@@ -18,31 +17,23 @@ ApplicationWindow {
             return x*(dpi/160);
         }
     }
-//    visible: false
-    width: 360
-    height: 640
+
+    width: Screen.desktopAvailableWidth
+    height: Screen.desktopAvailableHeight
+    visibility: Qt.platform.os === "android" ? Window.FullScreen
+                                             : Window.Windowed
     title: qsTr("Feed your cat")
     color: "#D3D3EB"
-
-//    flags: Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
-//    visibility: Qt.platform.os === "android" ? Window.FullScreen
-//                                             : Window.Windowed
-
     header: Controls.Toolbar {
         visible: false
         height: 70
         stack: stackViewLoader.item
     }
-
     Component.onCompleted: {
         console.log(Common.getDefaultFont(),Common.getDefaultFont())
         SoundManager.updateVolume(Logic.soundVolume);
         Vibrator.setEnabled(Logic.vibrationEnabled);
-    }
-
-    StatusBar {
-        theme: ThemeManager.currentThemeIndex
-        color: ThemeManager.currentTheme["backgroundGradColor1"]
+        root.showFullScreen();
     }
 
     Binding {
@@ -50,14 +41,15 @@ ApplicationWindow {
         property: "pauseMusic"
         value: Logic.sessionPaused
     }
-
     Loader {
         id: stackViewLoader
+
+        property Item header: root.header
+
         anchors.fill: parent
         asynchronous: true
         opacity: 0
         focus: true
-
         sourceComponent: PageSelector {
             id: stackView
 
