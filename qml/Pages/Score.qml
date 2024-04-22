@@ -63,7 +63,6 @@ Controls.BasePage {
                         color: ThemeManager.currentTheme["secondaryTextColor"]
                     }
                 }
-
             }
         }
 

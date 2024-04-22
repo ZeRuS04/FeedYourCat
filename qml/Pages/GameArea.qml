@@ -146,6 +146,20 @@ Controls.BasePage {
         }
         height: root.height
 
+        Controls.Label {
+            anchors {
+                top: parent.top
+                bottom: gridItem.top
+                horizontalCenter: parent.horizontalCenter
+            }
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: height
+            bold: true
+            color: ThemeManager.currentTheme["toolbarBackgroundColor"]
+            opacity: ThemeManager.currentTheme["toolbarBackgroundOpacity"]
+            text: "x%1".arg(Math.min(Logic.series, 7) + 1)
+        }
         Item {
             id: timerItem
 
@@ -208,7 +222,6 @@ Controls.BasePage {
                 text: qsTr("PAUSE")
             }
         }
-
         Item {
             id: gridItem
 

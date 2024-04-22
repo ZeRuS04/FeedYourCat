@@ -15,6 +15,8 @@ Item {
 
     property int lastScore: 0
     property int lastTime: 0
+    property int series: 0
+
 
     property alias topScore: setting.topScore
     property alias soundVolume: setting.soundVolume
@@ -179,13 +181,17 @@ Item {
                         Vibrator.vibrate(500)
                     }
                     area[index] = 0;
+                    root.series = 0;
                     return;
                 }
 
                 if (area[index] > 0) {
-                    score += isFed ? 1 : 0;
+                    score += isFed ? Math.max(1, Math.min(root.series, 8)) : 0;
                     timeLeft += isFed ? rewardForFeedCat
                                       : rewardForSkipCat;
+                    if (isFed) {
+                        root.series++;
+                    }
                 }
                 area[index] = 0;
                 areaChanged()
