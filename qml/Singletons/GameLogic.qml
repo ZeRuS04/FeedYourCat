@@ -35,6 +35,7 @@ Item {
     property var newStageTigerChance: [8,13,18.23,27,30,35,40]
     property int minimumCatDelay: 1200
     property int maximumCatDelay: 1800
+    property real tigerTimeFactor: 1.0
     property real speedIncreaseCof: 1.05
     property int foodCount: 0
 
@@ -93,7 +94,7 @@ Item {
             property alias timeLeft: mainGameTimer.timeLeft
             property int time: root.time * 1000
             property int startCats: root.startCats
-            property int newCatInterval: root.baseNewCatInterval * Math.pow(0.9, currentStage) * 1000
+            property int newCatInterval:Math.max(root.baseNewCatInterval * Math.pow(0.9, currentStage) * 1000, 500)
 //            property int newCatCount: newStageCatCount[Math.min(currentStage, newStageCatCount.length - 1)]
             property int stagesInterval: root.stagesInterval
             property var newStageCatCount: root.newStageCatCount
@@ -105,6 +106,7 @@ Item {
             property real speedIncreaseCof: root.speedIncreaseCof
             property int minimumCatDelay: root.minimumCatDelay
             property int maximumCatDelay: root.maximumCatDelay
+            property real tigerTimeFactor: root.tigerTimeFactor
 
             function initArea() {
                 for (var i = 0, c = Constants.tigersCatalog.length * -1; i < cellCount; i++, c++) {
@@ -192,8 +194,9 @@ Item {
             }
 
             function updateStage() {
-                minimumCatDelay /= speedIncreaseCof;
-                maximumCatDelay /= speedIncreaseCof;
+                minimumCatDelay = Math.max(minimumCatDelay / speedIncreaseCof, 300);
+                maximumCatDelay = Math.max(maximumCatDelay / speedIncreaseCof, 500);
+                tigerTimeFactor = Math.min(tigerTimeFactor * speedIncreaseCof, 2.0);
 //                newCatInterval /= speedIncreaseCof;
             }
 
