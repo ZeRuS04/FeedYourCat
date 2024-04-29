@@ -18,8 +18,10 @@ ApplicationWindow {
         }
     }
 
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
+    width:Qt.platform.os === "android" ?  Screen.desktopAvailableWidth
+                                       : 640
+    height: Qt.platform.os === "android" ? Screen.desktopAvailableHeight
+                                         : 1280
     visibility: Qt.platform.os === "android" ? Window.FullScreen
                                              : Window.Windowed
     title: qsTr("Feed your cat")
