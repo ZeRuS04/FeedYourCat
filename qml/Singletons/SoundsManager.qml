@@ -92,7 +92,7 @@ Item {
                 gameMusicSound.stop();
         }
         onPlayingChanged: {
-            if (!playing) {
+            if (!gameMusicSound.playing) {
                 loops = -1;
                 isLastPart = true;
                 play();
