@@ -67,6 +67,9 @@ MouseArea {
             catImage.timeIsOver = false;
             if (!Logic.session.isTestMode) {
                 waitTimer.interval = Math.floor(Math.random() * (Logic.session.maximumCatDelay - Logic.session.minimumCatDelay)) + Logic.session.minimumCatDelay;
+                if (state === "tiger") {
+                    waitTimer.interval *= Logic.session.tigerTimeFactor;
+                }
                 waitTimer.start();
             }
         }
