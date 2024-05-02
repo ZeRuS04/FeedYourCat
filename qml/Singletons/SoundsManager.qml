@@ -73,15 +73,17 @@ Item {
         property Connections connection: Connections {
             target: Logic
 
-            function onGameOver(time, score) {
-                gameMusicSound.isLastPart = false;
-                gameMusicSound.loops = 1;
+            function onSessionStartedChanged() {
+                if (!Logic.sessionStarted) {
+                    gameMusicSound.isLastPart = false;
+                    gameMusicSound.loops = 1;
+                }
             }
         }
 
         loops: 1
         source: !isLastPart ? "qrc:/resources/sounds/main1.ogg"
-                           : "qrc:/resources/sounds/main1loop.ogg"
+                            : "qrc:/resources/sounds/main1loop.ogg"
         audioOutput: AudioOutput { volume: pauseMusic ? gameMusicSound.realVolume / 4 : gameMusicSound.realVolume }
         onNeedPlayChanged: {
             if (needPlay)
@@ -92,7 +94,7 @@ Item {
                 gameMusicSound.stop();
         }
         onPlayingChanged: {
-            if (!gameMusicSound.playing) {
+            if (!gameMusicSound.playing && Logic.sessionStarted && !Logic.sessionPaused && needPlay) {
                 loops = -1;
                 isLastPart = true;
                 play();

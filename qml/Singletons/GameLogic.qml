@@ -45,6 +45,7 @@ Item {
         if (!!session)
             session.destroy();
         session = sessionComponent.createObject(root, {isTestMode: isTestMode});
+        sessionStarted = true;
         sessionPaused = false;
     }
 
@@ -65,7 +66,7 @@ Item {
     }
 
     onLastScoreChanged: if (lastScore > topScore) topScore = lastScore
-
+    onGameOver: sessionStarted = false
     Settings {
         id: setting
 

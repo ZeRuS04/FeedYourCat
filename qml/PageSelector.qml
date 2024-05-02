@@ -89,6 +89,7 @@ StackView {
 
         property: "gameMusicPlaying"
         value: root.state === "game" || root.state === "pause"
+               || (root.state === "settings" && Logic.sessionStarted)
     }
 
     Connections {
@@ -112,9 +113,7 @@ StackView {
     Component {
         id: settingsComponent
 
-        Pages.Settings {
-
-        }
+        Pages.Settings {}
     }
 
     Component {
@@ -132,8 +131,7 @@ StackView {
     Component {
         id: gameComponent
 
-        Pages.GameArea {
-        }
+        Pages.GameArea {}
     }
 
     Component {
