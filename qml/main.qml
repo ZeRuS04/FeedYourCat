@@ -38,6 +38,14 @@ ApplicationWindow {
         root.showFullScreen();
     }
 
+    Connections {
+        target: Qt.application
+        function onStateChanged() {
+            if (Qt.application.state !== Qt.ApplicationActive) {
+                Logic.pause();
+            }
+        }
+    }
     Binding {
         target: SoundManager
         property: "pauseMusic"
