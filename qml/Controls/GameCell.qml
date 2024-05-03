@@ -116,6 +116,8 @@ MouseArea {
         }
     }
     Rectangle {
+        id: backgroundRect
+
         anchors.fill: parent
         radius: height / 8
         color: root.backgroundColor
@@ -127,12 +129,10 @@ MouseArea {
             }
         }
     }
-    Image {
+    ShaderEffectSource {
         id: mask
-        anchors.fill: parent
-        visible: false
 
-        source: "../../resources/icons/mask.svg"
+        sourceItem: backgroundRect
     }
     Item {
         id: catContainer
