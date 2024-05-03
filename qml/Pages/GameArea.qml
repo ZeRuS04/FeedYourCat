@@ -149,9 +149,13 @@ Controls.BasePage {
         Item {
             id: timerItem
 
-            anchors.top: parent.top
-            anchors.bottom: gridItem.top
+            anchors {
+                top: parent.top
+                bottom: gridItem.top
+            }
             width: parent.width
+            implicitHeight: Math.max(gameTimerLabel.implicitHeight,
+                                     pauseLabel.implicitHeight)
 
             Controls.Label {
                 id: gameTimerLabel
@@ -198,8 +202,9 @@ Controls.BasePage {
                     }
                 }
             }
-
             Controls.Label {
+                id: pauseLabel
+
                 visible: Logic.sessionPaused
                 anchors.centerIn: parent
                 font.pointSize: 60
@@ -213,11 +218,12 @@ Controls.BasePage {
             id: gridItem
 
             anchors {
+                horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
                 bottomMargin: root.height / 15
             }
 
-            width: parent.width
+            width: Math.min(parent.width, (parent.height - header.height - timerItem.implicitHeight) / 4 * 3)
             height: grid.height
 
             enabled: !Logic.sessionPaused
@@ -228,14 +234,14 @@ Controls.BasePage {
 
                 anchors.centerIn: parent
                 columns: Logic.columnCount
-                spacing: root.width / 24
+                spacing: gridItem.width / 24
 
                 Repeater {
                     model: Logic.columnCount * Logic.rowCount
 
                     delegate: Controls.GameCell {
                         cellIndex: model.index
-                        width: (root.width - (root.width / 6)) / 3
+                        width: (gridItem.width - (gridItem.width / 6)) / 3
 
                         onFeed: function (type) { return type === "cat" ? root.addPlus() : root.addMinus(); }
                     }
