@@ -14,6 +14,9 @@ StackView {
         case "game":
             clear();
             push(pauseComponent);
+            if (!!storedGameArea) {
+                storedGameArea.destroy();
+            }
             root.storedGameArea = gameComponent.createObject(root);
             push(root.storedGameArea);
             Logic.newGame(false);
@@ -123,7 +126,6 @@ StackView {
             onContinueSig: updatePage("continue")
             onRestart: updatePage("game")
             onSettings: updatePage("settings")
-
             onVisibleChanged: if (visible) Logic.pause()
         }
     }

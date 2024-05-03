@@ -41,7 +41,6 @@ QtObject {
             timer.start();
         }
     }
-
     property Timer __timer: Timer {
         id: timer
 
@@ -52,7 +51,7 @@ QtObject {
             root.tick(interval);
             root.timeLeft -=interval;
             if (timeLeft === 0) {
-                root.triggered();
+                Qt.callLater(root.triggered);
                 if (root.repeat) {
                     root.restart();
                 }
