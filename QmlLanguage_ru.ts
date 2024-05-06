@@ -87,13 +87,13 @@ And do not touch tigers!</source>
     <name>Score</name>
     <message>
         <location filename="qml/pages/Score.qml" line="38"/>
-        <source>YOUR SCORE:</source>
-        <translation>ВАШ СЧЕТ:</translation>
+        <source>YOUR RESULT:</source>
+        <translation>ВАШ РЕЗУЛЬТАТ:</translation>
     </message>
     <message>
         <location filename="qml/pages/Score.qml" line="50"/>
-        <source>HIGH SCORE: %1</source>
-        <translation>РЕКОРД: %1</translation>
+        <source>HIGH RESULT:</source>
+        <translation>РЕКОРД:</translation>
     </message>
     <message>
         <location filename="qml/pages/Score.qml" line="72"/>

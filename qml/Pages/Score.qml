@@ -31,24 +31,20 @@ Controls.BasePage {
                 anchors.centerIn: parent
                 width: parent.width
 
-                spacing: 30
+                spacing: 20
 
                 Controls.Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pointSize: 30
-                    text: qsTr("YOUR SCORE:")
+                    text: qsTr("YOUR RESULT:")
                     color: ThemeManager.currentTheme["secondaryTextColor"]
-                }
-                Item {
-                    width: 10
-                    height: 20
                 }
                 Controls.ScoreParameter {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: 280
                     value: ({
                         multiplier: "x%1".arg("8"),
-                        text: root.score
+                        text: root.score || "0"
                     })
                     state: "score"
                 }
@@ -56,7 +52,7 @@ Controls.BasePage {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: 280
                     value: ({
-                        text: root.fedCat
+                        text: root.fedCat || "0"
                     })
                     state: "cats"
                 }
@@ -73,12 +69,10 @@ Controls.BasePage {
                     width: 10
                     height: 20
                 }
-
-
                 Controls.Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pointSize: 30
-                    text: qsTr("HIGH SCORE: ")
+                    text: qsTr("HIGH RESULT:")
                     color: ThemeManager.currentTheme["secondaryTextColor"]
                 }
                 Controls.ScoreParameter {
