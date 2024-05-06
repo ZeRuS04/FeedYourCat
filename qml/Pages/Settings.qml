@@ -377,7 +377,6 @@ Controls.BasePage {
                     text:  qsTr("designed by ")
                     font.pointSize: 12
                 }
-
                 Controls.Label {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Lii.Design"
@@ -392,13 +391,11 @@ Controls.BasePage {
                         onClicked: Qt.openUrlExternally("https://www.behance.net/liisign")
                     }
                 }
-
                 Controls.Label {
                     anchors.verticalCenter: parent.verticalCenter
                     text:  qsTr("and")
                     font.pointSize: 12
                 }
-
                 Controls.Label {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Eugene.Sinel"

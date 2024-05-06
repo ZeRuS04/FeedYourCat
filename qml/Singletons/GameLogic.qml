@@ -15,8 +15,11 @@ Item {
 
     property int lastScore: 0
     property int lastTime: 0
+    property int lastFedCat: 0
 
     property alias topScore: setting.topScore
+    property alias topSessionTime: setting.topSessionTime
+    property alias topFedCat: setting.topFedCat
     property alias soundVolume: setting.soundVolume
     property alias vibrationEnabled: setting.vibrationEnabled
     property alias lang: setting.lang
@@ -48,7 +51,6 @@ Item {
         sessionStarted = true;
         sessionPaused = false;
     }
-
     function pause() {
         if(!!session) {
             session.pause();
@@ -56,7 +58,6 @@ Item {
         } else
             console.warn("Error pause: session is not open yet");
     }
-
     function resume() {
         if(!!session) {
             session.resume();
@@ -66,18 +67,22 @@ Item {
     }
 
     onLastScoreChanged: if (lastScore > topScore) topScore = lastScore
+    onLastTimeChanged: if (lastTime > topSessionTime) topSessionTime = lastTime
+    onLastFedCatChanged: if (lastFedCat > topFedCat) topFedCat = lastFedCat
     onGameOver: sessionStarted = false
+
     Settings {
         id: setting
 
         property int topScore: 0
+        property int topSessionTime: 0
+        property int topFedCat: 0
         property real soundVolume: 1
         property bool vibrationEnabled: true
         property string lang: "en"
 
         onLangChanged: Translator.setTranslation(lang)
     }
-
     Component {
         id: sessionComponent
 
@@ -90,10 +95,12 @@ Item {
             property bool isTestMode: false
             readonly property int cellCount: root.rowCount * root.columnCount
             property var area: []
+            property int fedCat: 0
             property int score: 0
             property int totalSessionTime: 0
             property alias timeLeft: mainGameTimer.timeLeft
             property int time: root.time * 1000
+            property int multiplier: 1
             property int startCats: root.startCats
             property int newCatInterval:Math.max(root.baseNewCatInterval * Math.pow(0.9, currentStage) * 1000, 500)
 //            property int newCatCount: newStageCatCount[Math.min(currentStage, newStageCatCount.length - 1)]
@@ -173,20 +180,24 @@ Item {
                     if (timeLeft <= Math.abs(rewardForTiger) && !isTestMode) {
                         root.pause();
                         root.lastScore = sessionObj.score;
+                        root.lastFedCat = sessionObj.fedCat;
                         root.lastTime = sessionObj.totalSessionTime;
-                        root.gameOver(sessionObj.totalSessionTime, sessionObj.score)
-                        Vibrator.vibrate(500)
-                        Vibrator.vibrate(500)
+                        root.gameOver(sessionObj.totalSessionTime, sessionObj.fedCat);
+                        multiplier = 1;
+                        Vibrator.vibrate(500);
+                        Vibrator.vibrate(500);
                     } else {
                         timeLeft += rewardForTiger;
-                        Vibrator.vibrate(500)
+                        Vibrator.vibrate(500);
                     }
                     area[index] = 0;
                     return;
                 }
 
                 if (area[index] > 0) {
-                    score += isFed ? 1 : 0;
+                    fedCat += isFed ? 1 : 0;
+                    score += isFed ? multiplier : 0;
+                    multiplier = isFed ? Math.min(8, multiplier + 1) : multiplier;
                     timeLeft += isFed ? rewardForFeedCat
                                       : rewardForSkipCat;
                 }

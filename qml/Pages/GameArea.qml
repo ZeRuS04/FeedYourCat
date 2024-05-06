@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import "../controls" as Controls
 
 import Singletons 1.0
@@ -9,15 +10,8 @@ Controls.BasePage {
     pageName: "game"
     foodCount: 0
 
-    property int plusObjectsCount: 0
-    property int minusObjectsCount: 0
-
     function addPlus() {
-        var plusObj = plusComponent.createObject(timerItem);
-    }
-
-    function addMinus() {
-        var minusObj = minusComponent.createObject(timerItem);
+        var plusObj = plusComponent.createObject(scoreBar.iconLoader);
     }
 
     Component {
@@ -26,17 +20,12 @@ Controls.BasePage {
         Controls.Label {
             id: plus
 
-            anchors.left: gameTimerLabel.right
-            y: parent.height / 3 * 2 - height / 2
-            text: "+" + Logic.rewardForFeedCat
+            anchors.centerIn: parent
+            text: "+" + Logic.rewardForFeedCat * Logic.session.multiplier
             color: "#F600FF"
             visible: !Logic.sessionPaused
-            font.pointSize: 30
-            Component.onCompleted: {
-                var nAvailableCount = Math.floor((timerItem.width - gameTimerLabel.width) / 2 / implicitWidth);
-                anchors.leftMargin = 5 + implicitWidth * (root.plusObjectsCount % nAvailableCount);
-                root.plusObjectsCount++;
-            }
+            font.pointSize: 28
+            bold: true
 
             Connections {
                 target: Logic.session
@@ -55,15 +44,14 @@ Controls.BasePage {
                 running: true
 
                 onFinished: {
-                    root.plusObjectsCount--;
                     plus.destroy();
                 }
 
                 NumberAnimation {
                     target: plus
-                    property: "y"
-                    from: plus.y
-                    to: 0
+                    property: "anchors.horizontalCenterOffset"
+                    from: 0
+                    to: plus.height * 2
                     duration: 1000 / Math.pow(Logic.session.speedIncreaseCof, Logic.session.currentStage - 1)
                 }
                 PropertyAnimation {
@@ -152,53 +140,53 @@ Controls.BasePage {
             anchors {
                 top: parent.top
                 bottom: gridItem.top
+                horizontalCenter: parent.horizontalCenter
             }
-            width: parent.width
-            implicitHeight: Math.max(gameTimerLabel.implicitHeight,
+            width: gridItem.width
+            implicitHeight: Math.max(row.implicitHeight,
                                      pauseLabel.implicitHeight)
 
-            Controls.Label {
-                id: gameTimerLabel
-
-                function switchColor() {
-                    if (gameTimerLabel.color === ThemeManager.currentTheme["mainTextColor"])
-                        gameTimerLabel.color = ThemeManager.currentTheme["alertColor"];
-                    else
-                        gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"];
+            Column {
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
                 }
+                width: parent.width
+                spacing: 10
 
-                anchors.centerIn: parent
-
-                visible: !Logic.sessionPaused
-                text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.timeLeft), "mm:ss")
-                                      : "00:00"
-                bold: true
-                font.pointSize: 40
-                color: ThemeManager.currentTheme["secondaryTextColor"]
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 500
-                    }
+                Controls.ScoreParameter {
+                    width: parent.width - 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    value: !!Logic.session && (Logic.session.timeLeft / (Logic.time * 1000)) || 0
+                    state: "time_bar"
+                    opacity: enabled ? 1.0 : 0.5
                 }
+                RowLayout {
+                    id: row
 
-                Controls.AdvancedTimer {
-                    property bool running: !!Logic.session && Logic.session.timeLeft < 6000
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 20
+                    spacing: 5
+                    enabled: !Logic.sessionPaused
+                    opacity: enabled ? 1.0 : 0.5
 
-                    interval: 500
-                    repeat: true
+                    Controls.ScoreParameter {
+                        id: scoreBar
 
-                    onRunningChanged: {
-                        if (running)
-                            restart()
-                        else {
-                            stop();
-                            gameTimerLabel.color = ThemeManager.currentTheme["mainTextColor"]
-                        }
+                        Layout.preferredWidth: (row.width - parent.spacing) / 2
+                        value: ({
+                            multiplier: "x%1".arg(!!Logic.session && Logic.session.multiplier || "1"),
+                            text: !!Logic.session && Logic.session.score || "0"
+                        })
+                        state: "score"
                     }
-
-                    onTriggered: {
-                        gameTimerLabel.switchColor()
+                    Controls.ScoreParameter {
+                        Layout.preferredWidth: (row.width - parent.spacing) / 2
+                        value: ({
+                                    text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.totalSessionTime), "mm:ss")
+                                                          : "00:00"
+                                })
+                        state: "time"
                     }
                 }
             }
@@ -225,7 +213,6 @@ Controls.BasePage {
 
             width: Math.min(parent.width, (parent.height - header.height - timerItem.implicitHeight) / 4 * 3)
             height: grid.height
-
             enabled: !Logic.sessionPaused
             opacity: enabled ? 1.0 : 0.5
 
@@ -242,8 +229,7 @@ Controls.BasePage {
                     delegate: Controls.GameCell {
                         cellIndex: model.index
                         width: (gridItem.width - (gridItem.width / 6)) / 3
-
-                        onFeed: function (type) { return type === "cat" ? root.addPlus() : root.addMinus(); }
+                        onFeed: function (type) { if (type === "cat") root.addPlus(); }
                     }
                 }
             }

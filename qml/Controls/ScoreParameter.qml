@@ -74,27 +74,16 @@ Item {
             left: parent.left
         }
     }
-    SequentialAnimation {
+    PropertyAnimation {
         id: blinkAnimation
 
         loops: 1
-
-        PropertyAnimation {
-            target: root
-            property: "__blinkCoef"
-            from: 0
-            to: 1.0
-            easing.type: Easing.OutInQuad
-            duration: 150
-        }
-        PropertyAnimation {
-            target: root
-            property: "__blinkCoef"
-            from: 1.0
-            to: 0
-            easing.type: Easing.InOutQuad
-            duration: 400
-        }
+        target: root
+        property: "__blinkCoef"
+        from: 1.0
+        to: 0
+        easing.type: Easing.InOutQuad
+        duration: 400
     }
     Component {
         id: textComponent
@@ -117,10 +106,22 @@ Item {
             Rectangle {
                 anchors {
                     bottom: parent.bottom
-                    left: parent.left
+                    left: parent.horizontalCenter
                     top: parent.top
                 }
-                width: Math.min(parent.width * root.value, parent.width)
+                width: Math.min(parent.width / 2 * root.value, parent.width)
+                radius: background.radius
+                color: root.value > 0.6 ? "green"
+                                        : root.value <= 0.3 ? "red"
+                                                            : "orange"
+            }
+            Rectangle {
+                anchors {
+                    bottom: parent.bottom
+                    right: parent.horizontalCenter
+                    top: parent.top
+                }
+                width: Math.min(parent.width / 2 * root.value, parent.width)
                 radius: background.radius
                 color: root.value > 0.6 ? "green"
                                         : root.value <= 0.3 ? "red"
@@ -282,7 +283,11 @@ Item {
             PropertyChanges {
                 target: root
                 contentLoader.sourceComponent: barComponent
-                iconLoader.sourceComponent: hourglassComponent
+                iconLoader {
+                    sourceComponent: hourglassComponent
+                    anchors.leftMargin: (root.width - iconLoader.width) / 2
+                }
+                background.anchors.leftMargin: 0
             }
         },
         State {
@@ -295,6 +300,7 @@ Item {
                     sourceComponent: textComponent
                 }
                 iconLoader.sourceComponent: multiplierComponent
+                background.anchors.leftMargin: iconLoader.width / 2
             }
         },
         State {
@@ -307,6 +313,7 @@ Item {
                     sourceComponent: textComponent
                 }
                 iconLoader.sourceComponent: clockComponent
+                background.anchors.leftMargin: iconLoader.width / 2
             }
         },
         State {
@@ -319,6 +326,7 @@ Item {
                     sourceComponent: textComponent
                 }
                 iconLoader.sourceComponent: catComponent
+                background.anchors.leftMargin: iconLoader.width / 2
             }
         }
     ]

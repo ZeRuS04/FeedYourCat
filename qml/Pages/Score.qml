@@ -8,6 +8,7 @@ Controls.BasePage {
     id: root
 
     property int score: !!Logic.session ? Logic.session.score : 0
+    property int fedCat: !!Logic.session ? Logic.session.fedCat : 0
 
     signal continueSig()
     signal restart()
@@ -30,7 +31,7 @@ Controls.BasePage {
                 anchors.centerIn: parent
                 width: parent.width
 
-                spacing: 50
+                spacing: 30
 
                 Controls.Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -38,32 +39,73 @@ Controls.BasePage {
                     text: qsTr("YOUR SCORE:")
                     color: ThemeManager.currentTheme["secondaryTextColor"]
                 }
-
-                Controls.ScorePanel {
+                Item {
+                    width: 10
+                    height: 20
+                }
+                Controls.ScoreParameter {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    score: root.score
+                    width: 280
+                    value: ({
+                        multiplier: "x%1".arg("8"),
+                        text: root.score
+                    })
+                    state: "score"
+                }
+                Controls.ScoreParameter {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: 280
+                    value: ({
+                        text: root.fedCat
+                    })
+                    state: "cats"
+                }
+                Controls.ScoreParameter {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: 280
+                    value: ({
+                                text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.totalSessionTime), "mm:ss")
+                                                      : "00:00"
+                            })
+                    state: "time"
+                }
+                Item {
+                    width: 10
+                    height: 20
+                }
+
+
+                Controls.Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pointSize: 30
+                    text: qsTr("HIGH SCORE: ")
                     color: ThemeManager.currentTheme["secondaryTextColor"]
                 }
-
-                Row {
+                Controls.ScoreParameter {
                     anchors.horizontalCenter: parent.horizontalCenter
-
-                    Controls.Label {
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        font.pointSize: 30
-                        text: qsTr("HIGH SCORE: ")
-                        color: ThemeManager.currentTheme["secondaryTextColor"]
-                    }
-                    Controls.Label {
-                        anchors.verticalCenter: parent.verticalCenter
-                        bold: true
-                        font.pointSize: 30
-                        text: qsTr("%1").arg(Logic.topScore)
-                        color: ThemeManager.currentTheme["secondaryTextColor"]
-                    }
+                    width: 280
+                    value: ({
+                        multiplier: "x%1".arg("8"),
+                        text: Logic.topScore
+                    })
+                    state: "score"
                 }
-
+                Controls.ScoreParameter {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: 280
+                    value: ({
+                        text: Logic.topFedCat
+                    })
+                    state: "cats"
+                }
+                Controls.ScoreParameter {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: 280
+                    value: ({
+                                text: Qt.formatTime(new Date(Logic.topSessionTime), "mm:ss")
+                            })
+                    state: "time"
+                }
             }
         }
 

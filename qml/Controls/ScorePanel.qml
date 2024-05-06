@@ -4,18 +4,17 @@ import Singletons 1.0
 Row {
     id: root
 
-    property int score: !!Logic.session ? Logic.session.score : 0
+    property int score: !!Logic.session ? Logic.session.fedCat : 0
     property alias color: scoreLabel.color
 
     spacing: 5
 
     Image {
         anchors.verticalCenter: parent.verticalCenter
-        sourceSize.width: 50
-        sourceSize.height: 40
+        sourceSize.width: 60
+        sourceSize.height: 48
         source: ThemeManager.currentTheme["scoreImage"]
     }
-
     Label {
         id: scoreLabel
 
