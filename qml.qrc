@@ -124,6 +124,7 @@
         <file>resources/icons/play.svg</file>
         <file>resources/icons/pause.svg</file>
         <file>resources/icons/paw.svg</file>
+        <file>resources/icons/hourglass.svg</file>
         <file>resources/icons/restart.svg</file>
         <file>resources/icons/mask.svg</file>
         <file>resources/icons/line.svg</file>
@@ -143,5 +144,6 @@
         <file>resources/sounds/purring.ogg</file>
         <file>QmlLanguage_ru.qm</file>
         <file>qml/controls/Switch.qml</file>
+        <file>qml/controls/ScoreParameter.qml</file>
     </qresource>
 </RCC>
