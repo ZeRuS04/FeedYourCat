@@ -20,6 +20,7 @@ QtObject {
     readonly property color cellBorderColor: "#8567A0"
     readonly property color themeSwitcherCheckedColor: "#8780AB"
     readonly property color themeSwitcherHandleColor: "#2F2369"
+    readonly property color timeBarBackgroundColor: "#0B0041"
 
     readonly property color mainTextColor: "#CFCCE0"
     readonly property color secondaryTextColor: "#FFFFFF"

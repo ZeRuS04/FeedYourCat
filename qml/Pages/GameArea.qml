@@ -10,10 +10,6 @@ Controls.BasePage {
     pageName: "game"
     foodCount: 0
 
-    function addPlus() {
-        var plusObj = plusComponent.createObject(scoreBar.iconLoader);
-    }
-
     Component {
         id: plusComponent
 
@@ -143,8 +139,7 @@ Controls.BasePage {
                 horizontalCenter: parent.horizontalCenter
             }
             width: gridItem.width
-            implicitHeight: Math.max(row.implicitHeight,
-                                     pauseLabel.implicitHeight)
+            implicitHeight: pauseLabel.implicitHeight
 
             Column {
                 anchors {
@@ -159,35 +154,8 @@ Controls.BasePage {
                     anchors.horizontalCenter: parent.horizontalCenter
                     value: !!Logic.session && (Logic.session.timeLeft / (Logic.time * 1000)) || 0
                     state: "time_bar"
-                    opacity: enabled ? 1.0 : 0.5
-                }
-                RowLayout {
-                    id: row
-
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - 20
-                    spacing: 5
                     enabled: !Logic.sessionPaused
                     opacity: enabled ? 1.0 : 0.5
-
-                    Controls.ScoreParameter {
-                        id: scoreBar
-
-                        Layout.preferredWidth: (row.width - parent.spacing) / 2
-                        value: ({
-                            multiplier: "x%1".arg(!!Logic.session && Logic.session.multiplier || "1"),
-                            text: !!Logic.session && Logic.session.score || "0"
-                        })
-                        state: "score"
-                    }
-                    Controls.ScoreParameter {
-                        Layout.preferredWidth: (row.width - parent.spacing) / 2
-                        value: ({
-                                    text: !!Logic.session ? Qt.formatTime(new Date(Logic.session.totalSessionTime), "mm:ss")
-                                                          : "00:00"
-                                })
-                        state: "time"
-                    }
                 }
             }
             Controls.Label {
@@ -229,7 +197,6 @@ Controls.BasePage {
                     delegate: Controls.GameCell {
                         cellIndex: model.index
                         width: (gridItem.width - (gridItem.width / 6)) / 3
-                        onFeed: function (type) { if (type === "cat") root.addPlus(); }
                     }
                 }
             }

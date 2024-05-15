@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 import "../controls" as Controls
 import Singletons 1.0
 
@@ -10,31 +11,9 @@ Item {
     property alias iconLoader: iconLoader
     property alias contentLoader: contentLoader
     property var value
-    property real __blinkCoef: 0
-    property color __blinkColor: "green"
-
-    function blink(color) {
-        __blinkColor = color;
-        blinkAnimation.restart();
-    }
 
     implicitHeight: Math.max(background.implicitHeight, iconLoader.implicitHeight)
-    layer {
-        enabled: true
-        effect: MultiEffect {
-            autoPaddingEnabled: true
-            colorization: 0.5 * __blinkCoef
-            colorizationColor: __blinkColor
-            brightness: 0.4 * __blinkCoef
-            saturation: 0.2 * __blinkCoef
-            blurEnabled: __blinkCoef > 0
-            blurMax: 16
-            blur: __blinkCoef
-            shadowEnabled: __blinkCoef > 0
-            shadowScale: 1.1 * __blinkCoef
-            shadowColor: __blinkColor
-        }
-    }
+
     Rectangle {
         id: background
 
@@ -44,10 +23,9 @@ Item {
             verticalCenter: parent.verticalCenter
             leftMargin: iconLoader.width / 2
         }
-        implicitHeight: 40
-        color: ThemeManager.currentTheme["cellBackgroundColor"]
-        radius: height / 4
-
+        implicitHeight: 80
+        color: ThemeManager.currentTheme["timeBarBackgroundColor"]
+        radius: Number.MAX_VALUE
     }
     Loader {
         id: contentLoader
@@ -60,7 +38,7 @@ Item {
         anchors.fill: background
         border {
             color: ThemeManager.currentTheme["cellBorderColor"]
-            width: 2
+            width: 3
         }
 
         color: "transparent"
@@ -74,28 +52,6 @@ Item {
             left: parent.left
         }
     }
-    PropertyAnimation {
-        id: blinkAnimation
-
-        loops: 1
-        target: root
-        property: "__blinkCoef"
-        from: 1.0
-        to: 0
-        easing.type: Easing.InOutQuad
-        duration: 400
-    }
-    Component {
-        id: textComponent
-
-        Controls.Label {
-            text: !!root.value && root.value.text || ""
-            font.pointSize: 28
-            bold: true
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-    }
     Component {
         id: barComponent
 
@@ -103,29 +59,56 @@ Item {
             id: barItem
 
             property var oldValue: root.value
-            Rectangle {
-                anchors {
-                    bottom: parent.bottom
-                    left: parent.horizontalCenter
-                    top: parent.top
+            property color barColor: {
+                if (root.value > 0.8) {
+                    return "#ABE388";
+                } else if ( root.value > 0.6) {
+                    return "#E6E68A";
+                } else if (root.value > 0.4) {
+                    return "#CC7552";
+                } else {
+                    return "#C13229";
                 }
-                width: Math.min(parent.width / 2 * root.value, parent.width)
-                radius: background.radius
-                color: root.value > 0.6 ? "green"
-                                        : root.value <= 0.3 ? "red"
-                                                            : "orange"
             }
+            Behavior on barColor {
+                ColorAnimation {}
+            }
+
             Rectangle {
+                id: innerBarRect
+
                 anchors {
                     bottom: parent.bottom
-                    right: parent.horizontalCenter
+                    horizontalCenter: parent.horizontalCenter
                     top: parent.top
+                    margins: backgroundBorder.border.width * 2
                 }
-                width: Math.min(parent.width / 2 * root.value, parent.width)
+                width: Math.min((parent.width - iconLoader.width / 6 * 5 - anchors.margins * 2) * root.value
+                                + iconLoader.width / 6 * 5,
+                                parent.width)
                 radius: background.radius
-                color: root.value > 0.6 ? "green"
-                                        : root.value <= 0.3 ? "red"
-                                                            : "orange"
+                gradient: Gradient {
+                    orientation: Gradient.Horizontal
+                    GradientStop { position: 0.2; color: barItem.barColor }
+                    GradientStop { position: 0.5; color: "#FFFFFF" }
+                    GradientStop { position: 0.8; color: barItem.barColor }
+                }
+                border.color: Qt.rgba(0, 0, 0, 0.01)
+                border.width: 2
+                layer {
+                    enabled: true
+                    effect: InnerShadow {
+                        radius: 20
+                        samples: 12
+                        spread: 0.6
+                        color: "#33000000"
+                    }
+                }
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 100
+                    }
+                }
             }
             Connections {
                 target: root
@@ -142,89 +125,18 @@ Item {
         }
     }
     Component {
-        id: hourglassComponent
-
-        Image {
-            id: hourglassImage
-
-            source: "qrc:/resources/icons/hourglass.svg"
-
-            // sourceSize.width: 22
-            // sourceSize.height: 29
-
-            SequentialAnimation {
-                running: !Logic.sessionPaused
-                loops: -1
-
-                ScaleAnimator {
-                    target: hourglassImage
-                    from: 0.95
-                    to: 1.05
-                    easing.type: Easing.InOutQuad
-                    duration: 800
-                }
-                // RotationAnimator {
-                //     target: hourglassImage
-                //     from: 0
-                //     to: 360
-                //     duration: 800
-                // }
-                ScaleAnimator {
-                    target: hourglassImage
-                    from: 1.05
-                    to: 0.95
-                    easing.type: Easing.InOutQuad
-                    duration: 800
-                }
-            }
-        }
-    }
-    Component {
-        id: catComponent
-
-        Image {
-            id: catImage
-
-            source: ThemeManager.currentTheme["scoreImage"]
-            sourceSize.width: 60
-            sourceSize.height: 48
-        }
-    }
-    Component {
-        id: multiplierComponent
-
-        Rectangle {
-            color: "white"
-            height: 60
-            width: 60
-            // implicitWidth: implicitHeight
-            radius: Number.MAX_VALUE
-            border {
-                color: ThemeManager.currentTheme["cellBorderColor"]
-                width: 3
-            }
-
-            Controls.Label {
-                anchors.centerIn: parent
-                font.pointSize: 22
-                bold: true
-                text: !!root.value && root.value.multiplier || ""
-            }
-        }
-    }
-    Component {
         id: clockComponent
 
         Rectangle {
             id: clockBack
 
-            color: "white"
-            height: 60
-            width: 60
+            color: ThemeManager.currentTheme["timeBarBackgroundColor"]
+            height: 130
+            width: height
             radius: Number.MAX_VALUE
             border {
                 color: ThemeManager.currentTheme["cellBorderColor"]
-                width: 3
+                width: 6
             }
 
             Rectangle {
@@ -234,9 +146,10 @@ Item {
                     bottom: parent.verticalCenter
                     horizontalCenter: parent.horizontalCenter
                 }
-                height: parent.height / 3
+                height: parent.height / 3 + 10
                 width: 2
                 antialiasing: true
+                radius: Number.MAX_VALUE
                 color: ThemeManager.currentTheme["cellBorderColor"]
                 transformOrigin: Item.Bottom
 
@@ -245,7 +158,7 @@ Item {
                     from: 0
                     to: 360
                     loops: -1
-                    duration: 3000
+                    duration: emergencyAnimation.running ? 500 : 2000
                     running: !Logic.sessionPaused
                 }
             }
@@ -257,9 +170,10 @@ Item {
                     horizontalCenter: parent.horizontalCenter
                 }
                 antialiasing: true
-                height: parent.height / 4
-                width: 3
+                height: parent.height / 3
+                width: 4
                 rotation: 120
+                radius: Number.MAX_VALUE
                 color: ThemeManager.currentTheme["cellBorderColor"]
                 transformOrigin: Item.Bottom
 
@@ -268,8 +182,54 @@ Item {
                     from: 0
                     to: 360
                     loops: -1
-                    duration: 36000
+                    duration: emergencyAnimation.running ? 6000 : 24000
                     running: !Logic.sessionPaused
+                }
+            }
+            Rectangle {
+                id: redOverlay
+
+                anchors.fill: parent
+                radius: Number.MAX_VALUE
+                color: "#C13229"
+                opacity: 0
+            }
+            SequentialAnimation {
+                id: emergencyAnimation
+
+                running: Logic.sessionStarted && !Logic.sessionPaused
+                         && typeof root.value === "number" && root.value < 0.4
+                loops: -1
+                alwaysRunToEnd: true
+
+                ParallelAnimation {
+                    ScaleAnimator {
+                        target: clockBack
+                        from: 0.95
+                        to: 1.05
+                        easing.type: Easing.InOutQuad
+                        duration: 500
+                    }
+                    OpacityAnimator {
+                        target: redOverlay
+                        from: 0
+                        to: 0.5
+                    }
+                }
+                ParallelAnimation {
+                    ScaleAnimator {
+                        target: clockBack
+                        from: 1.05
+                        to: 0.95
+                        easing.type: Easing.InOutQuad
+                        duration: 500
+                    }
+                    OpacityAnimator {
+                        target: redOverlay
+                        from: 0.5
+                        to: 0
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }
@@ -284,49 +244,10 @@ Item {
                 target: root
                 contentLoader.sourceComponent: barComponent
                 iconLoader {
-                    sourceComponent: hourglassComponent
+                    sourceComponent: clockComponent
                     anchors.leftMargin: (root.width - iconLoader.width) / 2
                 }
                 background.anchors.leftMargin: 0
-            }
-        },
-        State {
-            name: "score"
-
-            PropertyChanges {
-                target: root
-                contentLoader {
-                    anchors.leftMargin: iconLoader.width / 3
-                    sourceComponent: textComponent
-                }
-                iconLoader.sourceComponent: multiplierComponent
-                background.anchors.leftMargin: iconLoader.width / 2
-            }
-        },
-        State {
-            name: "time"
-
-            PropertyChanges {
-                target: root
-                contentLoader {
-                    anchors.leftMargin: iconLoader.width / 3
-                    sourceComponent: textComponent
-                }
-                iconLoader.sourceComponent: clockComponent
-                background.anchors.leftMargin: iconLoader.width / 2
-            }
-        },
-        State {
-            name: "cats"
-
-            PropertyChanges {
-                target: root
-                contentLoader {
-                    anchors.leftMargin: iconLoader.width / 3
-                    sourceComponent: textComponent
-                }
-                iconLoader.sourceComponent: catComponent
-                background.anchors.leftMargin: iconLoader.width / 2
             }
         }
     ]
