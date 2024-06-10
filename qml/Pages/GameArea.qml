@@ -141,8 +141,9 @@ Controls.BasePage {
 
             Column {
                 anchors {
-                    verticalCenter: parent.verticalCenter
                     horizontalCenter: parent.horizontalCenter
+                    top: parent.top
+                    topMargin: 40
                 }
                 width: parent.width
                 spacing: 10
@@ -167,7 +168,6 @@ Controls.BasePage {
                 text: qsTr("PAUSE")
             }
         }
-
         Item {
             id: gridItem
 
