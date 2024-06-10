@@ -154,5 +154,12 @@
         <file>QmlLanguage_ru.qm</file>
         <file>qml/controls/Switch.qml</file>
         <file>qml/controls/ScoreParameter.qml</file>
+        <file>qml/controls/DropCatCoins.qml</file>
+        <file>resources/images/cats/Catcoins/Catcoin-1.png</file>
+        <file>resources/images/cats/Catcoins/Catcoin-2.png</file>
+        <file>resources/images/cats/Catcoins/Catcoin-3.png</file>
+        <file>resources/images/cats/Catcoins/Catcoin-4.png</file>
+        <file>resources/images/cats/Catcoins/Catcoin-5.png</file>
+        <file>resources/images/cats/Catcoins/Catcoin-6.png</file>
     </qresource>
 </RCC>
