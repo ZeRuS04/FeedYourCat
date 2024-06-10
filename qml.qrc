@@ -141,6 +141,16 @@
         <file>resources/sounds/main1.ogg</file>
         <file>resources/sounds/main1loop.ogg</file>
         <file>resources/sounds/purring.ogg</file>
+        <file>resources/sounds/dropcoin1.wav</file>
+        <file>resources/sounds/dropcoin2.wav</file>
+        <file>resources/sounds/dropcoin3.wav</file>
+        <file>resources/sounds/dropcoin4.wav</file>
+        <file>resources/sounds/dropcoin5.wav</file>
+        <file>resources/sounds/fallonwood3.wav</file>
+        <file>resources/sounds/fallonwood4.wav</file>
+        <file>resources/sounds/fallonwood5.wav</file>
+        <file>resources/sounds/drumhit.wav</file>
+        <file>resources/sounds/whoosh.wav</file>
         <file>QmlLanguage_ru.qm</file>
         <file>qml/controls/Switch.qml</file>
         <file>qml/controls/ScoreParameter.qml</file>
