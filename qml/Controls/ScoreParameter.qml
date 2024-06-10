@@ -23,14 +23,9 @@ Item {
             verticalCenter: parent.verticalCenter
             leftMargin: iconLoader.width / 2
         }
-        implicitHeight: 80
+        implicitHeight: 48
         color: ThemeManager.currentTheme["timeBarBackgroundColor"]
         radius: Number.MAX_VALUE
-    }
-    Loader {
-        id: contentLoader
-
-        anchors.fill: background
     }
     Rectangle {
         id: backgroundBorder
@@ -43,6 +38,11 @@ Item {
 
         color: "transparent"
         radius: background.radius
+    }
+    Loader {
+        id: contentLoader
+
+        anchors.fill: background
     }
     Loader {
         id: iconLoader
@@ -61,13 +61,13 @@ Item {
             property var oldValue: root.value
             property color barColor: {
                 if (root.value > 0.8) {
-                    return "#ABE388";
+                    return ThemeManager.currentTheme["greenColor"];
                 } else if ( root.value > 0.6) {
-                    return "#E6E68A";
+                    return ThemeManager.currentTheme["yellowColor"];
                 } else if (root.value > 0.4) {
-                    return "#CC7552";
+                    return ThemeManager.currentTheme["orangeColor"];
                 } else {
-                    return "#C13229";
+                    return ThemeManager.currentTheme["redColor"];
                 }
             }
             Behavior on barColor {
@@ -81,7 +81,7 @@ Item {
                     bottom: parent.bottom
                     horizontalCenter: parent.horizontalCenter
                     top: parent.top
-                    margins: backgroundBorder.border.width * 2
+                    margins: (root.value > 1 ? -1 : 1) *  backgroundBorder.border.width * 2
                 }
                 width: Math.min((parent.width - iconLoader.width / 6 * 5 - anchors.margins * 2) * root.value
                                 + iconLoader.width / 6 * 5,
@@ -104,22 +104,15 @@ Item {
                         color: "#33000000"
                     }
                 }
-                Behavior on width {
+                Behavior on anchors.margins {
                     NumberAnimation {
                         duration: 100
                     }
                 }
-            }
-            Connections {
-                target: root
-
-                function onValueChanged() {
-                    if (oldValue - value < 0) {
-                        root.blink("#ABE388");
-                    } else if (oldValue - value > 0.1) {
-                        root.blink("red");
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 100
                     }
-                    oldValue = value;
                 }
             }
         }
@@ -131,12 +124,13 @@ Item {
             id: clockBack
 
             color: ThemeManager.currentTheme["timeBarBackgroundColor"]
-            height: 130
+            height: 80
             width: height
+            antialiasing: true
             radius: Number.MAX_VALUE
             border {
                 color: ThemeManager.currentTheme["cellBorderColor"]
-                width: 6
+                width: 5
             }
 
             Rectangle {
@@ -146,7 +140,7 @@ Item {
                     bottom: parent.verticalCenter
                     horizontalCenter: parent.horizontalCenter
                 }
-                height: parent.height / 3 + 10
+                height: parent.height / 3 + 5
                 width: 2
                 antialiasing: true
                 radius: Number.MAX_VALUE
@@ -186,13 +180,28 @@ Item {
                     running: !Logic.sessionPaused
                 }
             }
-            Rectangle {
+
+            ShaderEffectSource {
+                id: mask
+
+                sourceItem: clockBack
+            }
+            RadialGradient {
                 id: redOverlay
 
                 anchors.fill: parent
-                radius: Number.MAX_VALUE
-                color: "#C13229"
                 opacity: 0
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "transparent" }
+                    GradientStop { position: 0.5; color: "#C13229" }
+                }
+                layer {
+                    enabled: true
+                    effect: MultiEffect {
+                        maskEnabled: true
+                        maskSource: mask
+                    }
+                }
             }
             SequentialAnimation {
                 id: emergencyAnimation
@@ -210,8 +219,9 @@ Item {
                         easing.type: Easing.InOutQuad
                         duration: 500
                     }
-                    OpacityAnimator {
+                    PropertyAnimation {
                         target: redOverlay
+                        property: "opacity"
                         from: 0
                         to: 0.5
                     }
@@ -224,8 +234,9 @@ Item {
                         easing.type: Easing.InOutQuad
                         duration: 500
                     }
-                    OpacityAnimator {
+                    PropertyAnimation {
                         target: redOverlay
+                        property: "opacity"
                         from: 0.5
                         to: 0
                         easing.type: Easing.InOutQuad
