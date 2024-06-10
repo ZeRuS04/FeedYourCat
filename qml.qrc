@@ -153,6 +153,7 @@
         <file>resources/sounds/fallonwood5.wav</file>
         <file>resources/sounds/drumhit.wav</file>
         <file>resources/sounds/whoosh.wav</file>
+        <file>resources/sounds/hungry.wav</file>
         <file>QmlLanguage_ru.qm</file>
         <file>qml/controls/Switch.qml</file>
         <file>qml/controls/ScoreParameter.qml</file>

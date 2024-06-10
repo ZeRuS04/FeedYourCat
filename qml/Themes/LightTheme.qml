@@ -24,8 +24,15 @@ QtObject {
 
     readonly property color mainTextColor: "#0E1950"
     readonly property color secondaryTextColor: "#0E1950"
+    readonly property color thirdTextColor: "#1B124C"
 
     readonly property color alertColor: "#DC143C"
+
+    readonly property color greenColor: "#ABE388"
+    readonly property color yellowColor: "#E6E68A"
+    readonly property color orangeColor: "#CC7552"
+    readonly property color redColor: "#C13229"
+
     //====== Opacities:
     readonly property real menuButtonBackgroundOpacity: 0.8
     readonly property real cellBackgroundOpacity: 1.0
@@ -34,5 +41,6 @@ QtObject {
 
     //====== Images:
     property url mainMenuImage: "qrc:/resources/images/cats/Start_Cats/SVG/Start_Cat_Light_Theme.svg"
+    property url pauseImage: "qrc:/resources/images/cats/Start_Cats/SVG/Cat_pause_Light_Theme.svg"
     property url scoreImage: "qrc:/resources/icons/Light_Theme/cat_score.svg"
 }

@@ -106,7 +106,18 @@ Item {
         drumhit.stop();
         drumhit.play();
     }
+    function hungryPlay() {
+        hungrySound.stop();
+        hungrySound.play();
+    }
 
+    SoundEffect {
+        id: hungrySound
+
+        volume: root.__globalVolume
+        muted: Qt.application.state === Qt.ApplicationInactive
+        source: "qrc:/resources/sounds/hungry.wav"
+    }
     SoundEffect {
         id: fallSound1
 
