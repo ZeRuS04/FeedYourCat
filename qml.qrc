@@ -133,6 +133,8 @@
         <file>resources/icons/ru.svg</file>
         <file>resources/icons/sun.svg</file>
         <file>resources/icons/moon.svg</file>
+        <file>resources/icons/record_paw.png</file>
+        <file>resources/icons/record_paw_revers.png</file>
         <file>qml/singletons/SoundsManager.qml</file>
         <file>resources/sounds/buttons.ogg</file>
         <file>resources/sounds/feedcat.ogg</file>
@@ -161,5 +163,6 @@
         <file>resources/images/cats/Catcoins/Catcoin-4.png</file>
         <file>resources/images/cats/Catcoins/Catcoin-5.png</file>
         <file>resources/images/cats/Catcoins/Catcoin-6.png</file>
+        <file>qml/controls/RecordPawAnimation.qml</file>
     </qresource>
 </RCC>
