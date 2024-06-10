@@ -114,5 +114,8 @@ QQC2.Button {
             }
         }
     }
-    onClicked: SoundManager.buttonClickPlay()
+    onClicked: {
+        Vibrator.vibrate(120);
+        SoundManager.buttonClickPlay();
+    }
 }

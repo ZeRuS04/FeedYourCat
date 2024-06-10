@@ -24,12 +24,10 @@ Controls.BasePage {
 
             Controls.Label {
                 anchors.centerIn: parent
-
                 font.pointSize: 30
                 text: qsTr("PAUSE")
             }
         }
-
         Item {
             id: logoItem
 
@@ -38,16 +36,13 @@ Controls.BasePage {
 
             Image {
                 anchors.centerIn: parent
-
                 width: 200
                 height: 200
-
                 sourceSize.width: width
                 sourceSize.height: height
-                source: ThemeManager.currentTheme["mainMenuImage"]
+                source: ThemeManager.currentTheme["pauseImage"]
             }
         }
-
         Item {
             Layout.fillWidth: true
             Layout.preferredHeight: buttonsColumn.height
@@ -64,31 +59,23 @@ Controls.BasePage {
                 Controls.MenuButton {
                     width: 280
                     height: 60
-
                     text: qsTr("CONTINUE")
-
                     primaryStyle: true
                     font.bold: true
 
                     onClicked: root.continueSig()
                 }
-
                 Controls.MenuButton {
                     width: 280
                     height: 60
-
                     text: qsTr("RESTART")
-
                     onClicked: root.restart()
                 }
-
                 Controls.MenuButton {
                     width: 280
                     height: 60
-
                     icon.source: "qrc:/resources/icons/settings.svg"
                     text: qsTr("SETTINGS")
-
                     onClicked: root.settings()
                 }
             }

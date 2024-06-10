@@ -46,7 +46,6 @@ Controls.BasePage {
                 color: ThemeManager.currentTheme["secondaryTextColor"]
             }
         }
-
         Item {
             id: logoItem
 
@@ -64,7 +63,6 @@ Controls.BasePage {
                 source: ThemeManager.currentTheme["mainMenuImage"]
             }
         }
-
         Item {
             Layout.fillWidth: true
             Layout.preferredHeight: buttonsColumn.height
@@ -90,7 +88,6 @@ Controls.BasePage {
 
                     onClicked: root.start()
                 }
-
                 Controls.MenuButton {
                     width: 280
                     height: 60

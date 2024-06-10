@@ -57,13 +57,7 @@ Item {
             SequentialAnimation {
                 id: dropAnimation
 
-                onFinished: {
-                    if (catcoin.isLastCoin) {
-                        // presenter.stopSounds()
-                        console.log("###isFinishLastCoin")
-                        root.finished()
-                    }
-                }
+                onFinished: if (catcoin.isLastCoin) root.finished()
 
                 PauseAnimation {
                     duration: presenter.skipAnimation ? 0 : catcoin.delay

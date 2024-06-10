@@ -147,7 +147,7 @@ Item {
                 }
                 font.pointSize: 42
                 text: qsTr("NEW\nRECORD")
-                color: "#1B124C"
+                color: ThemeManager.currentTheme["thirdTextColor"]
                 rotation: -13
                 bold: true
                 lineHeight: 0.8

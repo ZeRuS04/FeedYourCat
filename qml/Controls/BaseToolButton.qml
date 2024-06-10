@@ -22,4 +22,5 @@ ToolButton {
                                           ThemeManager.currentThemeIndex ? 1.5 : 0.5)
     }
     background: null
+    onClicked: Vibrator.vibrate(120);
 }

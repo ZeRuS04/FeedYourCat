@@ -61,7 +61,6 @@ Controls.BasePage {
             }
         }
     }
-
     Component {
         id: minusComponent
 
@@ -120,7 +119,6 @@ Controls.BasePage {
             }
         }
     }
-
     Item {
         anchors {
             left: parent.left
