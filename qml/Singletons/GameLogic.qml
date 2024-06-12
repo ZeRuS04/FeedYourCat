@@ -20,6 +20,8 @@ Item {
     property alias topScore: setting.topScore
     property alias topSessionTime: setting.topSessionTime
     property alias topFedCat: setting.topFedCat
+    property alias totalFedCat: setting.totalFedCat
+    property alias totalGameTime: setting.totalGameTime
     property alias soundVolume: setting.soundVolume
     property alias vibrationEnabled: setting.vibrationEnabled
     property alias lang: setting.lang
@@ -41,6 +43,7 @@ Item {
     property real tigerTimeFactor: 1.0
     property real speedIncreaseCof: 1.05
     property int foodCount: 0
+    property int maxTigersInRow: 4
 
     signal gameOver(int time, int score);
 
@@ -67,8 +70,14 @@ Item {
     }
 
     onLastScoreChanged: if (lastScore > topScore) topScore = lastScore
-    onLastTimeChanged: if (lastTime > topSessionTime) topSessionTime = lastTime
-    onLastFedCatChanged: if (lastFedCat > topFedCat) topFedCat = lastFedCat
+    onLastTimeChanged: {
+        if (lastTime > topSessionTime) topSessionTime = lastTime;
+        totalGameTime += lastTime;
+    }
+    onLastFedCatChanged: {
+        if (lastFedCat > topFedCat) topFedCat = lastFedCat;
+        totalFedCat += topFedCat;
+    }
     onGameOver: sessionStarted = false
 
     Settings {
@@ -77,6 +86,8 @@ Item {
         property int topScore: 0
         property int topSessionTime: 0
         property int topFedCat: 0
+        property int totalFedCat: 0
+        property int totalGameTime: 0
         property real soundVolume: 1
         property bool vibrationEnabled: true
         property string lang: "en"
@@ -115,6 +126,7 @@ Item {
             property int minimumCatDelay: root.minimumCatDelay
             property int maximumCatDelay: root.maximumCatDelay
             property real tigerTimeFactor: root.tigerTimeFactor
+            property int __tigersInRow: 0
 
             function initArea() {
                 for (var i = 0, c = Constants.tigersCatalog.length * -1; i < cellCount; i++, c++) {
@@ -145,7 +157,7 @@ Item {
             }
 
             function emitTiger() {
-                return Math.random() <= tigerChance;
+                return __tigersInRow < root.maxTigersInRow && Math.random() <= tigerChance;
             }
 
             function emitCat() {
@@ -170,6 +182,12 @@ Item {
                     return;
                 }
                 var isTiger  = emitTiger();
+                if (isTiger) {
+                    __tigersInRow++;
+                } else {
+                    __tigersInRow = 0;
+                }
+
                 area[index] = isTiger ? (Math.floor(Math.random() * Constants.tigersCatalog.length) + 1) * -1
                                       : Math.floor(Math.random() * Constants.catsCatalog.length) + 1;
                 areaChanged();
