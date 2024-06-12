@@ -12,7 +12,7 @@ Item {
     property alias contentLoader: contentLoader
     property var value
 
-    implicitHeight: Math.max(background.implicitHeight, iconLoader.implicitHeight)
+    implicitHeight: Math.max(background.implicitHeight, iconLoader.implicitHeight * 1.05)
 
     Rectangle {
         id: background
@@ -191,6 +191,7 @@ Item {
 
                 anchors.fill: parent
                 opacity: 0
+                antialiasing: true
                 gradient: Gradient {
                     GradientStop { position: 0.0; color: "transparent" }
                     GradientStop { position: 0.5; color: "#C13229" }
@@ -200,6 +201,7 @@ Item {
                     effect: MultiEffect {
                         maskEnabled: true
                         maskSource: mask
+                        antialiasing: true
                     }
                 }
             }
@@ -213,7 +215,7 @@ Item {
 
                 ParallelAnimation {
                     ScaleAnimator {
-                        target: clockBack
+                        target: iconLoader
                         from: 0.95
                         to: 1.05
                         easing.type: Easing.InOutQuad
@@ -228,7 +230,7 @@ Item {
                 }
                 ParallelAnimation {
                     ScaleAnimator {
-                        target: clockBack
+                        target: iconLoader
                         from: 1.05
                         to: 0.95
                         easing.type: Easing.InOutQuad
