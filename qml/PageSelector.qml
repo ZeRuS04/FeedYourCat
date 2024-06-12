@@ -86,7 +86,6 @@ StackView {
         value: root.state === "mainMenu" || root.state === "rules" ||
                root.state === "settings" || root.state === "score"
     }
-
     Binding {
         target: SoundManager
 
@@ -94,7 +93,6 @@ StackView {
         value: root.state === "game" || root.state === "pause"
                || (root.state === "settings" && Logic.sessionStarted)
     }
-
     Connections {
         target: Logic
 
@@ -102,7 +100,6 @@ StackView {
             updatePage("score")
         }
     }
-
     Component {
         id: menuComponent
 
@@ -112,13 +109,11 @@ StackView {
             onSettings: updatePage("settings")
         }
     }
-
     Component {
         id: settingsComponent
 
         Pages.Settings {}
     }
-
     Component {
         id: pauseComponent
 
@@ -129,13 +124,11 @@ StackView {
             onVisibleChanged: if (visible) Logic.pause()
         }
     }
-
     Component {
         id: gameComponent
 
         Pages.GameArea {}
     }
-
     Component {
         id: scoreComponent
 
@@ -144,7 +137,6 @@ StackView {
             onSettings: updatePage("settings")
         }
     }
-
     Component {
         id: rulesComponent
 
