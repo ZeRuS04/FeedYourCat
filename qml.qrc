@@ -136,10 +136,9 @@
         <file>resources/icons/record_paw.png</file>
         <file>resources/icons/record_paw_revers.png</file>
         <file>qml/singletons/SoundsManager.qml</file>
-        <file>resources/sounds/buttons.ogg</file>
-        <file>resources/sounds/feedcat.ogg</file>
-        <file>resources/sounds/feedtiger.ogg</file>
-        <file>resources/sounds/gemover3.mp3</file>
+        <file>resources/sounds/buttons.wav</file>
+        <file>resources/sounds/feedcat.wav</file>
+        <file>resources/sounds/feedtiger.wav</file>
         <file>resources/sounds/main1.ogg</file>
         <file>resources/sounds/main1loop.ogg</file>
         <file>resources/sounds/purring.ogg</file>

@@ -153,23 +153,26 @@ Item {
         muted: Qt.application.state === Qt.ApplicationInactive
         source: "qrc:/resources/sounds/whoosh.wav"
     }
-    MediaPlayer {
+    SoundEffect {
         id: buttonSound
 
-        source: "qrc:/resources/sounds/buttons.ogg"
-        audioOutput: AudioOutput { volume: root.__globalVolume }
+        volume: root.__globalVolume
+        muted: Qt.application.state === Qt.ApplicationInactive
+        source: "qrc:/resources/sounds/buttons.wav"
     }
-    MediaPlayer {
+    SoundEffect {
         id: feedCatSound
 
-        source: "qrc:/resources/sounds/feedcat.ogg"
-        audioOutput: AudioOutput { volume: root.__globalVolume }
+        volume: root.__globalVolume
+        muted: Qt.application.state === Qt.ApplicationInactive
+        source: "qrc:/resources/sounds/feedcat.wav"
     }
-    MediaPlayer {
+    SoundEffect {
         id: feedTigerSound
 
-        source: "qrc:/resources/sounds/feedtiger.ogg"
-        audioOutput: AudioOutput { volume: root.__globalVolume }
+        volume: root.__globalVolume
+        muted: Qt.application.state === Qt.ApplicationInactive
+        source: "qrc:/resources/sounds/feedtiger.wav"
     }
     MediaPlayer {
         id: menuSound
