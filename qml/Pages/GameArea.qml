@@ -124,7 +124,7 @@ Controls.BasePage {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: !header.visible ? -header.height : 0
+            bottomMargin: !header.visible && !Logic.sessionPaused ? -header.height : 0
         }
         height: root.height
 
@@ -135,6 +135,7 @@ Controls.BasePage {
                 top: parent.top
                 bottom: gridItem.top
                 horizontalCenter: parent.horizontalCenter
+                topMargin: !header.visible && Logic.sessionPaused ? header.height : 0
             }
             width: gridItem.width
             implicitHeight: pauseLabel.implicitHeight
@@ -154,18 +155,9 @@ Controls.BasePage {
                     value: !!Logic.session && (Logic.session.timeLeft / (Logic.time * 1000)) || 0
                     state: "time_bar"
                     enabled: !Logic.sessionPaused
+                    layer.enabled: true
                     opacity: enabled ? 1.0 : 0.5
                 }
-            }
-            Controls.Label {
-                id: pauseLabel
-
-                visible: Logic.sessionPaused
-                anchors.centerIn: parent
-                font.pointSize: 60
-                bold: true
-                color: ThemeManager.currentTheme["secondaryTextColor"]
-                text: qsTr("PAUSE")
             }
         }
         Item {

@@ -1,6 +1,7 @@
 import QtQuick.Window
 import QtQuick
 import QtQuick.Controls
+import Qt5Compat.GraphicalEffects
 import Singletons 1.0
 
 import "controls" as Controls
@@ -81,6 +82,38 @@ ApplicationWindow {
                     root.header.height = Qt.binding(function() { return 70 })
                     root.header.visible = true
                 }
+            }
+        }
+    }
+    FastBlur {
+        anchors.fill: stackViewLoader
+        source: stackViewLoader
+        radius: 64
+        visible: pauseOverlay.visible
+    }
+    Item {
+        id: pauseOverlay
+
+        anchors.fill: parent
+        visible: Logic.sessionPaused && stackViewLoader.item.state === "game"
+
+        Column {
+            anchors.centerIn: parent
+            Controls.Label {
+                id: pauseLabel
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 60
+                bold: true
+                color: ThemeManager.currentTheme["secondaryTextColor"]
+                text: qsTr("PAUSE")
+            }
+            Controls.PauseToolButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                checked: true
+                width: 100
+                height: 100
+                onClicked: Logic.resume()
             }
         }
     }

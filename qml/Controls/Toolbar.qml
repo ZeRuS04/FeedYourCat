@@ -29,7 +29,7 @@ ToolBar {
         State {
             name: "game"
 
-            PropertyChanges { target: root; visible: true }
+            PropertyChanges { target: root; visible: !Logic.sessionPaused }
             PropertyChanges { target: scorePanel; visible: true }
             PropertyChanges { target: pauseButton; visible: true }
         },

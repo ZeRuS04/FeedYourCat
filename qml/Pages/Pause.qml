@@ -36,8 +36,8 @@ Controls.BasePage {
 
             Image {
                 anchors.centerIn: parent
-                width: 200
-                height: 200
+                width: 280
+                height: 280
                 sourceSize.width: width
                 sourceSize.height: height
                 source: ThemeManager.currentTheme["pauseImage"]
