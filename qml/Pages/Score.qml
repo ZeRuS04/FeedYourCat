@@ -17,7 +17,7 @@ Controls.BasePage {
     signal settings()
     signal nextStep()
 
-    foodCount: fedCat === 0 ? 24 : 0
+    foodCount: fedCat === 0 || !isRecord ? 24 : 0
     pageName: "score"
     Component.onCompleted: nextStep()
     onNextStep: {

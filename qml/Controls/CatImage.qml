@@ -318,13 +318,12 @@ Item {
                             return "";
                         }
                     }
-
                     rotation: {
                         switch (type) {
-//                        case 0:
-//                            return 0;
-                        case 1:
-                            return 90 - parent.rotation;
+                       case 0:
+                           return -30 - parent.rotation;
+//                        case 1:
+//                            return 90 - parent.rotation;
 //                        case 2:
 //                            return 0;
 //                        case 3:
