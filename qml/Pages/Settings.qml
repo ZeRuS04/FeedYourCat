@@ -9,7 +9,9 @@ Controls.BasePage {
     id: root
 
     property string title: qsTr("SETTINGS")
+    property bool __completed: false
 
+    Component.onCompleted: __completed = true
     pageName: "settings"
 /*
     Column {
@@ -266,6 +268,7 @@ Controls.BasePage {
                         } else {
                             Logic.lang = "en";
                         }
+                        SoundManager.feedCatPlay();
                     }
                 }
                 Controls.Switch {
@@ -283,6 +286,7 @@ Controls.BasePage {
                         } else {
                             ThemeManager.currentThemeIndex = 1;
                         }
+                        SoundManager.feedCatPlay();
                     }
                 }
                 Controls.Switch {
@@ -298,7 +302,10 @@ Controls.BasePage {
                         Logic.vibrationEnabled = checked;
                         Vibrator.setEnabled(checked);
                         if (checked) {
-                            Vibrator.vibrate(120);
+                            Vibrator.vibrate(300);
+                        }
+                        if (root.__completed) {
+                            SoundManager.feedCatPlay();
                         }
                     }
                 }
@@ -333,9 +340,11 @@ Controls.BasePage {
                             }
                             value: Logic.soundVolume
                             onMoved: {
-                                SoundManager.updateVolume(position);
-                                SoundManager.feedCatPlay();
-                                Logic.soundVolume = position;
+                                Qt.callLater(function (position) {
+                                    SoundManager.updateVolume(position);
+                                    SoundManager.feedCatPlay();
+                                    Logic.soundVolume = position;
+                                }, position);
                             }
                         }
                     }
